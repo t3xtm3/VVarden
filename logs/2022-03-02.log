@@ -1,0 +1,764 @@
+[2022-03-02T17:42:04.976Z] [info]: Bot is ready!
+[2022-03-02T17:44:24.661Z] [info]: Bot is ready!
+[2022-03-02 17:44:38] [info]: Bot is ready!
+[2022-03-02 17:44:51] [info]: Bot is ready!
+[2022-03-02 17:45:06] [info]: Bot is ready!
+[2022-03-02 17:51:36] [info]: Bot is ready!
+[2022-03-02 17:52:15] [info]: Bot is ready!
+[2022-03-02 17:52:22] [info]: Registering commands
+[2022-03-02 17:52:22] [info]: Bot is ready!
+[2022-03-02 17:53:03] [info]: Registering commands
+[2022-03-02 17:53:03] [info]: Bot is ready!
+[2022-03-02 17:53:15] [info]: Registering commands
+[2022-03-02 17:53:16] [info]: Bot is ready!
+[2022-03-02 17:53:39] [info]: Registering commands
+[2022-03-02 17:53:40] [info]: Bot is ready!
+[2022-03-02 17:54:40] [info]: Registering commands
+[2022-03-02 17:54:40] [info]: Bot is ready!
+[2022-03-02 17:55:15] [error]: Unhandled Promise Rejection
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/events/ready.ts[0m:[93m14[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type 'string[]' is not assignable to parameter of type 'ApplicationCommandDataResolvable[]'.
+  Type 'string' is not assignable to type 'ApplicationCommandDataResolvable'.
+
+[7m14[0m         guild?.commands.set(Object.keys(client.commands));
+[7m  [0m [91m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/events/ready.ts[0m:[93m16[0m:[93m1[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m16[0m 
+[7m  [0m [91m[0m
+
+  [96msrc/events/ready.ts[0m:[93m3[0m:[93m45[0m
+    [7m3[0m export default async function (client: Bot) {
+    [7m [0m [96m                                            ~[0m
+    The parser expected to find a '}' to match the '{' token here.
+
+    at createTSError (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:840:12)
+    at reportTSError (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:844:19)
+    at getOutput (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1034:36)
+    at Object.compile (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1342:43)
+    at Module.m._compile (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1474:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1478:12)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+[2022-03-02 17:55:51] [error]: Unhandled Promise Rejection
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/events/ready.ts[0m:[93m16[0m:[93m1[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m16[0m 
+[7m  [0m [91m[0m
+
+  [96msrc/events/ready.ts[0m:[93m3[0m:[93m45[0m
+    [7m3[0m export default async function (client: Bot) {
+    [7m [0m [96m                                            ~[0m
+    The parser expected to find a '}' to match the '{' token here.
+
+    at createTSError (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:840:12)
+    at reportTSError (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:844:19)
+    at getOutput (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1034:36)
+    at Object.compile (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1342:43)
+    at Module.m._compile (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1474:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1478:12)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+[2022-03-02 17:55:57] [info]: Registering commands
+[2022-03-02 17:55:58] [info]: Bot is ready!
+[2022-03-02 17:55:58] [info]: 
+[2022-03-02 17:56:06] [info]: Registering commands
+[2022-03-02 17:56:07] [info]: Bot is ready!
+[2022-03-02 17:56:23] [info]: Registering commands
+[2022-03-02 17:56:24] [info]: Bot is ready!
+[2022-03-02 17:56:28] [info]: Registering commands
+[2022-03-02 17:56:29] [info]: Bot is ready!
+[2022-03-02 17:56:39] [info]: Registering commands
+[2022-03-02 17:56:40] [info]: Bot is ready!
+[2022-03-02 17:56:46] [info]: Registering commands
+[2022-03-02 17:56:47] [info]: Bot is ready!
+[2022-03-02 17:57:47] [info]: Registering commands
+[2022-03-02 17:57:48] [info]: Bot is ready!
+[2022-03-02 17:59:03] [info]: Registering commands
+[2022-03-02 17:59:04] [info]: Bot is ready!
+[2022-03-02 17:59:20] [info]: Registering commands
+[2022-03-02 17:59:20] [info]: Bot is ready!
+[2022-03-02 17:59:23] [info]: Registering commands
+[2022-03-02 17:59:30] [info]: Bot is ready!
+[2022-03-02 18:00:34] [info]: test
+[2022-03-02 18:44:07] [info]: Registering commands
+[2022-03-02 18:44:08] [info]: Bot is ready!
+[2022-03-02 18:44:08] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `prisma.user.upsert()` invocation:
+
+
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:14:12)
+[2022-03-02 18:45:26] [info]: Registering commands
+[2022-03-02 18:45:26] [info]: Bot is ready!
+[2022-03-02 18:45:26] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `prisma.user.upsert()` invocation:
+
+
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:14:12)
+[2022-03-02 18:46:41] [info]: Registering commands
+[2022-03-02 18:46:42] [info]: Bot is ready!
+[2022-03-02 18:46:42] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `prisma.user.upsert()` invocation:
+
+
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:14:12)
+[2022-03-02 18:48:59] [info]: Registering commands
+[2022-03-02 18:49:00] [info]: Bot is ready!
+[2022-03-02 18:49:00] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `prisma.user.upsert()` invocation:
+
+
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:14:12)
+[2022-03-02 18:51:42] [info]: Registering commands
+[2022-03-02 18:51:42] [info]: Bot is ready!
+[2022-03-02 18:51:43] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `client.db.user.create()` invocation in
+F:\FiveM\VVarden\src\utils\user\createUser.ts:14:33
+
+  11     user: string;
+  12     userType: UserType
+  13 }) {
+→ 14     return await client.db.user.create(
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:14:12)
+[2022-03-02 18:52:33] [info]: Registering commands
+[2022-03-02 18:52:35] [info]: Bot is ready!
+[2022-03-02 18:52:35] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `client.db.user.create()` invocation in
+F:\FiveM\VVarden\src\utils\user\createUser.ts:13:33
+
+  10     user: string;
+  11     userType: UserType
+  12 }) {
+→ 13     return await client.db.user.create(
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:13:12)
+[2022-03-02 18:53:04] [info]: Registering commands
+[2022-03-02 18:53:04] [info]: Bot is ready!
+[2022-03-02 18:53:04] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `client.db.user.create()` invocation in
+F:\FiveM\VVarden\src\utils\user\createUser.ts:13:33
+
+  10     user: string;
+  11     userType: UserType
+  12 }) {
+→ 13     return await client.db.user.create(
+  Error occurred during query execution:
+ConnectorError(ConnectorError { user_facing_error: None, kind: QueryError(Server(ServerError { code: 1265, message: "Data truncated for column 'userType' at row 1", state: "01000" })) })
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39813:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:13:12)
+[2022-03-02 18:53:16] [info]: Registering commands
+[2022-03-02 18:53:17] [info]: Bot is ready!
+[2022-03-02 18:55:51] [info]: Registering commands
+[2022-03-02 18:55:52] [info]: Bot is ready!
+[2022-03-02 18:55:52] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `client.db.user.create()` invocation in
+F:\FiveM\VVarden\src\utils\user\createUser.ts:13:33
+
+  10     user: string;
+  11     userType: UserType
+  12 }) {
+→ 13     return await client.db.user.create(
+  Unique constraint failed on the constraint: `PRIMARY`
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39809:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:13:12)
+[2022-03-02 18:57:49] [info]: Registering commands
+[2022-03-02 18:57:50] [info]: Bot is ready!
+[2022-03-02 18:57:50] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `client.db.user.create()` invocation in
+F:\FiveM\VVarden\src\utils\user\createUser.ts:13:33
+
+  10     user: string;
+  11     userType: UserType
+  12 }) {
+→ 13     return await client.db.user.create(
+  Unique constraint failed on the constraint: `PRIMARY`
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39809:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:13:12)
+[2022-03-02 18:57:57] [info]: Registering commands
+[2022-03-02 18:57:58] [info]: Bot is ready!
+[2022-03-02 19:00:50] [info]: Registering commands
+[2022-03-02 19:00:51] [info]: Bot is ready!
+[2022-03-02 19:00:59] [info]: Registering commands
+[2022-03-02 19:01:00] [info]: Bot is ready!
+[2022-03-02 19:01:19] [error]: Unhandled Promise Rejection
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/events/ready.ts[0m:[93m4[0m:[93m31[0m - [91merror[0m[90m TS2305: [0mModule '"../utils/user/"' has no exported member 'isAdmin'.
+
+[7m4[0m import { createUser, getUser, isAdmin } from '../utils/user/';
+[7m [0m [91m                              ~~~~~~~[0m
+
+    at createTSError (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:840:12)
+    at reportTSError (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:844:19)
+    at getOutput (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1034:36)
+    at Object.compile (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1342:43)
+    at Module.m._compile (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1474:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Object.require.extensions.<computed> [as .ts] (F:\FiveM\VVarden\node_modules\ts-node\src\index.ts:1478:12)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+[2022-03-02 19:01:28] [info]: Registering commands
+[2022-03-02 19:01:29] [info]: Bot is ready!
+[2022-03-02 19:01:38] [info]: Registering commands
+[2022-03-02 19:01:39] [info]: Bot is ready!
+[2022-03-02 19:01:39] [error]: Unhandled Promise Rejection
+
+Error: 
+Invalid `client.db.user.create()` invocation in
+F:\FiveM\VVarden\src\utils\user\createUser.ts:13:33
+
+  10     user: string;
+  11     userType: UserType
+  12 }) {
+→ 13     return await client.db.user.create(
+  Unique constraint failed on the constraint: `PRIMARY`
+    at Object.request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:39809:15)
+    at async PrismaClient._request (F:\FiveM\VVarden\node_modules\@prisma\client\runtime\index.js:40637:18)
+    at async createUser (F:\FiveM\VVarden\src\utils\user\createUser.ts:13:12)
+[2022-03-02 19:02:20] [info]: Registering commands
+[2022-03-02 19:02:21] [info]: Bot is ready!
+[2022-03-02 19:04:10] [info]: Registering commands
+[2022-03-02 19:04:11] [info]: Bot is ready!
+[2022-03-02 19:05:40] [info]: Registering commands
+[2022-03-02 19:05:41] [info]: Bot is ready!
+[2022-03-02 19:05:50] [info]: Registering commands
+[2022-03-02 19:05:51] [info]: Bot is ready!
+[2022-03-02 19:06:08] [info]: Registering commands
+[2022-03-02 19:06:09] [info]: Bot is ready!
+[2022-03-02 19:06:24] [info]: Registering commands
+[2022-03-02 19:06:25] [info]: Bot is ready!
+[2022-03-02 19:08:44] [info]: Registering commands
+[2022-03-02 19:08:45] [info]: Bot is ready!
+[2022-03-02 19:08:45] [debug]: Duration: 0ms
+[2022-03-02 19:08:45] [debug]: Duration: 0ms
+[2022-03-02 19:08:45] [debug]: Duration: 0ms
+[2022-03-02 19:08:45] [debug]: Duration: 0ms
+[2022-03-02 19:08:45] [debug]: Duration: 0ms
+[2022-03-02 19:09:12] [info]: Registering commands
+[2022-03-02 19:09:13] [info]: Bot is ready!
+[2022-03-02 19:09:13] [debug]: Duration: 0ms
+[2022-03-02 19:09:13] [debug]: Duration: 0ms
+[2022-03-02 19:09:13] [debug]: Duration: 0ms
+[2022-03-02 19:09:13] [debug]: Duration: 0ms
+[2022-03-02 19:09:13] [debug]: Duration: 0ms
+[2022-03-02 19:09:46] [info]: Registering commands
+[2022-03-02 19:09:47] [info]: Bot is ready!
+[2022-03-02 19:09:47] [debug]: Query took 0ms
+[2022-03-02 19:09:47] [debug]: Query took 0ms
+[2022-03-02 19:09:47] [debug]: Query took 0ms
+[2022-03-02 19:09:47] [debug]: Query took 0ms
+[2022-03-02 19:09:47] [debug]: Query took 0ms
+[2022-03-02 19:10:25] [info]: Registering commands
+[2022-03-02 19:10:25] [info]: Bot is ready!
+[2022-03-02 19:10:25] [debug]: Starting a mysql pool with 17 connections.
+[2022-03-02 19:10:25] [debug]: Query took 0ms
+[2022-03-02 19:10:25] [debug]: Query took 0ms
+[2022-03-02 19:10:25] [debug]: Query took 0ms
+[2022-03-02 19:10:25] [debug]: Query took 0ms
+[2022-03-02 19:10:25] [debug]: Query took 0ms
+[2022-03-02 19:11:41] [info]: Registering commands
+[2022-03-02 19:11:42] [info]: Bot is ready!
+[2022-03-02 19:11:42] [verbose]: Starting a mysql pool with 17 connections.
+[2022-03-02 19:11:42] [verbose]: Query took 0ms
+[2022-03-02 19:11:42] [verbose]: Query took 0ms
+[2022-03-02 19:11:42] [verbose]: Query took 0ms
+[2022-03-02 19:11:42] [verbose]: Query took 0ms
+[2022-03-02 19:11:42] [verbose]: Query took 0ms
+[2022-03-02 19:21:24] [info] - Registering commands
+[2022-03-02 19:21:25] [info] - Bot is ready!
+[2022-03-02 19:21:25] [info] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:21:25] [info] - Query took 0ms
+[2022-03-02 19:21:25] [info] - Query took 0ms
+[2022-03-02 19:21:25] [info] - Query took 0ms
+[2022-03-02 19:21:25] [info] - Query took 0ms
+[2022-03-02 19:21:25] [info] - Query took 0ms
+[2022-03-02 19:23:25] [info] - Registering commands
+[2022-03-02 19:23:26] [info] - Bot is ready!
+[2022-03-02 19:23:26] [info] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:23:26] [info] - Query took 0ms
+[2022-03-02 19:23:26] [info] - Query took 0ms
+[2022-03-02 19:23:26] [info] - Query took 0ms
+[2022-03-02 19:23:26] [info] - Query took 0ms
+[2022-03-02 19:23:26] [info] - Query took 0ms
+[2022-03-02 19:28:33] [info] - Registering commands
+[2022-03-02 19:28:34] [info] - Bot is ready!
+[2022-03-02 19:28:35] [info] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:28:35] [info] - Query took 0ms
+[2022-03-02 19:28:35] [info] - Query took 0ms
+[2022-03-02 19:28:35] [info] - Query took 0ms
+[2022-03-02 19:28:35] [info] - Query took 0ms
+[2022-03-02 19:28:35] [info] - Query took 0ms
+[2022-03-02 19:32:14] [info] - Registering commands
+[2022-03-02 19:32:15] [info] - Bot is ready!
+[2022-03-02 19:32:15] [info] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:32:15] [info] - Query took 0ms
+[2022-03-02 19:32:15] [info] - Query took 0ms
+[2022-03-02 19:32:15] [info] - Query took 0ms
+[2022-03-02 19:32:15] [info] - Query took 0ms
+[2022-03-02 19:32:15] [info] - Query took 0ms
+[2022-03-02 19:32:25] [info] - Registering commands
+[2022-03-02 19:32:26] [info] - Bot is ready!
+[2022-03-02 19:32:26] [info] - Query took 0ms
+[2022-03-02 19:32:26] [info] - Query took 0ms
+[2022-03-02 19:32:26] [info] - Query took 0ms
+[2022-03-02 19:32:26] [info] - Query took 0ms
+[2022-03-02 19:32:26] [info] - Query took 0ms
+[2022-03-02 19:32:46] [info] - Registering commands
+[2022-03-02 19:32:47] [info] - Bot is ready!
+[2022-03-02 19:32:47] [info] - Query took 0ms
+[2022-03-02 19:32:47] [info] - Query took 0ms
+[2022-03-02 19:32:47] [info] - Query took 0ms
+[2022-03-02 19:32:47] [info] - Query took 0ms
+[2022-03-02 19:32:47] [info] - Query took 0ms
+[2022-03-02 19:33:16] [info] - Registering commands
+[2022-03-02 19:33:16] [info] - Bot is ready!
+[Wed Mar 02 2022 19:33:17 GMT+0000 (Greenwich Mean Time)] [info] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:33:17] [info] - Query took 0ms
+[2022-03-02 19:33:17] [info] - Query took 0ms
+[2022-03-02 19:33:17] [info] - Query took 0ms
+[2022-03-02 19:33:17] [info] - Query took 0ms
+[2022-03-02 19:33:17] [info] - Query took 0ms
+[2022-03-02 19:33:24] [info] - Registering commands
+[2022-03-02 19:33:24] [info] - Bot is ready!
+[2022-03-02 19:33:25] [info] - Query took 0ms
+[2022-03-02 19:33:25] [info] - Query took 0ms
+[2022-03-02 19:33:25] [info] - Query took 0ms
+[2022-03-02 19:33:25] [info] - Query took 0ms
+[2022-03-02 19:33:25] [info] - Query took 0ms
+[2022-03-02 19:33:34] [info] - Registering commands
+[2022-03-02 19:33:34] [info] - Bot is ready!
+[2022-03-02 19:33:35] [info] - Query took 0ms
+[2022-03-02 19:33:35] [info] - Query took 0ms
+[2022-03-02 19:33:35] [info] - Query took 0ms
+[2022-03-02 19:33:35] [info] - Query took 0ms
+[2022-03-02 19:33:35] [info] - Query took 0ms
+[2022-03-02 19:33:40] [info] - Registering commands
+[2022-03-02 19:33:41] [info] - Bot is ready!
+[2022-03-02 19:33:41] [info] - Query took 0ms
+[2022-03-02 19:33:41] [info] - Query took 0ms
+[2022-03-02 19:33:41] [info] - Query took 0ms
+[2022-03-02 19:33:41] [info] - Query took 0ms
+[2022-03-02 19:33:41] [info] - Query took 0ms
+[2022-03-02 19:34:13] [info] - Registering commands
+[2022-03-02 19:34:14] [info] - Bot is ready!
+[2022-03-02 19:34:14] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:34:14] [info] - Query took 0ms
+[2022-03-02 19:34:14] [info] - Query took 0ms
+[2022-03-02 19:34:14] [info] - Query took 0ms
+[2022-03-02 19:34:14] [info] - Query took 0ms
+[2022-03-02 19:34:14] [info] - Query took 0ms
+[2022-03-02 19:34:31] [info] - Registering commands
+[2022-03-02 19:34:32] [info] - Bot is ready!
+[2022-03-02 19:34:32] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:34:32] [prisma] - Query took 0ms
+[2022-03-02 19:34:32] [prisma] - Query took 0ms
+[2022-03-02 19:34:32] [prisma] - Query took 0ms
+[2022-03-02 19:34:32] [prisma] - Query took 0ms
+[2022-03-02 19:34:32] [prisma] - Query took 0ms
+[2022-03-02 19:35:05] [info] - Registering commands
+[2022-03-02 19:35:05] [info] - Bot is ready!
+[2022-03-02 19:35:05] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:35:05] [prisma] - undefined
+[2022-03-02 19:35:05] [prisma] - Query took 0ms
+[2022-03-02 19:35:05] [prisma] - undefined
+[2022-03-02 19:35:05] [prisma] - Query took 0ms
+[2022-03-02 19:35:05] [prisma] - undefined
+[2022-03-02 19:35:05] [prisma] - Query took 0ms
+[2022-03-02 19:35:05] [prisma] - undefined
+[2022-03-02 19:35:05] [prisma] - Query took 0ms
+[2022-03-02 19:35:05] [prisma] - undefined
+[2022-03-02 19:35:05] [prisma] - Query took 0ms
+[2022-03-02 19:35:17] [info] - Registering commands
+[2022-03-02 19:35:17] [info] - Bot is ready!
+[2022-03-02 19:35:18] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:35:18] [prisma] - Query took 0ms
+[2022-03-02 19:35:18] [prisma] - Query took 0ms
+[2022-03-02 19:35:18] [prisma] - Query took 0ms
+[2022-03-02 19:35:18] [prisma] - Query took 0ms
+[2022-03-02 19:35:18] [prisma] - Query took 0ms
+[2022-03-02 19:35:54] [info] - Registering commands
+[2022-03-02 19:35:55] [info] - Bot is ready!
+[2022-03-02 19:35:55] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:36:05] [info] - Registering commands
+[2022-03-02 19:36:06] [info] - Bot is ready!
+[2022-03-02 19:36:06] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 19:58:47] [info] - Registering commands
+[2022-03-02 19:58:48] [info] - Bot is ready!
+[2022-03-02 19:58:48] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:01:04] [info] - Registering commands
+[2022-03-02 20:01:06] [info] - Bot is ready!
+[2022-03-02 20:01:06] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:01:11] [info] - Registering commands
+[2022-03-02 20:01:12] [info] - Bot is ready!
+[2022-03-02 20:01:12] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:01:21] [info] - test
+[2022-03-02 20:01:53] [info] - Registering commands
+[2022-03-02 20:01:54] [info] - Bot is ready!
+[2022-03-02 20:01:54] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:02:04] [info] - Registering commands
+[2022-03-02 20:02:05] [info] - Bot is ready!
+[2022-03-02 20:02:05] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:02:30] [info] - Registering commands
+[2022-03-02 20:02:31] [info] - Bot is ready!
+[2022-03-02 20:02:31] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:03:01] [info] - Registering commands
+[2022-03-02 20:03:02] [info] - Bot is ready!
+[2022-03-02 20:03:02] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:03:26] [info] - Registering commands
+[2022-03-02 20:03:27] [info] - Bot is ready!
+[2022-03-02 20:03:27] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:03:37] [info] - Registering commands
+[2022-03-02 20:03:38] [info] - Bot is ready!
+[2022-03-02 20:03:38] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:03:57] [info] - Registering commands
+[2022-03-02 20:03:58] [info] - Bot is ready!
+[2022-03-02 20:03:58] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:04:11] [info] - Registering commands
+[2022-03-02 20:04:12] [info] - Bot is ready!
+[2022-03-02 20:04:12] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:04:26] [info] - Registering commands
+[2022-03-02 20:04:27] [info] - Bot is ready!
+[2022-03-02 20:04:27] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:04:36] [info] - Registering commands
+[2022-03-02 20:04:37] [info] - Bot is ready!
+[2022-03-02 20:04:37] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:04:44] [info] - Registering commands
+[2022-03-02 20:04:45] [info] - Bot is ready!
+[2022-03-02 20:04:46] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:05:35] [info] - Registering commands
+[2022-03-02 20:05:35] [info] - Bot is ready!
+[2022-03-02 20:05:36] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:06:39] [info] - Registering commands
+[2022-03-02 20:06:41] [info] - Bot is ready!
+[2022-03-02 20:06:41] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:08:52] [info] - Registering commands
+[2022-03-02 20:08:53] [info] - Bot is ready!
+[2022-03-02 20:08:53] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:09:07] [info] - Registering commands
+[2022-03-02 20:09:08] [info] - Bot is ready!
+[2022-03-02 20:09:08] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:09:51] [info] - Registering commands
+[2022-03-02 20:09:52] [info] - Bot is ready!
+[2022-03-02 20:09:52] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:10:07] [info] - Registering commands
+[2022-03-02 20:10:09] [info] - Bot is ready!
+[2022-03-02 20:10:09] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:20:59] [info] - Registering commands
+[2022-03-02 20:20:59] [info] - Bot is ready!
+[2022-03-02 20:21:00] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:21:48] [info] - Registering commands
+[2022-03-02 20:21:49] [info] - Bot is ready!
+[2022-03-02 20:21:49] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:23:31] [info] - Registering commands
+[2022-03-02 20:23:33] [info] - Bot is ready!
+[2022-03-02 20:23:33] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:24:09] [info] - Registering commands
+[2022-03-02 20:24:10] [info] - Bot is ready!
+[2022-03-02 20:24:10] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:24:18] [info] - test
+[2022-03-02 20:25:19] [info] - Registering commands
+[2022-03-02 20:25:20] [info] - Bot is ready!
+[2022-03-02 20:25:20] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:25:28] [info] - Registering commands
+[2022-03-02 20:25:30] [info] - Bot is ready!
+[2022-03-02 20:25:30] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:25:35] [info] - Registering commands
+[2022-03-02 20:25:36] [info] - Bot is ready!
+[2022-03-02 20:25:36] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:25:46] [info] - Registering commands
+[2022-03-02 20:25:47] [info] - Bot is ready!
+[2022-03-02 20:25:47] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:45:05] [info] - Registering commands
+[2022-03-02 20:45:05] [info] - Bot is ready!
+[2022-03-02 20:45:06] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:46:08] [info] - Registering commands
+[2022-03-02 20:46:08] [info] - Bot is ready!
+[2022-03-02 20:46:09] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:46:25] [info] - Registering commands
+[2022-03-02 20:46:26] [info] - Bot is ready!
+[2022-03-02 20:46:26] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:47:09] [info] - Registering commands
+[2022-03-02 20:47:11] [info] - Bot is ready!
+[2022-03-02 20:47:11] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:48:07] [info] - Registering commands
+[2022-03-02 20:48:07] [info] - Bot is ready!
+[2022-03-02 20:48:08] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:51:31] [info] - Registering commands
+[2022-03-02 20:51:34] [info] - Bot is ready!
+[2022-03-02 20:51:35] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:52:39] [info] - Registering commands
+[2022-03-02 20:52:39] [info] - Bot is ready!
+[2022-03-02 20:52:40] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:52:52] [info] - Registering commands
+[2022-03-02 20:52:53] [info] - Bot is ready!
+[2022-03-02 20:52:53] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 20:53:28] [info] - test
+[2022-03-02 21:00:58] [info] - Registering commands
+[2022-03-02 21:00:59] [info] - Bot is ready!
+[2022-03-02 21:01:00] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:01:29] [info] - test
+[2022-03-02 21:02:40] [info] - Registering commands
+[2022-03-02 21:02:41] [info] - Bot is ready!
+[2022-03-02 21:02:41] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:06:05] [info] - Registering commands
+[2022-03-02 21:06:06] [info] - Bot is ready!
+[2022-03-02 21:06:21] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:08:19] [info] - Registering commands
+[2022-03-02 21:08:20] [info] - Bot is ready!
+[2022-03-02 21:08:22] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:08:52] [info] - Registering commands
+[2022-03-02 21:08:53] [info] - Bot is ready!
+[2022-03-02 21:08:55] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:08:55] [info] - test
+[2022-03-02 21:09:47] [info] - Registering commands
+[2022-03-02 21:09:48] [info] - Bot is ready!
+[2022-03-02 21:09:53] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:09:53] [info] - test
+[2022-03-02 21:10:23] [info] - test
+[2022-03-02 21:11:53] [info] - Registering commands
+[2022-03-02 21:11:54] [info] - Bot is ready!
+[2022-03-02 21:12:11] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:12:45] [info] - Registering commands
+[2022-03-02 21:12:46] [info] - Bot is ready!
+[2022-03-02 21:13:19] [info] - Registering commands
+[2022-03-02 21:13:20] [info] - Bot is ready!
+[2022-03-02 21:13:25] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:13:42] [info] - Registering commands
+[2022-03-02 21:13:43] [info] - Bot is ready!
+[2022-03-02 21:14:08] [info] - Registering commands
+[2022-03-02 21:14:09] [info] - Bot is ready!
+[2022-03-02 21:16:53] [info] - Registering commands
+[2022-03-02 21:16:53] [info] - Bot is ready!
+[2022-03-02 21:16:58] [info] - Registering commands
+[2022-03-02 21:16:59] [info] - Bot is ready!
+[2022-03-02 21:17:38] [info] - Registering commands
+[2022-03-02 21:17:39] [info] - Bot is ready!
+[2022-03-02 21:18:08] [info] - Registering commands
+[2022-03-02 21:18:09] [info] - Bot is ready!
+[2022-03-02 21:18:15] [info] - Registering commands
+[2022-03-02 21:18:15] [info] - Bot is ready!
+[2022-03-02 21:18:22] [info] - Registering commands
+[2022-03-02 21:18:23] [info] - Bot is ready!
+[2022-03-02 21:18:28] [info] - Registering commands
+[2022-03-02 21:18:29] [info] - Bot is ready!
+[2022-03-02 21:18:55] [info] - Registering commands
+[2022-03-02 21:18:56] [info] - Bot is ready!
+[2022-03-02 21:18:56] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:19:08] [info] - Registering commands
+[2022-03-02 21:19:09] [info] - Bot is ready!
+[2022-03-02 21:19:10] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:19:53] [info] - Registering commands
+[2022-03-02 21:19:54] [info] - Bot is ready!
+[2022-03-02 21:19:54] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:22:00] [info] - Registering commands
+[2022-03-02 21:22:01] [info] - Bot is ready!
+[2022-03-02 21:22:01] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:34:28] [info] - Registering commands
+[2022-03-02 21:34:29] [info] - Bot is ready!
+[2022-03-02 21:34:30] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:35:58] [info] - Registering commands
+[2022-03-02 21:35:58] [info] - Bot is ready!
+[2022-03-02 21:35:59] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:36:32] [info] - Registering commands
+[2022-03-02 21:36:33] [info] - Bot is ready!
+[2022-03-02 21:36:33] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:37:10] [info] - Registering commands
+[2022-03-02 21:37:10] [info] - Bot is ready!
+[2022-03-02 21:37:11] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:37:50] [info] - Registering commands
+[2022-03-02 21:37:51] [info] - Bot is ready!
+[2022-03-02 21:37:51] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:38:33] [info] - Registering commands
+[2022-03-02 21:38:34] [info] - Bot is ready!
+[2022-03-02 21:38:34] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:38:53] [info] - Registering commands
+[2022-03-02 21:38:53] [info] - Bot is ready!
+[2022-03-02 21:38:53] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:39:00] [info] - Registering commands
+[2022-03-02 21:39:01] [info] - Bot is ready!
+[2022-03-02 21:39:01] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:39:39] [info] - Registering commands
+[2022-03-02 21:39:40] [info] - Bot is ready!
+[2022-03-02 21:39:40] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:39:57] [info] - Registering commands
+[2022-03-02 21:39:58] [info] - Bot is ready!
+[2022-03-02 21:39:58] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:40:57] [info] - Registering commands
+[2022-03-02 21:40:58] [info] - Bot is ready!
+[2022-03-02 21:40:59] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:41:44] [info] - Registering commands
+[2022-03-02 21:41:45] [info] - Bot is ready!
+[2022-03-02 21:41:45] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:45:11] [info] - Registering commands
+[2022-03-02 21:45:12] [info] - Bot is ready!
+[2022-03-02 21:45:12] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:45:23] [info] - Registering commands
+[2022-03-02 21:45:24] [info] - Bot is ready!
+[2022-03-02 21:45:24] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 21:54:09] [info] - Registering commands
+[2022-03-02 21:54:09] [info] - Bot is ready!
+[2022-03-02 21:54:10] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:00:35] [info] - Registering commands
+[2022-03-02 22:00:36] [info] - Bot is ready!
+[2022-03-02 22:00:51] [info] - Registering commands
+[2022-03-02 22:00:52] [info] - Bot is ready!
+[2022-03-02 22:00:56] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:01:11] [info] - Registering commands
+[2022-03-02 22:01:11] [info] - Bot is ready!
+[2022-03-02 22:01:17] [info] - Joined new guild VVarden Test with 2 members.
+Guild owner is <@461623736785698816> (461623736785698816)
+[2022-03-02 22:01:17] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:01:44] [info] - Registering commands
+[2022-03-02 22:01:45] [info] - Bot is ready!
+[2022-03-02 22:01:50] [info] - Joined new guild VVarden Test with 2 members.
+Guild owner is <@461623736785698816> (461623736785698816)
+[2022-03-02 22:01:50] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:06:25] [info] - Registering commands
+[2022-03-02 22:06:26] [info] - Bot is ready!
+[2022-03-02 22:06:28] [info] - Joined new guild VVarden Test with 2 members.
+Guild owner is <@461623736785698816> (461623736785698816)
+[2022-03-02 22:06:28] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:07:12] [info] - Registering commands
+[2022-03-02 22:07:13] [info] - Bot is ready!
+[2022-03-02 22:07:16] [info] - Joined new guild VVarden Test with 2 members. Guild owner is <@461623736785698816> (461623736785698816)
+[2022-03-02 22:07:16] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:07:35] [info] - Registering commands
+[2022-03-02 22:07:36] [info] - Bot is ready!
+[2022-03-02 22:19:22] [info] - Registering commands
+[2022-03-02 22:19:23] [info] - Bot is ready!
+[2022-03-02 22:20:30] [info] - Registering commands
+[2022-03-02 22:20:31] [info] - Bot is ready!
+[2022-03-02 22:20:38] [info] - Registering commands
+[2022-03-02 22:20:39] [info] - Bot is ready!
+[2022-03-02 22:20:48] [info] - Registering commands
+[2022-03-02 22:20:49] [info] - Bot is ready!
+[2022-03-02 22:21:00] [info] - Registering commands
+[2022-03-02 22:21:00] [info] - Bot is ready!
+[2022-03-02 22:21:24] [info] - Registering commands
+[2022-03-02 22:21:24] [info] - Bot is ready!
+[2022-03-02 22:21:43] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:24:59] [info] - Registering commands
+[2022-03-02 22:25:00] [info] - Bot is ready!
+[2022-03-02 22:25:30] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:25:48] [info] - Registering commands
+[2022-03-02 22:25:49] [info] - Bot is ready!
+[2022-03-02 22:25:53] [info] - Registering commands
+[2022-03-02 22:25:54] [info] - Bot is ready!
+[2022-03-02 22:26:07] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:28:58] [info] - Registering commands
+[2022-03-02 22:28:59] [info] - Bot is ready!
+[2022-03-02 22:29:05] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:29:21] [info] - Registering commands
+[2022-03-02 22:29:22] [info] - Bot is ready!
+[2022-03-02 22:29:24] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:29:38] [info] - Registering commands
+[2022-03-02 22:29:38] [info] - Bot is ready!
+[2022-03-02 22:29:40] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 22:29:46] [info] - Registering commands
+[2022-03-02 22:29:47] [info] - Bot is ready!
+[2022-03-02 22:30:17] [info] - Registering commands
+[2022-03-02 22:30:18] [info] - Bot is ready!
+[2022-03-02 22:30:40] [info] - Registering commands
+[2022-03-02 22:30:41] [info] - Bot is ready!
+[2022-03-02 22:30:49] [info] - Registering commands
+[2022-03-02 22:30:50] [info] - Bot is ready!
+[2022-03-02 22:32:01] [info] - Registering commands
+[2022-03-02 22:32:01] [info] - Bot is ready!
+[2022-03-02 22:36:04] [info] - Registering commands
+[2022-03-02 22:36:05] [info] - Bot is ready!
+[2022-03-02 22:39:10] [info] - Registering commands
+[2022-03-02 22:39:10] [info] - Bot is ready!
+[2022-03-02 22:45:23] [info] - Registering commands
+[2022-03-02 22:45:24] [info] - Bot is ready!
+[2022-03-02 23:32:32] [info] - Registering commands
+[2022-03-02 23:32:33] [info] - Bot is ready!
+[2022-03-02 23:32:35] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 23:32:52] [info] - Registering commands
+[2022-03-02 23:32:52] [info] - Bot is ready!
+[2022-03-02 23:32:53] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 23:43:18] [info] - Registering commands
+[2022-03-02 23:43:19] [info] - Bot is ready!
+[2022-03-02 23:43:20] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 23:48:35] [info] - Registering commands
+[2022-03-02 23:48:36] [info] - Bot is ready!
+[2022-03-02 23:49:18] [info] - Registering commands
+[2022-03-02 23:49:19] [info] - Bot is ready!
+[2022-03-02 23:50:18] [info] - Registering commands
+[2022-03-02 23:50:20] [info] - Bot is ready!
+[2022-03-02 23:50:27] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 23:51:12] [info] - Registering commands
+[2022-03-02 23:51:13] [info] - Bot is ready!
+[2022-03-02 23:51:15] [prisma] - Starting a mysql pool with 17 connections.
+[2022-03-02 23:51:44] [info] - Registering commands
+[2022-03-02 23:51:45] [info] - Bot is ready!
+[2022-03-02 23:51:50] [info] - Registering commands
+[2022-03-02 23:51:51] [info] - Bot is ready!
+[2022-03-02 23:52:00] [info] - Registering commands
+[2022-03-02 23:52:00] [info] - Bot is ready!
+[2022-03-02 23:52:08] [info] - Registering commands
+[2022-03-02 23:52:09] [info] - Bot is ready!
+[2022-03-02 23:52:15] [info] - Registering commands
+[2022-03-02 23:52:16] [info] - Bot is ready!
+[2022-03-02 23:53:56] [info] - Registering commands
+[2022-03-02 23:53:57] [info] - Bot is ready!
+[2022-03-02 23:54:25] [info] - Registering commands
+[2022-03-02 23:54:26] [info] - Bot is ready!
+[2022-03-02 23:54:34] [info] - Registering commands
+[2022-03-02 23:54:35] [info] - Bot is ready!
+[2022-03-02 23:54:56] [info] - Registering commands
+[2022-03-02 23:54:57] [info] - Bot is ready!
+[2022-03-02 23:58:35] [info] - Registering commands
+[2022-03-02 23:58:36] [info] - Bot is ready!
+[2022-03-02 23:58:41] [prisma] - Starting a mysql pool with 17 connections.

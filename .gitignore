@@ -1,5 +1,5 @@
-/node_modules
-botinfo.log
-.idea
+node_modules/
+build/
 .env
-/imports
+logs/
+imports/

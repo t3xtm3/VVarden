@@ -1,0 +1,1 @@
+export {getStaffMember} from './getStaffMember'

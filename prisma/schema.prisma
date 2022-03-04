@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Users {
+    id             String              @id
+    status         String
+    user_type      String
+    roles          String              @default("") @db.LongText
+    servers        String              @default("") @db.LongText
+    reason         String
+    filter_type    String
+    createdAt      DateTime           @default(now())
+    updatedAt      DateTime           @updatedAt
+
+    @@map(name: "users")
+}
+
+model Staff {
+    id              String              @id
+    admin           Boolean
+    dev             Boolean
+    createdAt       DateTime           @default(now())
+    updatedAt       DateTime           @updatedAt
+
+    @@map(name: "staff")
+}
+
+model Guild {
+    id              String              @id @unique
+    name            String
+    logchan         String
+    punown          Punish              @default(BAN)
+    punsupp         Punish              @default(KICK)
+    punleak         Punish              @default(KICK)
+    puncheat        Punish              @default(KICK)
+    createdAt       DateTime            @default(now())
+    updatedAt       DateTime            @updatedAt
+
+    @@map(name: "guild")
+}
+
+model Settings {
+    id             Int                  @id @default(autoincrement())
+    mainGuild      String
+    logChannel     String
+    addUserLog     String
+    createdAt      DateTime             @default(now())
+    updatedAt      DateTime             @updatedAt
+
+    @@map(name: "settings")
+}
+
+model BadServers {
+    id               String             @id @unique
+    name             String
+    addedBy          String
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+
+    @@map(name: "bad_servers")
+}
+
+enum Punish {
+    WARN
+    KICK
+    BAN
+}
