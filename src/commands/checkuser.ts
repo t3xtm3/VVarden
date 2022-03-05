@@ -31,7 +31,7 @@ export default class CheckUserCommand extends SlashCommand {
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id =
             (
-                interaction.options.getUser('user')?.id || interaction.options.get('userid')
+                interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value
             )?.toString() ?? interaction.member.user.id;
 
         const discordUser = (await client.users.cache.get(id)) || (await client.users.fetch(id));
@@ -65,7 +65,7 @@ export default class CheckUserCommand extends SlashCommand {
                                     value: `**User Type**: ${user.user_type}\n**Details**: ${user.reason}`,
                                 },
                                 {
-                                    name: `Added Type: ${user.filter_type}`,
+                                    name: `Added Type: ${user.filter_type.replace('_', '-')}`,
                                     value: `**Date Added**: ${user.updatedAt}`,
                                 },
                             ],

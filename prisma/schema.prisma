@@ -17,7 +17,7 @@ model Users {
     roles          String              @default("") @db.LongText
     servers        String              @default("") @db.LongText
     reason         String
-    filter_type    String
+    filter_type    FilterType
     createdAt      DateTime           @default(now())
     updatedAt      DateTime           @updatedAt
 
@@ -67,6 +67,12 @@ model BadServers {
     updatedAt        DateTime           @updatedAt
 
     @@map(name: "bad_servers")
+}
+
+enum FilterType {
+    MANUAL
+    SEMI_AUTO
+    AUTO
 }
 
 enum Punish {

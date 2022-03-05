@@ -1,3 +1,4 @@
+import { FilterType } from '@prisma/client';
 import { Bot } from '../../classes';
 
 export async function createUser({
@@ -15,7 +16,7 @@ export async function createUser({
     user_type: string;
     servers: string;
     reason: string;
-    filter_type: string;
+    filter_type: FilterType;
 }) {
     return await client.db.users.create({
         data: {

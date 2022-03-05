@@ -1,3 +1,4 @@
+import { FilterType } from '@prisma/client';
 import { getUser, globalFindCheck, updateStatus } from '.';
 import { Bot } from '../../classes';
 import { combineRoles } from '../helpers';
@@ -17,7 +18,7 @@ export async function upsertUser({
     user_type: string;
     server: string;
     roles: string;
-    filter_type: string;
+    filter_type: FilterType;
 }) {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise<any>(async resolve => {

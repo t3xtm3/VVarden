@@ -1,3 +1,4 @@
+import { FilterType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
@@ -99,7 +100,7 @@ export default class AddUserCommand extends SlashCommand {
             user_type,
             servers: server,
             reason,
-            filter_type: 'MANUAL',
+            filter_type: FilterType.MANUAL,
         })
             .then(async () => {
                 await sendEmbed({

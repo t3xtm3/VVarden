@@ -21,7 +21,8 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
                 client,
                 id: interaction.user.id,
             });
-            if (staff[slashCommand.staffRole as keyof typeof staff]) has = true;
+            if (!staff) message = 'No staff members defined';
+            else if (staff[slashCommand.staffRole as keyof typeof staff]) has = true;
             else
                 message = `You must be a \`Bot ${slashCommand.staffRole.toUpperCase()}\` to use this command`;
         } else if (slashCommand.permission) {

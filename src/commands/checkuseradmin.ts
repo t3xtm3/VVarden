@@ -99,7 +99,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
                                 inline: false,
                             },
                             {
-                                name: `Added Type: ${user.filter_type}`,
+                                name: `Added Type: ${user.filter_type.replace('_', '-')}`,
                                 value: `**Date Added**: ${user.createdAt
                                     .toISOString()
                                     .replace(/T/, ' ')

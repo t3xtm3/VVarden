@@ -1,3 +1,4 @@
+import { FilterType } from '@prisma/client';
 import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as readline from 'readline';
@@ -104,7 +105,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                             server: serverid,
                             roles: lineArr[3],
                             user_type: type,
-                            filter_type: 'Semi-Auto',
+                            filter_type: FilterType.SEMI_AUTO,
                         }).then((result: any) => {
                             if (Array.isArray(result)) {
                                 permblacklisted++;
