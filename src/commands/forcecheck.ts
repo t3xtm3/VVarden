@@ -1,8 +1,7 @@
-import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
-import { getStaffMember } from '../utils/staff';
-import { getUser, globalFindCheck } from '../utils/users';
+import { globalFindCheck } from '../utils/users';
 
 export default class ForceCheckCommand extends SlashCommand {
     constructor(client: Bot) {

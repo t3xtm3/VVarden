@@ -1,7 +1,6 @@
-import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
-import { getStaffMember } from '../utils/staff';
 import { updateStatus } from '../utils/users';
 
 export default class AppealCommand extends SlashCommand {

@@ -1,8 +1,4 @@
-import {
-    ApplicationCommandOptionData,
-    ApplicationCommandType,
-    PermissionString,
-} from 'discord.js';
+import { ApplicationCommandOptionData, ApplicationCommandType, PermissionString } from 'discord.js';
 import { Bot } from '../classes';
 
 export interface CommandOptions {

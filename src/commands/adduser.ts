@@ -67,8 +67,8 @@ export default class AddUserCommand extends SlashCommand {
         const id = interaction.options.get('id').value as Snowflake;
         const exists = await client.users
             .fetch(id)
-            .then(user => true)
-            .catch(e => false);
+            .then(() => true)
+            .catch(() => false);
 
         if (!exists) {
             await sendEmbed({
@@ -101,7 +101,7 @@ export default class AddUserCommand extends SlashCommand {
             reason,
             filter_type: 'MANUAL',
         })
-            .then(async u => {
+            .then(async () => {
                 await sendEmbed({
                     interaction,
                     embed: {

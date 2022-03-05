@@ -29,7 +29,7 @@ export async function punishUser({
                     content: `:shield: Warden\nYou are being automodded by ${guildInfo.name} for being associated with ${count} Leaking or Cheating Discord Servers.\nYou may attempt to appeal this via the Official Warden Discord:\nhttps://discord.gg/jeFeDRasfs`,
                 });
             })
-            .catch(e => {
+            .catch(() => {
                 const channel = client.channels.cache.get(guildInfo.logchan) as TextChannel;
                 sendEmbed({
                     channel,
@@ -73,9 +73,7 @@ export async function punishUser({
                 },
                 color: 0x008000,
             },
-        }).catch(err => {
-            console.log;
-        });
+        }).catch();
     } else {
         const action =
             toDo === 'BAN'
@@ -95,7 +93,7 @@ export async function punishUser({
                     },
                 });
             })
-            .catch(err => {
+            .catch(() => {
                 sendEmbed({
                     channel,
                     embed: {

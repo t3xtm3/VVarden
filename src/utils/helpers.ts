@@ -3,7 +3,6 @@ import * as fs from 'fs';
 import * as readline from 'readline';
 import { Bot } from '../classes';
 import sendEmbed from './messages/sendEmbed';
-import { getSettings } from './settings/getSettings';
 import { upsertUser } from './users/upsertUser';
 let processState = '';
 

@@ -1,11 +1,5 @@
 // import { ChannelType, LogType } from '@prisma/client';
-import {
-    BaseCommandInteraction,
-    CategoryChannel,
-    Client,
-    Interaction,
-    Permissions,
-} from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { getStaffMember } from '../utils/staff';

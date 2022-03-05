@@ -102,7 +102,7 @@ export default class UpstatusCommand extends SlashCommand {
                     },
                 });
             })
-            .catch(e => {
+            .catch(() => {
                 sendEmbed({
                     interaction,
                     embed: {

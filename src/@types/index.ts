@@ -1,2 +1,2 @@
-export {CommandOptions} from './CommandOptions'
-export {EmbedOptions} from './EmbedOptions'
+export { CommandOptions } from './CommandOptions';
+export { EmbedOptions } from './EmbedOptions';
