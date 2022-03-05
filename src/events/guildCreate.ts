@@ -23,7 +23,6 @@ export default async function (client: Bot, guild: Guild) {
                 \nIf you want to contribute to the project, use the Official Discord: <https://discord.gg/jeFeDRasfs>`,
                 color: 0x008000,
                 footer: {
-                    // Footer text
                     text: 'VVarden by Vampire#8144',
                 },
             },

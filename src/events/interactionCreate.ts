@@ -54,8 +54,5 @@ export default async function (
             });
         }
     }
-    // else if (interaction.isButton()) {
-    // }
-
     return true;
 }

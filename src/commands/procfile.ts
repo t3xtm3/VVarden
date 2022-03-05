@@ -1,8 +1,4 @@
-import {
-    BaseCommandInteraction,
-    Snowflake,
-    TextBasedChannel,
-} from 'discord.js';
+import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import { processCSVImport } from '../utils/helpers';
 import sendEmbed from '../utils/messages/sendEmbed';
