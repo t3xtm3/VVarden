@@ -55,6 +55,7 @@ db.$on('info', (e: any) => {
 db.$use(async (params, next) => {
     const before = Date.now();
     const result = await next(params);
+    if (params.action === 'findUnique') return result;
     const after = Date.now();
     client.logger.prisma(`Query - ${params.model}.${params.action} took ${after - before}ms`);
 

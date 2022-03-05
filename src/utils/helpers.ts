@@ -54,7 +54,7 @@ export async function processCSVImport(
         processFiles(client, 'leaker', chan).then(ret => {
             processFiles(client, 'cheater', chan).then(retb => {
                 sendEmbed({
-                    interaction,
+                    channel: chan,
                     embed: {
                         description: `:shield: Sucessfully completed imports for ${
                             ret?.count + retb?.count

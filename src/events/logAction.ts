@@ -1,13 +1,11 @@
 import { TextBasedChannel } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import sendEmbed from '../utils/messages/sendEmbed';
-import { getSettings } from '../utils/settings/getSettings';
+import data from '../config.json';
 
 export default async function (client: Bot, info: any) {
-    const settings = await getSettings({ client });
-
     if (info.type === 'USER_ADD') {
-        const channel = await getChannel(client, settings.addUserLog);
+        const channel = await getChannel(client, data.CHANNEL_ADDUSERS);
         if (!channel) return false;
         await sendEmbed({
             channel,
@@ -28,7 +26,7 @@ export default async function (client: Bot, info: any) {
         });
         return true;
     } else if (info.type === 'APPEAL') {
-        const channel = await getChannel(client, settings.logChannel);
+        const channel = await getChannel(client, data.CHANNEL_LOG);
         if (!channel) return false;
         await sendEmbed({
             channel,
@@ -43,7 +41,7 @@ export default async function (client: Bot, info: any) {
         });
         return true;
     } else if (info.type === 'STATUS_UPDATE') {
-        const channel = await getChannel(client, settings.logChannel);
+        const channel = await getChannel(client, data.CHANNEL_LOG);
         if (!channel) return false;
         await sendEmbed({
             channel,

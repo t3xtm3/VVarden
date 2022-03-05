@@ -16,6 +16,7 @@
       "emitDecoratorMetadata": true,
       "sourceMap": false,
       "declaration": false,
+      "resolveJsonModule": true,
       "typeRoots": [
         "src/@types/*"
       ]

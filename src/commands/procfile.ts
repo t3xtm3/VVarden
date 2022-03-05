@@ -2,7 +2,7 @@ import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import { processCSVImport } from '../utils/helpers';
 import sendEmbed from '../utils/messages/sendEmbed';
-import { getSettings } from '../utils/settings/getSettings';
+import data from '../config.json';
 
 export default class ProcfileCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -17,10 +17,9 @@ export default class ProcfileCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        const settings = await getSettings({ client });
         const chan =
-            (await client.channels.cache.get(settings.logChannel)) ??
-            (await client.channels.fetch(settings.logChannel));
+            (await client.channels.cache.get(data.CHANNEL_LOG)) ??
+            (await client.channels.fetch(data.CHANNEL_LOG));
 
         await sendEmbed({
             channel: chan as TextBasedChannel,

@@ -25,7 +25,6 @@ export async function upsertUser({
         const user = await getUser({ client, id });
         if (user) {
             const newRoles = combineRoles(user.roles, roles).join(';');
-            console.log(newRoles);
             const spServers = user.servers.split(';');
             if (spServers.includes(server)) {
                 if (user.status === 'appealed') {

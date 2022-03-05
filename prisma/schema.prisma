@@ -25,9 +25,9 @@ model Users {
 }
 
 model Staff {
-    id              String              @id
-    admin           Boolean
-    dev             Boolean
+    id              String             @id
+    admin           Boolean            @default(false)
+    dev             Boolean            @default(false)
     createdAt       DateTime           @default(now())
     updatedAt       DateTime           @updatedAt
 
@@ -46,17 +46,6 @@ model Guild {
     updatedAt       DateTime            @updatedAt
 
     @@map(name: "guild")
-}
-
-model Settings {
-    id             Int                  @id @default(autoincrement())
-    mainGuild      String
-    logChannel     String
-    addUserLog     String
-    createdAt      DateTime             @default(now())
-    updatedAt      DateTime             @updatedAt
-
-    @@map(name: "settings")
 }
 
 model BadServers {

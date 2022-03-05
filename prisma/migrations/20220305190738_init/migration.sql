@@ -6,7 +6,7 @@ CREATE TABLE `users` (
     `roles` LONGTEXT NOT NULL DEFAULT '',
     `servers` LONGTEXT NOT NULL DEFAULT '',
     `reason` VARCHAR(191) NOT NULL,
-    `filter_type` VARCHAR(191) NOT NULL,
+    `filter_type` ENUM('MANUAL', 'SEMI_AUTO', 'AUTO') NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -16,8 +16,8 @@ CREATE TABLE `users` (
 -- CreateTable
 CREATE TABLE `staff` (
     `id` VARCHAR(191) NOT NULL,
-    `admin` BOOLEAN NOT NULL,
-    `dev` BOOLEAN NOT NULL,
+    `admin` BOOLEAN NOT NULL DEFAULT false,
+    `dev` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -37,18 +37,6 @@ CREATE TABLE `guild` (
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `guild_id_key`(`id`),
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `settings` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `mainGuild` VARCHAR(191) NOT NULL,
-    `logChannel` VARCHAR(191) NOT NULL,
-    `addUserLog` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
