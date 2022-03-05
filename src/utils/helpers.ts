@@ -11,9 +11,7 @@ export function combineRoles(oldRoles: string, newRoles: string) {
     // Takes a delimited role string and combines it, removing dupes
     const wipOldArr = oldRoles.split(';');
     const wipNewArr = newRoles.split(';');
-    const combArr = wipOldArr.concat(
-        wipNewArr.filter(item => wipOldArr.indexOf(item) < 0)
-    );
+    const combArr = wipOldArr.concat(wipNewArr.filter(item => wipOldArr.indexOf(item) < 0));
 
     return combArr;
 }
@@ -79,21 +77,14 @@ export async function processCSVImport(
     }
 }
 
-async function processFiles(
-    client: Bot,
-    type: string,
-    logChan: TextBasedChannel
-) {
+async function processFiles(client: Bot, type: string, logChan: TextBasedChannel) {
     const total = { count: 0, blacklisted: 0, permblacklisted: 0 };
     try {
         const dir = fs.readdirSync(`./imports/${type}`);
         if (Array.isArray(dir) && dir.length > 0) {
             for (const filename of dir) {
                 const rawServerID = filename.split('-');
-                const serverid = rawServerID[3].slice(
-                    0,
-                    rawServerID[3].length - 4
-                );
+                const serverid = rawServerID[3].slice(0, rawServerID[3].length - 4);
 
                 const rl = readline.createInterface({
                     input: fs.createReadStream(`./imports/${type}/${filename}`),

@@ -47,13 +47,9 @@ export default class UpstatusCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id = (
-            interaction.options.getUser('user')?.id ||
-            interaction.options.get('userid')
+            interaction.options.getUser('user')?.id || interaction.options.get('userid')
         )?.toString();
 
         const status = interaction.options.get('status').value as string;

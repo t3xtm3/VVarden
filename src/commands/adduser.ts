@@ -48,10 +48,7 @@ export default class AddUserCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const isStaff = await getStaffMember({
             client,
             id: interaction.member.user.id,
@@ -88,12 +85,9 @@ export default class AddUserCommand extends SlashCommand {
             interaction.options.get('reason')?.value.toString() ||
             'Manual: Member of Blacklisted Discord Server';
 
-        const user_type =
-            interaction.options.get('type')?.value.toString() || 'leaker';
+        const user_type = interaction.options.get('type')?.value.toString() || 'leaker';
 
-        const status =
-            interaction.options.get('status')?.value.toString() ||
-            'blacklisted';
+        const status = interaction.options.get('status')?.value.toString() || 'blacklisted';
 
         const server = (interaction.options.get('server')?.value ||
             interaction.guildId) as Snowflake;

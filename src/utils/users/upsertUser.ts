@@ -48,9 +48,7 @@ export async function upsertUser({
                             },
                             data: {
                                 servers:
-                                    spServers.length > 1
-                                        ? spServers.join(';')
-                                        : spServers.join(''),
+                                    spServers.length > 1 ? spServers.join(';') : spServers.join(''),
                                 roles: newRoles,
                                 status: 'permblacklisted',
                             },
@@ -67,9 +65,7 @@ export async function upsertUser({
                             },
                             data: {
                                 servers:
-                                    spServers.length > 1
-                                        ? spServers.join(';')
-                                        : spServers.join(''),
+                                    spServers.length > 1 ? spServers.join(';') : spServers.join(''),
                                 roles: newRoles,
                             },
                         })

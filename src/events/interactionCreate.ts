@@ -10,14 +10,9 @@ import { Bot } from '../classes/Bot';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { getStaffMember } from '../utils/staff';
 
-export default async function (
-    client: Bot,
-    interaction: BaseCommandInteraction
-) {
+export default async function (client: Bot, interaction: BaseCommandInteraction) {
     if (interaction.isCommand()) {
-        const slashCommand = client.commands.find(
-            c => c.name === interaction.commandName
-        );
+        const slashCommand = client.commands.find(c => c.name === interaction.commandName);
         if (!slashCommand) {
             await interaction.reply({
                 content: 'An error has occurred',
@@ -36,8 +31,7 @@ export default async function (
             else
                 message = `You must be a \`Bot ${slashCommand.staffRole.toUpperCase()}\` to use this command`;
         } else if (slashCommand.permission) {
-            if (interaction.memberPermissions.has(slashCommand.permission))
-                has = true;
+            if (interaction.memberPermissions.has(slashCommand.permission)) has = true;
             else
                 message = `You lack the \`${slashCommand.permission}\` permission to use this command`;
         } else has = true;

@@ -14,10 +14,7 @@ export default class DonateCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         sendEmbed({
             interaction,
             embed: {

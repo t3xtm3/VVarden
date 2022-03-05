@@ -24,15 +24,9 @@ export default class AppealCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const user = interaction.options.getUser('user');
-        const date = new Date()
-            .toISOString()
-            .replace(/T/, ' ')
-            .replace(/\..+/, '');
+        const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
 
         const info = {
             id: user.id,

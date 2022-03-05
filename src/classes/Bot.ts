@@ -9,6 +9,9 @@ import { promisify } from 'util';
 
 const globPromise = promisify(glob);
 
+/**
+ * Custom bot class
+ */
 class Bot extends Client {
     commands: Collection<string, SlashCommand>;
     events: Collection<string, Event>;

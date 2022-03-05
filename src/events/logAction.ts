@@ -16,11 +16,9 @@ export default async function (client: Bot, info: any) {
                     name: `${info.author.username}#${info.author.discriminator}`,
                     icon_url: info.author.displayAvatarURL(),
                 },
-                description: `${info.author.username}#${
-                    info.author.discriminator
-                } added <@${info.userID}> (${
+                description: `${info.author.username}#${info.author.discriminator} added <@${
                     info.userID
-                }) to the database with: \`\`\`${JSON.stringify(
+                }> (${info.userID}) to the database with: \`\`\`${JSON.stringify(
                     info.details,
                     null,
                     2
@@ -65,9 +63,7 @@ export default async function (client: Bot, info: any) {
 async function getChannel(client: Bot, chan: any) {
     const channel = (await client.channels.fetch(chan)) as TextBasedChannel;
     if (!channel) {
-        client.logger.error(
-            `src/events/logAction.ts - ${chan} channel not set or found`
-        );
+        client.logger.error(`src/events/logAction.ts - ${chan} channel not set or found`);
         return false;
     }
     return channel;

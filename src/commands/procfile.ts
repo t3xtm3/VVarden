@@ -16,10 +16,7 @@ export default class ProcfileCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const settings = await getSettings({ client });
         const chan =
             (await client.channels.cache.get(settings.logChannel)) ??

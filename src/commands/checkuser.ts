@@ -28,19 +28,13 @@ export default class CheckUserCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id =
             (
-                interaction.options.getUser('user')?.id ||
-                interaction.options.get('userid')
+                interaction.options.getUser('user')?.id || interaction.options.get('userid')
             )?.toString() ?? interaction.member.user.id;
 
-        const discordUser =
-            (await client.users.cache.get(id)) ||
-            (await client.users.fetch(id));
+        const discordUser = (await client.users.cache.get(id)) || (await client.users.fetch(id));
 
         await getUser({ client, id })
             .then(async user => {

@@ -10,8 +10,7 @@ export default class ScanUsers extends SlashCommand {
         super({
             client,
             name: 'scanusers',
-            description:
-                'Scans your discord users and punishes them if blacklisted',
+            description: 'Scans your discord users and punishes them if blacklisted',
             type: 'CHAT_INPUT',
             options: [],
             defaultPermission: true,
@@ -19,10 +18,7 @@ export default class ScanUsers extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         await interaction.guild.members.fetch().then(async () => {
             const settings = await getGuild({
                 client,

@@ -1,1 +1,1 @@
-export {getStaffMember} from './getStaffMember'
+export { getStaffMember } from './getStaffMember';

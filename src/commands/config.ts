@@ -120,55 +120,50 @@ export default class ConfigCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const name = interaction.options.data[0]?.name;
         if (name === 'view') {
-            await getGuild({ client, id: interaction.guildId }).then(
-                async guildInfo => {
-                    sendEmbed({
-                        interaction,
-                        embed: {
-                            title: 'Server Configuration',
-                            description:
-                                'To change a setting use the config command with one of the options\nFor example: `/config punleak ban`',
-                            color: 0x008000,
-                            fields: [
-                                {
-                                    name: 'logchan - Log Channel',
-                                    value: `I am using <#${guildInfo.logchan}> for my logs\nThis is where I will post messages about the actions I take.`,
-                                    inline: false,
-                                },
-                                {
-                                    name: 'punown - Punish Owners [kick/ban]',
-                                    value: `I am set to **${guildInfo.punown}** Leak and Cheat Server Owners\nThese are the Owners and Staff Members of these Discords`,
-                                    inline: false,
-                                },
-                                {
-                                    name: 'punsupp - Punish Supporters [kick/ban]',
-                                    value: `I am set to **${guildInfo.punsupp}** Leak and Cheat Server Supporters\nThese are Nitro Boosters, Customers, or other types of Donators.`,
-                                    inline: false,
-                                },
-                                {
-                                    name: 'punleak - Punish Leakers [warn/kick/ban]',
-                                    value: `I am set to **${guildInfo.punleak}** Members of Leaking Discords.\nThese are users with only a Member Role in these servers.`,
-                                    inline: false,
-                                },
-                                {
-                                    name: 'puncheat - Punish Cheaters [warn/kick/ban]',
-                                    value: `I am set to **${guildInfo.puncheat}** Members of Cheating Discords.\nThese are users with only a Member Role in these servers.`,
-                                    inline: false,
-                                },
-                            ],
-                            footer: {
-                                text: 'VVarden by Vampire#8144',
+            await getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
+                sendEmbed({
+                    interaction,
+                    embed: {
+                        title: 'Server Configuration',
+                        description:
+                            'To change a setting use the config command with one of the options\nFor example: `/config punleak ban`',
+                        color: 0x008000,
+                        fields: [
+                            {
+                                name: 'logchan - Log Channel',
+                                value: `I am using <#${guildInfo.logchan}> for my logs\nThis is where I will post messages about the actions I take.`,
+                                inline: false,
                             },
+                            {
+                                name: 'punown - Punish Owners [kick/ban]',
+                                value: `I am set to **${guildInfo.punown}** Leak and Cheat Server Owners\nThese are the Owners and Staff Members of these Discords`,
+                                inline: false,
+                            },
+                            {
+                                name: 'punsupp - Punish Supporters [kick/ban]',
+                                value: `I am set to **${guildInfo.punsupp}** Leak and Cheat Server Supporters\nThese are Nitro Boosters, Customers, or other types of Donators.`,
+                                inline: false,
+                            },
+                            {
+                                name: 'punleak - Punish Leakers [warn/kick/ban]',
+                                value: `I am set to **${guildInfo.punleak}** Members of Leaking Discords.\nThese are users with only a Member Role in these servers.`,
+                                inline: false,
+                            },
+                            {
+                                name: 'puncheat - Punish Cheaters [warn/kick/ban]',
+                                value: `I am set to **${guildInfo.puncheat}** Members of Cheating Discords.\nThese are users with only a Member Role in these servers.`,
+                                inline: false,
+                            },
+                        ],
+                        footer: {
+                            text: 'VVarden by Vampire#8144',
                         },
-                    });
-                }
-            );
+                    },
+                });
+            });
         } else if (name === 'logchan') {
             const choice = interaction.options.get('channel').channel.id;
             await updateGuild({

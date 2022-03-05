@@ -8,14 +8,14 @@ const consoleFormat = winston.format.printf(({ level, message, timestamp }) => {
     const closing = gray(']');
     const seperator = grey('-');
 
-    return `${opening}${grey(timestamp)}${closing} ${opening}${level}${closing} ${seperator} ${white(`${message}`)}`;
+    return `${opening}${grey(
+        timestamp
+    )}${closing} ${opening}${level}${closing} ${seperator} ${white(`${message}`)}`;
 });
 
-const fileFormat = winston.format.printf(
-    ({ level, message, timestamp }) => {
-        return `[${timestamp}] [${level}] - ${message}`;
-    }
-);
+const fileFormat = winston.format.printf(({ level, message, timestamp }) => {
+    return `[${timestamp}] [${level}] - ${message}`;
+});
 
 const customLevels = {
     levels: {
@@ -25,10 +25,10 @@ const customLevels = {
         error: 3,
     },
     colors: {
-        prisma: 'blue'
-    }
-}
-winston.addColors(customLevels.colors)
+        prisma: 'blue',
+    },
+};
+winston.addColors(customLevels.colors);
 export class Logger {
     logger: winston.Logger;
 
@@ -67,10 +67,9 @@ export class Logger {
         this.debug = this.logger.debug.bind(this.logger);
         this.info = this.logger.info.bind(this.logger);
         this.error = this.logger.error.bind(this.logger);
-    };
+    }
 
     async prisma(message: any) {
         this.logger.log('prisma', message);
     }
-
 }

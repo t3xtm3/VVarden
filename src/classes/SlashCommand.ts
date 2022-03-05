@@ -6,6 +6,11 @@ import {
 } from 'discord.js';
 import { CommandOptions } from '../@types/CommandOptions';
 import { Bot } from './Bot';
+
+/**
+ * SlashCommand Class
+ * This is the base of all commands
+ */
 export abstract class SlashCommand implements CommandOptions {
     client: Bot;
     name: string;
@@ -26,8 +31,5 @@ export abstract class SlashCommand implements CommandOptions {
         this.staffRole = opts.staffRole;
         this.permission = opts.permission;
     }
-    public abstract run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean>;
+    public abstract run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean>;
 }

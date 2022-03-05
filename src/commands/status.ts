@@ -15,10 +15,7 @@ export default class StatusCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const uptime = process.uptime();
 
         const blacklistedUsers = await getAllBlacklisted({ client });
@@ -51,10 +48,7 @@ export default class StatusCommand extends SlashCommand {
                     {
                         name: 'Memory Usage',
                         value: `I am currently using ${
-                            Math.round(
-                                (process.memoryUsage().heapUsed / 1024 / 1024) *
-                                    100
-                            ) / 100
+                            Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100
                         } MB.`,
                         inline: false,
                     },

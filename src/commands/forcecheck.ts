@@ -9,8 +9,7 @@ export default class ForceCheckCommand extends SlashCommand {
         super({
             client,
             name: 'forcecheck',
-            description:
-                'Checks the DB status of a user and global automods if needed',
+            description: 'Checks the DB status of a user and global automods if needed',
             type: 'CHAT_INPUT',
             options: [
                 {
@@ -31,13 +30,9 @@ export default class ForceCheckCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id = (
-            interaction.options.getUser('user')?.id ||
-            interaction.options.get('userid')
+            interaction.options.getUser('user')?.id || interaction.options.get('userid')
         )?.toString();
 
         if (!id) {

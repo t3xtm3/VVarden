@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
 
@@ -14,10 +14,7 @@ export default class AboutCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         sendEmbed({
             interaction,
             embed: {

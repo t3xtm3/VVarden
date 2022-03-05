@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { getStaffMember } from '../utils/staff';
@@ -15,10 +15,7 @@ export default class RankCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const staff = await getStaffMember({ client, id: interaction.user.id });
         const member =
             (await interaction.guild.members.cache.get(interaction.user.id)) ||
@@ -35,8 +32,7 @@ export default class RankCommand extends SlashCommand {
         } else if (member.permissions.has('ADMINISTRATOR')) {
             embed.description = 'Your wish is my command **Discord Admin**!';
         } else if (interaction.user.id === '102498921640640512') {
-            embed.description =
-                "You're looking great today Leah. Let me know what you need.";
+            embed.description = "You're looking great today Leah. Let me know what you need.";
         } else if (interaction.user.id === '160347445711077376') {
             embed.description = 'What is thy bidding, my master?';
         } else {

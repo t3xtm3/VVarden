@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import { Logger } from './utils/logger';
 dotenv.config();
 
+/**
+ * Sharding Manager
+ */
 export class Sharding {
     static start(): void {
         // Must be the compiled file

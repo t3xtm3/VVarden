@@ -30,9 +30,7 @@ export async function punishUser({
                 });
             })
             .catch(e => {
-                const channel = client.channels.cache.get(
-                    guildInfo.logchan
-                ) as TextChannel;
+                const channel = client.channels.cache.get(guildInfo.logchan) as TextChannel;
                 sendEmbed({
                     channel,
                     embed: {

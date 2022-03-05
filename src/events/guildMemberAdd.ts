@@ -8,9 +8,7 @@ export default async function (client: Bot, guild: Guild, member: GuildMember) {
     const settings = await getGuild({ client, id: guild.id });
 
     if (!settings) {
-        client.logger.error(
-            `src/events/guildMemberAdd.ts - Bot is in unknown guild - ${guild.id}`
-        );
+        client.logger.error(`src/events/guildMemberAdd.ts - Bot is in unknown guild - ${guild.id}`);
         return false;
     }
 

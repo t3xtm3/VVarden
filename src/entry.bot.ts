@@ -44,6 +44,10 @@ process.on('unhandledRejection', (err: any, p) => {
     console.log(`Unhandled Promise Rejection\n\n${err.stack}`);
 });
 
+/**
+ * Database events
+ */
+
 db.$on('info', (e: any) => {
     client.logger.prisma(e);
 });
@@ -52,9 +56,7 @@ db.$use(async (params, next) => {
     const before = Date.now();
     const result = await next(params);
     const after = Date.now();
-    client.logger.prisma(
-        `Query - ${params.model}.${params.action} took ${after - before}ms`
-    );
+    client.logger.prisma(`Query - ${params.model}.${params.action} took ${after - before}ms`);
 
     return result;
 });

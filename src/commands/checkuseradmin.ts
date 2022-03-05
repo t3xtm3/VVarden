@@ -1,8 +1,7 @@
-import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import { getBadServersByIDs } from '../utils/badservers';
 import sendEmbed from '../utils/messages/sendEmbed';
-import { getStaffMember } from '../utils/staff';
 import { getUser } from '../utils/users';
 
 export default class CheckUserAdminCommand extends SlashCommand {
@@ -31,13 +30,9 @@ export default class CheckUserAdminCommand extends SlashCommand {
         });
     }
 
-    public async run(
-        client: Bot,
-        interaction: BaseCommandInteraction
-    ): Promise<boolean> {
+    public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id = (
-            interaction.options.getUser('user')?.id ||
-            interaction.options.get('userid')
+            interaction.options.getUser('user')?.id || interaction.options.get('userid')
         )?.toString();
 
         if (!id) {
@@ -51,16 +46,11 @@ export default class CheckUserAdminCommand extends SlashCommand {
             return false;
         }
 
-        const discordUser =
-            (await client.users.cache.get(id)) ||
-            (await client.users.fetch(id));
+        const discordUser = (await client.users.cache.get(id)) || (await client.users.fetch(id));
 
         await getUser({ client, id })
             .then(async user => {
-                const roles =
-                    user.roles !== ''
-                        ? user.roles.split(';').join(',\n')
-                        : 'None';
+                const roles = user.roles !== '' ? user.roles.split(';').join(',\n') : 'None';
 
                 const ids = user.servers.split(';');
 
@@ -69,7 +59,6 @@ export default class CheckUserAdminCommand extends SlashCommand {
                     ids,
                 });
 
-                const notBad = badServers.filter(i => ids.includes(i.id));
                 const badNames = badServers.map(i => i.name);
 
                 sendEmbed({
@@ -86,11 +75,10 @@ export default class CheckUserAdminCommand extends SlashCommand {
                         thumbnail: { url: discordUser.displayAvatarURL() },
                         color: 0xffff00,
                         fields: [
-                            // Array of field objects
                             {
-                                name: 'User Information', // Field
+                                name: 'User Information',
                                 value: `**ID**: ${user.id} / **Name**: ${discordUser.username}`,
-                                inline: false, // Whether you want multiple fields in same line
+                                inline: false,
                             },
                             {
                                 name: 'Known Discord Roles',
@@ -101,9 +89,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
                                 name: 'Known Servers',
                                 value:
                                     badNames.length > 0
-                                        ? badNames
-                                              .join(',\n')
-                                              .substring(0, 1024)
+                                        ? badNames.join(',\n').substring(0, 1024)
                                         : 'None',
                                 inline: false,
                             },
