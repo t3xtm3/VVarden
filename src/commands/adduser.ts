@@ -64,7 +64,8 @@ export default class AddUserCommand extends SlashCommand {
         }
 
         const reason =
-            interaction.options.get('reason')?.value.toString() || 'Manual: Member of Blacklisted Discord Server';
+            interaction.options.get('reason')?.value.toString() ||
+            'Manual: Member of Blacklisted Discord Server';
 
         const user_type = interaction.options.get('type')?.value.toString() || 'leaker';
         const status = interaction.options.get('status')?.value.toString() || 'blacklisted';
@@ -102,7 +103,8 @@ export default class AddUserCommand extends SlashCommand {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description: ':shield: User is already in database\nChange status if nessary using /upstatus',
+                        description:
+                            ':shield: User is already in database\nChange status if nessary using /upstatus',
                         color: 0xffff00,
                     },
                 });

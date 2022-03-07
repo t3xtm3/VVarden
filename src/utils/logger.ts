@@ -8,7 +8,9 @@ const consoleFormat = winston.format.printf(({ level, message, timestamp }) => {
     const closing = gray(']');
     const seperator = grey('-');
 
-    return `${opening}${grey(timestamp)}${closing} ${opening}${level}${closing} ${seperator} ${white(`${message}`)}`;
+    return `${opening}${grey(timestamp)}${closing} ${opening}${level}${closing} ${seperator} ${white(
+        `${message}`
+    )}`;
 });
 
 const fileFormat = winston.format.printf(({ level, message, timestamp }) => {

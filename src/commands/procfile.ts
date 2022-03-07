@@ -23,7 +23,8 @@ export default class ProcfileCommand extends SlashCommand {
         }
 
         const chan =
-            (await client.channels.cache.get(data.CHANNEL_LOG)) ?? (await client.channels.fetch(data.CHANNEL_LOG));
+            (await client.channels.cache.get(data.CHANNEL_LOG)) ??
+            (await client.channels.fetch(data.CHANNEL_LOG));
 
         await sendEmbed({
             channel: chan as TextBasedChannel,

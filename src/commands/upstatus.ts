@@ -54,7 +54,9 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        const id = (interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value)?.toString();
+        const id = (
+            interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value
+        )?.toString();
 
         const status = interaction.options.get('status').value as string;
         const user_type = interaction.options.get('type').value as string;

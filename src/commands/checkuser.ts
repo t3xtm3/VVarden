@@ -1,4 +1,4 @@
-import { BaseCommandInteraction } from 'discord.js';
+import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { getUser } from '../utils/users';
@@ -30,8 +30,8 @@ export default class CheckUserCommand extends SlashCommand {
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id =
-            (interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value)?.toString() ??
-            interaction.member.user.id;
+            ((interaction.options.getUser('user')?.id ||
+                interaction.options.get('userid')?.value) as Snowflake) ?? interaction.member.user.id;
 
         await getUser({ client, id })
             .then(async user => {

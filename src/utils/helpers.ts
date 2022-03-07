@@ -8,7 +8,8 @@ import { upsertUser } from './users/upsertUser';
 let processState = 0;
 
 export async function getChannelByID(client: Bot, channel: Snowflake, options?: any) {
-    const chan = ((await client.channels.cache.get(channel)) || (await client.channels.fetch(channel))) as TextChannel;
+    const chan = ((await client.channels.cache.get(channel)) ||
+        (await client.channels.fetch(channel))) as TextChannel;
     if (options.cache) client.logChans.set(options.guildID, chan);
     return chan;
 }
@@ -67,7 +68,11 @@ export function CSVtoArray(text: any) {
     return a;
 }
 
-export async function processCSVImport(client: Bot, interaction: BaseCommandInteraction, chan: TextBasedChannel) {
+export async function processCSVImport(
+    client: Bot,
+    interaction: BaseCommandInteraction,
+    chan: TextBasedChannel
+) {
     try {
         processState = 1;
 
@@ -78,7 +83,9 @@ export async function processCSVImport(client: Bot, interaction: BaseCommandInte
                     embed: {
                         description: `:shield: Sucessfully completed imports for ${
                             ret?.count + retb?.count
-                        } servers.\n+ ${ret?.blacklisted + retb?.blacklisted} users have been added.\n+ ${
+                        } servers.\n+ ${
+                            ret?.blacklisted + retb?.blacklisted
+                        } users have been added.\n+ ${
                             ret?.permblacklisted + retb?.permblacklisted
                         } users were permanently blacklisted.`,
                         author: {
