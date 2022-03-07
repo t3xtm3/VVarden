@@ -34,8 +34,6 @@ export default class CheckUserCommand extends SlashCommand {
                 interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value
             )?.toString() ?? interaction.member.user.id;
 
-        const discordUser = (await client.users.cache.get(id)) || (await client.users.fetch(id));
-
         await getUser({ client, id })
             .then(async user => {
                 const badType = ['blacklisted', 'permblacklisted'];
@@ -48,17 +46,17 @@ export default class CheckUserCommand extends SlashCommand {
                                 user.servers.split(';').length
                             } bad Discord servers.`,
                             author: {
-                                name: discordUser.username,
-                                icon_url: discordUser.displayAvatarURL(),
+                                name: user.last_username,
+                                icon_url: user.avatar,
                             },
                             thumbnail: {
-                                url: discordUser.displayAvatarURL(),
+                                url: user.avatar,
                             },
                             color: 0x800000,
                             fields: [
                                 {
                                     name: 'User Information',
-                                    value: `**ID**: ${user.id} / **Name**: ${discordUser.username}`,
+                                    value: `**ID**: ${user.id} / **Name**: ${user.last_username}`,
                                 },
                                 {
                                     name: 'Blacklist Reason',
