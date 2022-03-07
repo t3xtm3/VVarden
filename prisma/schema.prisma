@@ -12,12 +12,15 @@ datasource db {
 
 model Users {
     id             String              @id
+    last_username  String
+    avatar         String
     status         String
     user_type      String
-    roles          String              @default("") @db.LongText
     servers        String              @default("") @db.LongText
-    reason         String
+    roles          String              @default("") @db.LongText
     filter_type    FilterType
+    reason         String
+    anonymized     Boolean            @default(false)
     createdAt      DateTime           @default(now())
     updatedAt      DateTime           @updatedAt
 

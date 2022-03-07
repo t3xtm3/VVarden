@@ -1,12 +1,14 @@
 -- CreateTable
 CREATE TABLE `users` (
     `id` VARCHAR(191) NOT NULL,
+    `avatar` VARCHAR(191) NOT NULL,
     `status` VARCHAR(191) NOT NULL,
     `user_type` VARCHAR(191) NOT NULL,
-    `roles` LONGTEXT NOT NULL DEFAULT '',
+    `last_username` VARCHAR(191) NOT NULL,
     `servers` LONGTEXT NOT NULL DEFAULT '',
-    `reason` VARCHAR(191) NOT NULL,
+    `roles` LONGTEXT NOT NULL DEFAULT '',
     `filter_type` ENUM('MANUAL', 'SEMI_AUTO', 'AUTO') NOT NULL,
+    `reason` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
