@@ -19,8 +19,11 @@ export default class AboutCommand extends SlashCommand {
             interaction,
             embed: {
                 title: 'About Me',
-                description:
-                    "Hello, my name is VVarden!\nYou can call me Warden or 5 Warden (V Warden).\n\nI was created by Vampire#8144 in an effort to combat the prevalence of pirated code and cheating in the FiveM community, commonly called 'leaks' and 'hacks/cheats'.\n\nI am the frontend for a database of users in Leaking and Cheating Discord servers, with settings to prevent those users from entering your discord server.\n\nYou can join the Official Discord for more information: <https://discord.gg/jeFeDRasfs>",
+                description: `Hello, my name is VVarden!
+                    You can call me Warden or 5 Warden (V Warden).
+                    \nI was created by Vampire#8144 in an effort to combat the prevalence of pirated code and cheating in the FiveM community, commonly called 'leaks' and 'hacks/cheats'.
+                    \nI am the frontend for a database of users in Leaking and Cheating Discord servers, with settings to prevent those users from entering your discord server.
+                    \nYou can join the Official Discord for more information: <https://discord.gg/jeFeDRasfs>`,
                 color: 0x008000,
                 footer: {
                     text: 'VVarden by Vampire#8144',
