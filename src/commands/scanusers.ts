@@ -1,6 +1,7 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import { getGuild } from '../utils/guild';
+import { getProcessState, processInformationMsg } from '../utils/helpers';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { getUser } from '../utils/users';
 import { punishUser } from '../utils/users/punishUser';
@@ -19,6 +20,11 @@ export default class ScanUsers extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
+        if (getProcessState() === 1) {
+            processInformationMsg(interaction);
+            return false;
+        }
+
         await interaction.guild.members.fetch().then(async () => {
             const settings = await getGuild({
                 client,

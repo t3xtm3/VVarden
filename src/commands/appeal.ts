@@ -1,5 +1,6 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
+import { getProcessState, processInformationMsg } from '../utils/helpers';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { updateStatus } from '../utils/users';
 
@@ -26,6 +27,11 @@ export default class AppealCommand extends SlashCommand {
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const user = interaction.options.getUser('user');
         const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
+        if (getProcessState() === 1) {
+            processInformationMsg(interaction);
+            return false;
+        }
 
         const info = {
             id: user.id,

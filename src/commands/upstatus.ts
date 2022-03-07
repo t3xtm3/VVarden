@@ -1,5 +1,6 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
+import { getProcessState, processInformationMsg } from '../utils/helpers';
 import sendEmbed from '../utils/messages/sendEmbed';
 import { updateStatus } from '../utils/users';
 
@@ -48,6 +49,11 @@ export default class UpstatusCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
+        if (getProcessState() === 1) {
+            processInformationMsg(interaction);
+            return false;
+        }
+
         const id = (interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value)?.toString();
 
         const status = interaction.options.get('status').value as string;

@@ -1,6 +1,6 @@
 import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
-import { processCSVImport } from '../utils/helpers';
+import { getProcessState, processCSVImport, processInformationMsg } from '../utils/helpers';
 import sendEmbed from '../utils/messages/sendEmbed';
 import data from '../config.json';
 
@@ -17,6 +17,11 @@ export default class ProcfileCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
+        if (getProcessState() === 1) {
+            processInformationMsg(interaction);
+            return false;
+        }
+
         const chan =
             (await client.channels.cache.get(data.CHANNEL_LOG)) ?? (await client.channels.fetch(data.CHANNEL_LOG));
 

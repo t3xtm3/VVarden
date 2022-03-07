@@ -5,12 +5,30 @@ import * as readline from 'readline';
 import { Bot } from '../classes';
 import sendEmbed from './messages/sendEmbed';
 import { upsertUser } from './users/upsertUser';
-let processState = '';
+let processState = 0;
 
 export async function getChannelByID(client: Bot, channel: Snowflake, options?: any) {
     const chan = ((await client.channels.cache.get(channel)) || (await client.channels.fetch(channel))) as TextChannel;
     if (options.cache) client.logChans.set(options.guildID, chan);
     return chan;
+}
+
+export function getProcessState() {
+    return processState;
+}
+
+export function processInformationMsg(interaction: BaseCommandInteraction) {
+    sendEmbed({
+        interaction,
+        embed: {
+            description: 'This command is currently disabled while VVarden processes new information.',
+            author: {
+                name: `${interaction.user.username}#${interaction.user.discriminator}`,
+                icon_url: interaction.user.displayAvatarURL(),
+            },
+            color: 0xffff00,
+        },
+    });
 }
 
 export function combineRoles(oldRoles: string, newRoles: string) {
@@ -51,7 +69,7 @@ export function CSVtoArray(text: any) {
 
 export async function processCSVImport(client: Bot, interaction: BaseCommandInteraction, chan: TextBasedChannel) {
     try {
-        processState = 'import';
+        processState = 1;
 
         processFiles(client, 'leaker', chan).then(ret => {
             processFiles(client, 'cheater', chan).then(retb => {
@@ -70,6 +88,7 @@ export async function processCSVImport(client: Bot, interaction: BaseCommandInte
                         color: 0x008000,
                     },
                 });
+                processState = 0;
             });
         });
     } catch (e) {
