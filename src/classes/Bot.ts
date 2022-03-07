@@ -1,6 +1,6 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { Client, ClientOptions, Collection } from 'discord.js';
+import { Client, ClientOptions, Collection, Snowflake, TextChannel } from 'discord.js';
 import { SlashCommand } from './SlashCommand';
 import { Logger } from '../utils/logger';
 import { PrismaClient } from '@prisma/client';
@@ -15,6 +15,7 @@ const globPromise = promisify(glob);
 class Bot extends Client {
     commands: Collection<string, SlashCommand>;
     events: Collection<string, Event>;
+    logChans: Collection<Snowflake, TextChannel>;
     logger: Logger;
     db: PrismaClient;
 
@@ -23,6 +24,7 @@ class Bot extends Client {
 
         this.commands = new Collection();
         this.events = new Collection();
+        this.logChans = new Collection();
         this.logger = logger;
         this.db = db;
     }

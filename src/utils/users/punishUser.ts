@@ -1,6 +1,7 @@
 import { Guild, Users } from '.prisma/client';
 import { GuildMember, TextChannel } from 'discord.js';
 import { Bot } from '../../classes';
+import { getChannelByID } from '../helpers';
 import sendEmbed from '../messages/sendEmbed';
 
 export async function punishUser({
@@ -59,14 +60,17 @@ export async function punishUser({
             toDo = guildInfo.puncheat;
             break;
     }
-    const channel = ((await client.channels.cache.get(guildInfo.logchan)) ||
-        (await client.channels.fetch(guildInfo.logchan))) as TextChannel;
+    const cachedChannel = client.logChans.get(guildInfo.id);
+    const channel =
+        cachedChannel.id === guildInfo.logchan
+            ? cachedChannel
+            : await getChannelByID(client, guildInfo.logchan, { cache: true, guildID: guildInfo.id });
 
     if (toDo === 'WARN') {
         sendEmbed({
             channel,
             embed: {
-                description: `:warning: User <@${member.id}> has been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status} / **User Type**: ${type}.\n**Details**: ${oldUser.reason}`,
+                description: `:warning: User ${oldUser.last_username} (${member.id}) has been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status} / **User Type**: ${type}.\n**Details**: ${oldUser.reason}`,
                 author: {
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.user.displayAvatarURL(),
@@ -84,7 +88,7 @@ export async function punishUser({
                 sendEmbed({
                     channel,
                     embed: {
-                        description: `:shield: User <@${member.id}> has been punished with a ${guildInfo.punown} on scan.\nThey have been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status} / **User Type**: ${type}.\n**Details**: ${oldUser.reason}`,
+                        description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${guildInfo.punown} on scan.\nThey have been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status} / **User Type**: ${type}.\n**Details**: ${oldUser.reason}`,
                         author: {
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
@@ -97,7 +101,7 @@ export async function punishUser({
                 sendEmbed({
                     channel,
                     embed: {
-                        description: `:warning: I tried to ${guildInfo.punown} <@${member.id}> but something errored!\nPlease verify I have this permission, and am a higher role than this user!`,
+                        description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!\nPlease verify I have this permission, and am a higher role than this user!`,
                         author: {
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
