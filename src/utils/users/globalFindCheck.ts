@@ -1,9 +1,8 @@
-import { Snowflake } from 'discord.js';
 import { Bot } from '../../classes';
 import { getGuild } from '../guild';
 import { punishUser } from './punishUser';
 
-export async function globalFindCheck({ client, id }: { client: Bot; id: Snowflake }) {
+export async function globalFindCheck({ client, id }: { client: Bot; id: string }) {
     const user = await client.db.users.findUnique({
         where: {
             id,
