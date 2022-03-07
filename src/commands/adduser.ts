@@ -2,7 +2,6 @@ import { FilterType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../classes';
 import sendEmbed from '../utils/messages/sendEmbed';
-import { getStaffMember } from '../utils/staff';
 import { createUser } from '../utils/users';
 
 export default class AddUserCommand extends SlashCommand {
@@ -50,21 +49,6 @@ export default class AddUserCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        const isStaff = await getStaffMember({
-            client,
-            id: interaction.member.user.id,
-        });
-        if (!isStaff?.dev) {
-            await sendEmbed({
-                interaction,
-                embed: {
-                    description: 'Not authorized to use this command',
-                    color: 0xffff00,
-                },
-            });
-            return false;
-        }
-
         const id = interaction.options.get('id').value as Snowflake;
         const user = await client.users.fetch(id);
 
@@ -83,9 +67,7 @@ export default class AddUserCommand extends SlashCommand {
             interaction.options.get('reason')?.value.toString() || 'Manual: Member of Blacklisted Discord Server';
 
         const user_type = interaction.options.get('type')?.value.toString() || 'leaker';
-
         const status = interaction.options.get('status')?.value.toString() || 'blacklisted';
-
         const server = (interaction.options.get('server')?.value || interaction.guildId) as Snowflake;
 
         await createUser({
