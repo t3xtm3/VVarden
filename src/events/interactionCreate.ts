@@ -23,12 +23,10 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
             });
             if (!staff) message = 'No staff members defined';
             else if (staff[slashCommand.staffRole as keyof typeof staff]) has = true;
-            else
-                message = `You must be a \`Bot ${slashCommand.staffRole.toUpperCase()}\` to use this command`;
+            else message = `You must be a \`Bot ${slashCommand.staffRole.toUpperCase()}\` to use this command`;
         } else if (slashCommand.permission) {
             if (interaction.memberPermissions.has(slashCommand.permission)) has = true;
-            else
-                message = `You lack the \`${slashCommand.permission}\` permission to use this command`;
+            else message = `You lack the \`${slashCommand.permission}\` permission to use this command`;
         } else has = true;
 
         await interaction.deferReply();

@@ -18,8 +18,7 @@ export default class ProcfileCommand extends SlashCommand {
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const chan =
-            (await client.channels.cache.get(data.CHANNEL_LOG)) ??
-            (await client.channels.fetch(data.CHANNEL_LOG));
+            (await client.channels.cache.get(data.CHANNEL_LOG)) ?? (await client.channels.fetch(data.CHANNEL_LOG));
 
         await sendEmbed({
             channel: chan as TextBasedChannel,

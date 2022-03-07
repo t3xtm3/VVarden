@@ -6,6 +6,8 @@ import { combineRoles } from '../helpers';
 export async function upsertUser({
     client,
     id,
+    avatar,
+    last_username,
     status,
     user_type,
     server,
@@ -14,6 +16,8 @@ export async function upsertUser({
 }: {
     client: Bot;
     id: string;
+    avatar: string;
+    last_username: string;
     status: string;
     user_type: string;
     server: string;
@@ -47,8 +51,7 @@ export async function upsertUser({
                                 id,
                             },
                             data: {
-                                servers:
-                                    spServers.length > 1 ? spServers.join(';') : spServers.join(''),
+                                servers: spServers.length > 1 ? spServers.join(';') : spServers.join(''),
                                 roles: newRoles,
                                 status: 'permblacklisted',
                             },
@@ -64,8 +67,7 @@ export async function upsertUser({
                                 id,
                             },
                             data: {
-                                servers:
-                                    spServers.length > 1 ? spServers.join(';') : spServers.join(''),
+                                servers: spServers.length > 1 ? spServers.join(';') : spServers.join(''),
                                 roles: newRoles,
                             },
                         })
@@ -79,6 +81,8 @@ export async function upsertUser({
             await client.db.users.create({
                 data: {
                     id,
+                    avatar,
+                    last_username,
                     status,
                     user_type,
                     roles: roles,

@@ -4,6 +4,8 @@ import { Bot } from '../../classes';
 export async function createUser({
     client,
     id,
+    avatar,
+    last_username,
     status,
     user_type,
     servers,
@@ -12,6 +14,8 @@ export async function createUser({
 }: {
     client: Bot;
     id: string;
+    avatar: string;
+    last_username: string;
     status: string;
     user_type: string;
     servers: string;
@@ -21,6 +25,8 @@ export async function createUser({
     return await client.db.users.create({
         data: {
             id,
+            avatar,
+            last_username,
             status,
             user_type,
             servers,

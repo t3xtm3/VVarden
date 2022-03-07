@@ -30,9 +30,8 @@ export default class CheckUserCommand extends SlashCommand {
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id =
-            (
-                interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value
-            )?.toString() ?? interaction.member.user.id;
+            (interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value)?.toString() ??
+            interaction.member.user.id;
 
         await getUser({ client, id })
             .then(async user => {

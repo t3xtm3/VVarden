@@ -48,9 +48,7 @@ export default class UpstatusCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        const id = (
-            interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value
-        )?.toString();
+        const id = (interaction.options.getUser('user')?.id || interaction.options.get('userid')?.value)?.toString();
 
         const status = interaction.options.get('status').value as string;
         const user_type = interaction.options.get('type').value as string;
@@ -79,11 +77,11 @@ export default class UpstatusCommand extends SlashCommand {
         }
 
         await updateStatus({ client, id, status, user_type, reason })
-            .then(() => {
+            .then(u => {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description: `Updated <@${id}> to status \`${status}\`, type \`${user_type}\` with reason: \`${reason}\``,
+                        description: `Updated ${u.last_username} (${id}) to status \`${status}\`, type \`${user_type}\` with reason: \`${reason}\``,
                         author: {
                             name: `${interaction.user.username}#${interaction.user.discriminator}`,
                             icon_url: interaction.user.displayAvatarURL(),
@@ -95,6 +93,7 @@ export default class UpstatusCommand extends SlashCommand {
                     type: 'STATUS_UPDATE',
                     author: interaction.user,
                     userID: id,
+                    last_username: u.last_username,
                     details: {
                         status,
                         user_type,

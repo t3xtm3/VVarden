@@ -31,9 +31,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        const id = (
-            interaction.options.getUser('user')?.id || interaction.options.get('userid')
-        )?.toString();
+        const id = (interaction.options.getUser('user')?.id || interaction.options.get('userid'))?.toString();
 
         if (!id) {
             sendEmbed({
@@ -85,10 +83,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
                             },
                             {
                                 name: 'Known Servers',
-                                value:
-                                    badNames.length > 0
-                                        ? badNames.join(',\n').substring(0, 1024)
-                                        : 'None',
+                                value: badNames.length > 0 ? badNames.join(',\n').substring(0, 1024) : 'None',
                                 inline: false,
                             },
                             {

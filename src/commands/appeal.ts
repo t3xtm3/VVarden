@@ -39,7 +39,7 @@ export default class AppealCommand extends SlashCommand {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description: `Updated <@${info.id}> to status \`${info.status}\`, type \`${updated.user_type}\` with reason: \`${info.reason}\``,
+                        description: `Updated ${updated.last_username} (${info.id}) to status \`${info.status}\`, type \`${updated.user_type}\` with reason: \`${info.reason}\``,
                         color: 0x008000,
                     },
                 });
@@ -47,6 +47,7 @@ export default class AppealCommand extends SlashCommand {
                     type: 'APPEAL',
                     author: interaction.user,
                     userID: user.id,
+                    last_username: updated.last_username,
                 });
             })
             .catch(() => {

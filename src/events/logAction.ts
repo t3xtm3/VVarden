@@ -14,13 +14,9 @@ export default async function (client: Bot, info: any) {
                     name: `${info.author.username}#${info.author.discriminator}`,
                     icon_url: info.author.displayAvatarURL(),
                 },
-                description: `${info.author.username}#${info.author.discriminator} added <@${
+                description: `${info.author.username}#${info.author.discriminator} added ${info.last_username} (${
                     info.userID
-                }> (${info.userID}) to the database with: \`\`\`${JSON.stringify(
-                    info.details,
-                    null,
-                    2
-                )}\`\`\``,
+                }) to the database with: \`\`\`${JSON.stringify(info.details, null, 2)}\`\`\``,
                 color: 0x008000,
             },
         });
@@ -35,7 +31,7 @@ export default async function (client: Bot, info: any) {
                     name: `${info.author.username}#${info.author.discriminator}`,
                     icon_url: info.author.displayAvatarURL(),
                 },
-                description: `${info.author.username}#${info.author.discriminator} appealed <@${info.userID}> (${info.userID})`,
+                description: `${info.author.username}#${info.author.discriminator} appealed ${info.last_username} (${info.userID})`,
                 color: 0x008000,
             },
         });
@@ -50,7 +46,7 @@ export default async function (client: Bot, info: any) {
                     name: `${info.author.username}#${info.author.discriminator}`,
                     icon_url: info.author.displayAvatarURL(),
                 },
-                description: `${info.author.username}#${info.author.discriminator} updated status for <@${info.userID}> (${info.userID})\nUser Status: ${info.details.status}\nUser Type: ${info.details.user_type}\nReason: ${info.details.reason}`,
+                description: `${info.author.username}#${info.author.discriminator} updated status for ${info.last_username} (${info.userID})\nUser Status: ${info.details.status}\nUser Type: ${info.details.user_type}\nReason: ${info.details.reason}`,
                 color: 0x008000,
             },
         });

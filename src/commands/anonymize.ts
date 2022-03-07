@@ -50,7 +50,7 @@ export default class AnonymizeCommand extends SlashCommand {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description: `Anonymized <@${id}>`,
+                        description: `Anonymized ${id}`,
                         author: {
                             name: `${interaction.user.username}#${interaction.user.discriminator}`,
                             icon_url: interaction.user.displayAvatarURL(),

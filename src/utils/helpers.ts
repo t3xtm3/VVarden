@@ -1,11 +1,17 @@
 import { FilterType } from '@prisma/client';
-import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
+import { BaseCommandInteraction, Snowflake, TextBasedChannel, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as readline from 'readline';
 import { Bot } from '../classes';
 import sendEmbed from './messages/sendEmbed';
 import { upsertUser } from './users/upsertUser';
 let processState = '';
+
+export async function getChannelByID(client: Bot, channel: Snowflake, options?: any) {
+    const chan = ((await client.channels.cache.get(channel)) || (await client.channels.fetch(channel))) as TextChannel;
+    if (options.cache) client.logChans.set(options.guildID, chan);
+    return chan;
+}
 
 export function combineRoles(oldRoles: string, newRoles: string) {
     // Takes a delimited role string and combines it, removing dupes
@@ -43,11 +49,7 @@ export function CSVtoArray(text: any) {
     return a;
 }
 
-export async function processCSVImport(
-    client: Bot,
-    interaction: BaseCommandInteraction,
-    chan: TextBasedChannel
-) {
+export async function processCSVImport(client: Bot, interaction: BaseCommandInteraction, chan: TextBasedChannel) {
     try {
         processState = 'import';
 
@@ -58,9 +60,7 @@ export async function processCSVImport(
                     embed: {
                         description: `:shield: Sucessfully completed imports for ${
                             ret?.count + retb?.count
-                        } servers.\n+ ${
-                            ret?.blacklisted + retb?.blacklisted
-                        } users have been added.\n+ ${
+                        } servers.\n+ ${ret?.blacklisted + retb?.blacklisted} users have been added.\n+ ${
                             ret?.permblacklisted + retb?.permblacklisted
                         } users were permanently blacklisted.`,
                         author: {
@@ -101,6 +101,8 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                         await upsertUser({
                             client,
                             id: lineArr[7],
+                            avatar: lineArr[2],
+                            last_username: `${lineArr[0]}#${lineArr[1]}`,
                             status: 'blacklisted',
                             server: serverid,
                             roles: lineArr[3],

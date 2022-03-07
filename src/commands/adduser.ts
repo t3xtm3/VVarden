@@ -66,12 +66,9 @@ export default class AddUserCommand extends SlashCommand {
         }
 
         const id = interaction.options.get('id').value as Snowflake;
-        const exists = await client.users
-            .fetch(id)
-            .then(() => true)
-            .catch(() => false);
+        const user = await client.users.fetch(id);
 
-        if (!exists) {
+        if (!user) {
             await sendEmbed({
                 interaction,
                 embed: {
@@ -83,19 +80,19 @@ export default class AddUserCommand extends SlashCommand {
         }
 
         const reason =
-            interaction.options.get('reason')?.value.toString() ||
-            'Manual: Member of Blacklisted Discord Server';
+            interaction.options.get('reason')?.value.toString() || 'Manual: Member of Blacklisted Discord Server';
 
         const user_type = interaction.options.get('type')?.value.toString() || 'leaker';
 
         const status = interaction.options.get('status')?.value.toString() || 'blacklisted';
 
-        const server = (interaction.options.get('server')?.value ||
-            interaction.guildId) as Snowflake;
+        const server = (interaction.options.get('server')?.value || interaction.guildId) as Snowflake;
 
         await createUser({
             client,
             id,
+            avatar: user.displayAvatarURL(),
+            last_username: `${user.username}#${user.discriminator}`,
             status,
             user_type,
             servers: server,
@@ -115,6 +112,7 @@ export default class AddUserCommand extends SlashCommand {
                     type: 'USER_ADD',
                     author: interaction.user,
                     userID: id,
+                    last_username: user.username,
                     details: { guild: server, reason },
                 });
             })
@@ -122,8 +120,7 @@ export default class AddUserCommand extends SlashCommand {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description:
-                            ':shield: User is already in database\nChange status if nessary using /upstatus',
+                        description: ':shield: User is already in database\nChange status if nessary using /upstatus',
                         color: 0xffff00,
                     },
                 });
