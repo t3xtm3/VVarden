@@ -43,14 +43,14 @@ export default class ScanUsers extends SlashCommand {
                 },
             });
 
-            interaction.guild.members.cache.forEach(async (v, k) => {
-                const user = await getUser({ client, id: v.id });
+            interaction.guild.members.cache.forEach(async member => {
+                const user = await getUser({ client, id: member.id });
                 if (!user) return;
                 const block = ['blacklisted', 'permblacklisted'];
                 if (block.includes(user.status)) {
                     await punishUser({
                         client,
-                        member: v,
+                        member,
                         guildInfo: settings,
                         oldUser: user,
                         toDM: false,
