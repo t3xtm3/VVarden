@@ -9,7 +9,7 @@ export interface UserData {
     status: string;
     user_type: string;
     servers: string;
-    roles?: any;
+    roles?: string;
     reason: string;
     filter_type: FilterType;
 }
