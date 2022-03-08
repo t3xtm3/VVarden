@@ -1,7 +1,7 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import sendEmbed from '../../utils/messages/sendEmbed';
-import { getAllBlacklisted } from '../../utils/users';
+import { countBlacklisted } from '../../utils/users';
 
 export default class StatusCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -18,7 +18,7 @@ export default class StatusCommand extends SlashCommand {
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const uptime = process.uptime();
 
-        const blacklistedUsers = await getAllBlacklisted({ client });
+        const blacklistedUsers = await countBlacklisted({ client });
         sendEmbed({
             interaction,
             embed: {

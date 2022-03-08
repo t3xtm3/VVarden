@@ -22,7 +22,7 @@ export default class AppealCommand extends SlashCommand {
                     type: 6,
                     name: 'user',
                     description: 'User to appeal',
-                    required: true,
+                    required: false,
                 },
             ],
             defaultPermission: true,
