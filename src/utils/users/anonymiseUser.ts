@@ -1,6 +1,14 @@
+import { Snowflake } from 'discord.js';
 import { Bot } from '../../classes';
 
-export async function anonymiseUser({ client, id }: { client: Bot; id: string }) {
+/**
+ * Anonymise a user
+ *
+ * @export
+ * @param {Bot} client
+ * @param {Snowflake} id
+ */
+export async function anonymiseUser({ client, id }: { client: Bot; id: Snowflake }) {
     return await client.db.users.update({
         where: {
             id,

@@ -1,4 +1,4 @@
-import { BaseCommandInteraction } from 'discord.js';
+import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import sendEmbed from '../../utils/messages/sendEmbed';
@@ -13,9 +13,15 @@ export default class AppealCommand extends SlashCommand {
             type: 'CHAT_INPUT',
             options: [
                 {
+                    type: 3,
+                    name: 'userid',
+                    description: 'User ID to appeal',
+                    required: false,
+                },
+                {
                     type: 6,
                     name: 'user',
-                    description: 'Member to appeal',
+                    description: 'User to appeal',
                     required: true,
                 },
             ],
@@ -25,16 +31,28 @@ export default class AppealCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        const user = interaction.options.getUser('user');
-        const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-
         if (getProcessState() === 1) {
             processInformationMsg(interaction);
             return false;
         }
 
+        const id = (interaction.options.getUser('user')?.id ||
+            interaction.options.get('userid')?.value) as Snowflake;
+
+        if (!id) {
+            sendEmbed({
+                interaction,
+                embed: {
+                    description: 'You must provided either a user or user id',
+                    color: 0xffff00,
+                },
+            });
+            return false;
+        }
+        const date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
         const info = {
-            id: user.id,
+            id,
             reason: `Appealed ${date} - ${interaction.user.username}`,
             status: 'appealed',
             user_type: '',
@@ -52,7 +70,7 @@ export default class AppealCommand extends SlashCommand {
                 client.emit('logAction', {
                     type: 'APPEAL',
                     author: interaction.user,
-                    userID: user.id,
+                    userID: id,
                     last_username: updated.last_username,
                 });
             })

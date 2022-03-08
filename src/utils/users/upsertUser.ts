@@ -3,6 +3,20 @@ import { getUser, globalFindCheck, updateStatus } from '.';
 import { Bot } from '../../classes';
 import { combineRoles } from '../helpers';
 
+/**
+ * Upserts a user in the database
+ * from importing a csv file
+ *
+ * @param {Bot} client
+ * @param {Snowflake} id
+ * @param {string} avatar
+ * @param {string} last_username
+ * @param {string} status
+ * @param {string} user_type
+ * @param {string} server
+ * @param {string} roles
+ * @param {FilterType} filter_type
+ */
 export async function upsertUser({
     client,
     id,

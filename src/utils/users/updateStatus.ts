@@ -1,5 +1,14 @@
+import { Snowflake } from 'discord.js';
 import { Bot } from '../../classes';
 
+/**
+ * Updates the users status
+ *
+ * @param {Bot} client
+ * @param {Snowflake} id
+ * @param {string} status
+ * @param {string} user_type
+ */
 export async function updateStatus({
     client,
     id,
@@ -8,7 +17,7 @@ export async function updateStatus({
     reason,
 }: {
     client: Bot;
-    id: string;
+    id: Snowflake;
     status: string;
     user_type?: string;
     reason?: string;

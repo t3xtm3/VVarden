@@ -49,7 +49,7 @@ export default class AddUserCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        const id = interaction.options.get('id').value as Snowflake;
+        const id = interaction.options.get('id')?.value as Snowflake;
         const user = await client.users.fetch(id);
 
         if (!user) {
@@ -74,13 +74,15 @@ export default class AddUserCommand extends SlashCommand {
         await createUser({
             client,
             id,
-            avatar: user.displayAvatarURL(),
-            last_username: `${user.username}#${user.discriminator}`,
-            status,
-            user_type,
-            servers: server,
-            reason,
-            filter_type: FilterType.MANUAL,
+            info: {
+                avatar: user.displayAvatarURL(),
+                last_username: `${user.username}#${user.discriminator}`,
+                status,
+                user_type,
+                servers: server,
+                reason,
+                filter_type: FilterType.MANUAL,
+            },
         })
             .then(async () => {
                 await sendEmbed({

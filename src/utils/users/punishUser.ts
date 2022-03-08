@@ -4,6 +4,16 @@ import { Bot } from '../../classes';
 import { getChannelByID } from '../helpers';
 import sendEmbed from '../messages/sendEmbed';
 
+/**
+ * Punishes user in a guild with
+ * approiate actions where configured
+ *
+ * @param {Bot} client
+ * @param {GuildMember} member
+ * @param {Guild} guildInfo
+ * @param {Users} oldUser
+ * @param {boolean} toDM
+ */
 export async function punishUser({
     client,
     member,
@@ -15,7 +25,7 @@ export async function punishUser({
     member: GuildMember;
     guildInfo: Guild;
     oldUser: Users;
-    toDM: any;
+    toDM: boolean;
 }) {
     const type = oldUser.user_type as string;
     const count = oldUser.servers.split(';').length;
