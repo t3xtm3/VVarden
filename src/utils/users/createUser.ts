@@ -1,3 +1,4 @@
+import { Snowflake } from 'discord.js';
 import { UserData } from '../../@types';
 import { Bot } from '../../classes';
 
@@ -9,7 +10,7 @@ import { Bot } from '../../classes';
  * @param {Snowflake} id
  * @param {UserData} info
  */
-export async function createUser({ client, id, info }: { client: Bot; id: string; info: UserData }) {
+export async function createUser({ client, id, info }: { client: Bot; id: Snowflake; info: UserData }) {
     const data = { id, ...info };
     return await client.db.users.create({
         data: data,
