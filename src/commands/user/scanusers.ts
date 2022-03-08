@@ -1,10 +1,10 @@
 import { BaseCommandInteraction } from 'discord.js';
-import { Bot, SlashCommand } from '../classes';
-import { getGuild } from '../utils/guild';
-import { getProcessState, processInformationMsg } from '../utils/helpers';
-import sendEmbed from '../utils/messages/sendEmbed';
-import { getUser } from '../utils/users';
-import { punishUser } from '../utils/users/punishUser';
+import { Bot, SlashCommand } from '../../classes';
+import { getGuild } from '../../utils/guild';
+import { getProcessState, processInformationMsg } from '../../utils/helpers';
+import sendEmbed from '../../utils/messages/sendEmbed';
+import { getUser } from '../../utils/users';
+import { punishUser } from '../../utils/users/punishUser';
 
 export default class ScanUsers extends SlashCommand {
     constructor(client: Bot) {

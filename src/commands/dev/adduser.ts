@@ -1,8 +1,8 @@
 import { FilterType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
-import { Bot, SlashCommand } from '../classes';
-import sendEmbed from '../utils/messages/sendEmbed';
-import { createUser } from '../utils/users';
+import { Bot, SlashCommand } from '../../classes';
+import sendEmbed from '../../utils/messages/sendEmbed';
+import { createUser } from '../../utils/users';
 
 export default class AddUserCommand extends SlashCommand {
     constructor(client: Bot) {

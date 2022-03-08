@@ -1,8 +1,8 @@
 import { BaseCommandInteraction } from 'discord.js';
-import { Bot, SlashCommand } from '../classes';
-import { getProcessState, processInformationMsg } from '../utils/helpers';
-import sendEmbed from '../utils/messages/sendEmbed';
-import { updateStatus } from '../utils/users';
+import { Bot, SlashCommand } from '../../classes';
+import { getProcessState, processInformationMsg } from '../../utils/helpers';
+import sendEmbed from '../../utils/messages/sendEmbed';
+import { updateStatus } from '../../utils/users';
 
 export default class UpstatusCommand extends SlashCommand {
     constructor(client: Bot) {

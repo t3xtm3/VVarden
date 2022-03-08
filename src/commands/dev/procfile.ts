@@ -1,8 +1,8 @@
 import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
-import { Bot, SlashCommand } from '../classes';
-import { getProcessState, processCSVImport, processInformationMsg } from '../utils/helpers';
-import sendEmbed from '../utils/messages/sendEmbed';
-import data from '../config.json';
+import { Bot, SlashCommand } from '../../classes';
+import { getProcessState, processCSVImport, processInformationMsg } from '../../utils/helpers';
+import sendEmbed from '../../utils/messages/sendEmbed';
+import data from '../../config.json';
 
 export default class ProcfileCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -13,6 +13,7 @@ export default class ProcfileCommand extends SlashCommand {
             type: 'CHAT_INPUT',
             options: [],
             defaultPermission: true,
+            staffRole: 'dev',
         });
     }
 

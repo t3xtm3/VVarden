@@ -18,8 +18,7 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
         let message;
         if (slashCommand.staffRole) {
             const staff = await getStaffMember({ client, id: interaction.user.id });
-            if (!staff) message = 'No staff members defined';
-            else if (staff[slashCommand.staffRole as keyof typeof staff]) has = true;
+            if (staff[slashCommand.staffRole as keyof typeof staff]) has = true;
             else
                 message = `You must be a \`Bot ${slashCommand.staffRole.toUpperCase()}\` to use this command`;
         } else if (slashCommand.permission) {

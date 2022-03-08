@@ -30,7 +30,7 @@ class Bot extends Client {
     }
 
     async loadCommands(dir: string): Promise<void> {
-        const commandFiles = await globPromise(`${dir}/*{.ts,.js}`);
+        const commandFiles = await globPromise(`${dir}/*/*{.ts,.js}`);
         for (const filePath of commandFiles) {
             const commandFile = await require(filePath);
             const command = new commandFile.default(this);

@@ -1,7 +1,7 @@
 import { BaseCommandInteraction } from 'discord.js';
-import { Bot, SlashCommand } from '../classes';
-import sendEmbed from '../utils/messages/sendEmbed';
-import { assignAdmin, removeAdmin } from '../utils/staff';
+import { Bot, SlashCommand } from '../../classes';
+import sendEmbed from '../../utils/messages/sendEmbed';
+import { assignAdmin, removeAdmin } from '../../utils/staff';
 
 export default class AdminCommand extends SlashCommand {
     constructor(client: Bot) {

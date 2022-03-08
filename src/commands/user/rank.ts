@@ -1,7 +1,7 @@
 import { BaseCommandInteraction } from 'discord.js';
-import { Bot, SlashCommand } from '../classes';
-import sendEmbed from '../utils/messages/sendEmbed';
-import { getStaffMember } from '../utils/staff';
+import { Bot, SlashCommand } from '../../classes';
+import sendEmbed from '../../utils/messages/sendEmbed';
+import { getStaffMember } from '../../utils/staff';
 
 export default class RankCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -31,10 +31,6 @@ export default class RankCommand extends SlashCommand {
             embed.description = 'Your wish is my command **Bot Admin**!';
         } else if (member.permissions.has('ADMINISTRATOR')) {
             embed.description = 'Your wish is my command **Discord Admin**!';
-        } else if (interaction.user.id === '102498921640640512') {
-            embed.description = "You're looking great today Leah. Let me know what you need.";
-        } else if (interaction.user.id === '160347445711077376') {
-            embed.description = 'What is thy bidding, my master?';
         } else {
             embed.description = "You're a **Bot User**";
         }
