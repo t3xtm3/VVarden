@@ -3,7 +3,7 @@ import { Bot, SlashCommand } from '../../classes';
 import { getGuild } from '../../utils/guild';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import sendEmbed from '../../utils/messages/sendEmbed';
-import { getUser } from '../../utils/users';
+import { getAllBlacklisted } from '../../utils/users';
 import { punishUser } from '../../utils/users/punishUser';
 
 export default class ScanUsers extends SlashCommand {
@@ -43,11 +43,15 @@ export default class ScanUsers extends SlashCommand {
                 },
             });
 
-            interaction.guild.members.cache.forEach(async member => {
-                const user = await getUser({ client, id: member.id });
-                if (!user) return;
-                const block = ['blacklisted', 'permblacklisted'];
-                if (block.includes(user.status)) {
+            // Reduce database calls from one per member to one
+            // Bulk grab all blacklisted then check if exists
+            // Rather than checking database per member
+            const users = await getAllBlacklisted({ client });
+            // Process all blacklisted in parallel
+            await Promise.all(
+                interaction.guild.members.cache.map(async member => {
+                    const user = users.find(u => u.id === member.id);
+                    if (!user) return;
                     await punishUser({
                         client,
                         member,
@@ -55,7 +59,15 @@ export default class ScanUsers extends SlashCommand {
                         oldUser: user,
                         toDM: false,
                     });
-                }
+                })
+            ).then(() => {
+                sendEmbed({
+                    channel: interaction.channel,
+                    embed: {
+                        description: 'Scanning completed',
+                        color: 0x008000,
+                    },
+                });
             });
             return true;
         });
