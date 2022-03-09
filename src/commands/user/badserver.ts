@@ -1,8 +1,16 @@
+import { ServerType } from '@prisma/client';
 import { BaseCommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import _ from 'lodash';
 import { Bot, SlashCommand } from '../../classes';
 import { getAllBadServers, removeBadServer, upsertBadServer } from '../../utils/badservers';
+import { enumToMap } from '../../utils/helpers';
 import { sendEmbed, sendPagination } from '../../utils/messages';
+
+const map = enumToMap(ServerType);
+const choices = Array.from(map.entries()).map(m => ({
+    name: m[0],
+    value: `${m[1]}`,
+}));
 
 export default class BadServerCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -27,6 +35,13 @@ export default class BadServerCommand extends SlashCommand {
                             type: 3,
                             name: 'name',
                             description: 'Server Name',
+                            required: true,
+                        },
+                        {
+                            type: 3,
+                            name: 'type',
+                            description: 'Server Type',
+                            choices,
                             required: true,
                         },
                     ],
@@ -72,8 +87,15 @@ export default class BadServerCommand extends SlashCommand {
         }
 
         if (name === 'add') {
+            const type = interaction.options.get('type')?.value as ServerType;
             const serverName = interaction.options.get('name')?.value as string;
-            await upsertBadServer({ client, id: sid, name: serverName, addedBy: interaction.user.id })
+            await upsertBadServer({
+                client,
+                id: sid,
+                name: serverName,
+                type,
+                addedBy: interaction.user.id,
+            })
                 .then(() => {
                     sendEmbed({
                         interaction,

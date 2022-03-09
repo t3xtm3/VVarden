@@ -1,3 +1,4 @@
+import { ServerType } from '@prisma/client';
 import { Snowflake } from 'discord.js';
 import { Bot } from '../../classes';
 
@@ -14,11 +15,13 @@ export async function upsertBadServer({
     client,
     id,
     name,
+    type,
     addedBy,
 }: {
     client: Bot;
     id: Snowflake;
     name: string;
+    type: ServerType;
     addedBy: Snowflake;
 }) {
     return await client.db.badServers.upsert({
@@ -27,11 +30,13 @@ export async function upsertBadServer({
         },
         update: {
             name,
+            type,
             addedBy,
         },
         create: {
             id,
             name,
+            type,
             addedBy,
         },
     });
