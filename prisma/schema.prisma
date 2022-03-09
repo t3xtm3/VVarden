@@ -54,6 +54,7 @@ model Guild {
 model BadServers {
     id               String             @id @unique
     name             String
+    type             ServerType         @default(OTHER)
     addedBy          String
     createdAt        DateTime           @default(now())
     updatedAt        DateTime           @updatedAt
@@ -65,6 +66,13 @@ enum FilterType {
     MANUAL
     SEMI_AUTO
     AUTO
+}
+
+enum ServerType {
+    CHEATING
+    LEAKING
+    RESELLING
+    OTHER
 }
 
 enum UserStatus {
