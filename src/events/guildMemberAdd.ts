@@ -17,8 +17,7 @@ export default async function (client: Bot, guild: Guild, member: GuildMember) {
     if (!user) return false;
 
     // Dynamically set this in future?
-    const block = ['blacklisted', 'permblacklisted'];
-    if (block.includes(user.status)) {
+    if (user.status.includes('BLACKLIST')) {
         await punishUser({
             client,
             member,

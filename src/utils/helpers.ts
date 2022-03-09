@@ -1,4 +1,4 @@
-import { FilterType } from '@prisma/client';
+import { FilterType, UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake, TextBasedChannel, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as readline from 'readline';
@@ -41,7 +41,7 @@ export function combineRoles(oldRoles: string, newRoles: string) {
     return combArr;
 }
 
-export function CSVtoArray(text: any) {
+export function CSVtoArray(text: string) {
     const re_valid =
         /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
     const re_value =
@@ -53,7 +53,7 @@ export function CSVtoArray(text: any) {
     const a = []; // Initialize array to receive values.
     text.replace(
         re_value, // "Walk" the string using replace with callback.
-        (m0: any, m1: any, m2: any, m3: any) => {
+        (m0: string, m1: string, m2: string, m3: string) => {
             // Remove backslash from \' in single quoted values.
             if (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
             // Remove backslash from \" in double quoted values.
@@ -129,7 +129,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                             id: lineArr[7],
                             avatar: lineArr[2],
                             last_username: `${lineArr[0]}#${lineArr[1]}`,
-                            status: 'blacklisted',
+                            status: UserStatus.BLACKLIST,
                             server: serverid,
                             roles: lineArr[3],
                             user_type: type,
@@ -168,4 +168,19 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
         console.log(e);
         return total;
     }
+}
+
+export function enumToMap(enumeration: any): Map<string, string | number> {
+    const map = new Map<string, string | number>();
+    for (const key in enumeration) {
+        //TypeScript does not allow enum keys to be numeric
+        if (!isNaN(Number(key))) continue;
+
+        const val = enumeration[key] as string | number;
+
+        //TypeScript does not allow enum value to be null or undefined
+        if (val !== undefined && val !== null) map.set(key, val);
+    }
+
+    return map;
 }

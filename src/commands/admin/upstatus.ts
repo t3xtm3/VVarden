@@ -1,8 +1,15 @@
+import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import { getProcessState, processInformationMsg } from '../../utils/helpers';
+import { enumToMap, getProcessState, processInformationMsg } from '../../utils/helpers';
 import sendEmbed from '../../utils/messages/sendEmbed';
 import { updateStatus } from '../../utils/users';
+
+const map = enumToMap(UserStatus);
+const choices = Array.from(map.entries()).map(m => ({
+    name: m[0],
+    value: `${m[1]}`,
+}));
 
 export default class UpstatusCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -28,6 +35,7 @@ export default class UpstatusCommand extends SlashCommand {
                     type: 3,
                     name: 'status',
                     description: 'New Status of User',
+                    choices,
                     required: false,
                 },
                 {
@@ -57,9 +65,9 @@ export default class UpstatusCommand extends SlashCommand {
         const id = (interaction.options.getUser('user')?.id ||
             interaction.options.get('userid')?.value) as Snowflake;
 
-        const status = interaction.options.get('status').value as string;
-        const user_type = interaction.options.get('type').value as string;
-        const reason = interaction.options.get('reason').value as string;
+        const status = interaction.options.get('status')?.value as UserStatus;
+        const user_type = interaction.options.get('type')?.value as string;
+        const reason = interaction.options.get('reason')?.value as string;
 
         if (!id) {
             sendEmbed({

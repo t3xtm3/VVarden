@@ -14,7 +14,7 @@ model Users {
     id             String              @id
     last_username  String
     avatar         String
-    status         String
+    status         UserStatus
     user_type      String
     servers        String              @default("") @db.LongText
     roles          String              @default("") @db.LongText
@@ -65,6 +65,13 @@ enum FilterType {
     MANUAL
     SEMI_AUTO
     AUTO
+}
+
+enum UserStatus {
+    APPEALED
+    WHITELIST
+    BLACKLIST
+    PERM_BLACKLIST
 }
 
 enum Punish {

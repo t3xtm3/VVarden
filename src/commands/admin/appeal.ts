@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
@@ -54,7 +55,7 @@ export default class AppealCommand extends SlashCommand {
         const info = {
             id,
             reason: `Appealed ${date} - ${interaction.user.username}`,
-            status: 'appealed',
+            status: UserStatus.APPEALED,
             user_type: '',
         };
 

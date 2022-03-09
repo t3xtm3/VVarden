@@ -1,4 +1,4 @@
-import { FilterType } from '@prisma/client';
+import { FilterType, UserStatus } from '@prisma/client';
 
 /**
  * Interface for user data stored
@@ -6,7 +6,7 @@ import { FilterType } from '@prisma/client';
 export interface UserData {
     avatar: string;
     last_username: string;
-    status: string;
+    status: UserStatus;
     user_type: string;
     servers: string;
     roles?: string;

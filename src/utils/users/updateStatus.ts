@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { Snowflake } from 'discord.js';
 import { Bot } from '../../classes';
 
@@ -6,7 +7,7 @@ import { Bot } from '../../classes';
  *
  * @param {Bot} client
  * @param {Snowflake} id
- * @param {string} status
+ * @param {UserStatus} status
  * @param {string} user_type
  */
 export async function updateStatus({
@@ -18,7 +19,7 @@ export async function updateStatus({
 }: {
     client: Bot;
     id: Snowflake;
-    status: string;
+    status: UserStatus;
     user_type?: string;
     reason?: string;
 }) {

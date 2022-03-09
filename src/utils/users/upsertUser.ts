@@ -1,4 +1,4 @@
-import { FilterType } from '@prisma/client';
+import { FilterType, UserStatus } from '@prisma/client';
 import { getUser, globalFindCheck, updateStatus } from '.';
 import { Bot } from '../../classes';
 import { combineRoles } from '../helpers';
@@ -32,7 +32,7 @@ export async function upsertUser({
     id: string;
     avatar: string;
     last_username: string;
-    status: string;
+    status: UserStatus;
     user_type: string;
     server: string;
     roles: string;
@@ -45,11 +45,11 @@ export async function upsertUser({
             const newRoles = combineRoles(user.roles, roles).join(';');
             const spServers = user.servers.split(';');
             if (spServers.includes(server)) {
-                if (user.status === 'appealed') {
+                if (user.status === UserStatus.APPEALED) {
                     updateStatus({
                         client,
                         id,
-                        status: 'permblacklisted',
+                        status: UserStatus.PERM_BLACKLIST,
                     }).then(() => {
                         globalFindCheck({ client, id });
                         resolve([id]);
@@ -58,7 +58,7 @@ export async function upsertUser({
             } else {
                 spServers.push(server);
 
-                if (user.status === 'appealed') {
+                if (user.status === UserStatus.APPEALED) {
                     await client.db.users
                         .update({
                             where: {
@@ -67,7 +67,7 @@ export async function upsertUser({
                             data: {
                                 servers: spServers.length > 1 ? spServers.join(';') : spServers.join(''),
                                 roles: newRoles,
-                                status: 'permblacklisted',
+                                status: UserStatus.PERM_BLACKLIST,
                             },
                         })
                         .then(() => {

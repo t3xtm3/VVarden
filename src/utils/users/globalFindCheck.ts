@@ -20,8 +20,7 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
 
     if (!user) return false;
 
-    const block = ['blacklisted', 'permblacklisted'];
-    if (block.includes(user.status)) {
+    if (user.status.includes('BLACKLIST')) {
         // User is blacklisted
         (await client.guilds.fetch()).forEach(async (_, guildID) => {
             const guild = client.guilds.cache.get(guildID);

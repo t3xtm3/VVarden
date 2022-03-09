@@ -35,8 +35,7 @@ export default class CheckUserCommand extends SlashCommand {
 
         await getUser({ client, id })
             .then(async user => {
-                const badType = ['blacklisted', 'permblacklisted'];
-                if (badType.includes(user.status)) {
+                if (user.status.includes('BLACKLIST')) {
                     sendEmbed({
                         interaction,
                         embed: {

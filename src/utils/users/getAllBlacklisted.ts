@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { Bot } from '../../classes';
 
 /**
@@ -10,7 +11,7 @@ export async function getAllBlacklisted({ client }: { client: Bot }) {
     return await client.db.users.findMany({
         where: {
             user_type: {
-                in: ['blacklisted', 'permblacklisted'],
+                in: [UserStatus.BLACKLIST, UserStatus.PERM_BLACKLIST],
             },
         },
     });

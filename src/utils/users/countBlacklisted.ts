@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { Bot } from '../../classes';
 
 /**
@@ -10,7 +11,7 @@ export async function countBlacklisted({ client }: { client: Bot }) {
     return await client.db.users.count({
         where: {
             status: {
-                in: ['blacklisted', 'permblacklisted'],
+                in: [UserStatus.BLACKLIST, UserStatus.PERM_BLACKLIST],
             },
         },
     });
