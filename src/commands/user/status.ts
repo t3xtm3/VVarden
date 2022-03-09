@@ -1,6 +1,6 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 import { countBlacklisted } from '../../utils/users';
 
 export default class StatusCommand extends SlashCommand {

@@ -1,7 +1,7 @@
 import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processCSVImport, processInformationMsg } from '../../utils/helpers';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 import data from '../../config.json';
 
 export default class ProcfileCommand extends SlashCommand {

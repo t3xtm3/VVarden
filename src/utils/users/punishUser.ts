@@ -2,7 +2,7 @@ import { Guild, Users } from '.prisma/client';
 import { GuildMember, TextChannel } from 'discord.js';
 import { Bot } from '../../classes';
 import { getChannelByID } from '../helpers';
-import sendEmbed from '../messages/sendEmbed';
+import { sendEmbed } from '../messages';
 
 /**
  * Punishes user in a guild with

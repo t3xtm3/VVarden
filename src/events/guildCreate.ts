@@ -1,7 +1,7 @@
 import { Guild, TextChannel } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import { createGuild } from '../utils/guild';
-import sendEmbed from '../utils/messages/sendEmbed';
+import { sendEmbed } from '../utils/messages';
 
 export default async function (client: Bot, guild: Guild) {
     // Joined new guild

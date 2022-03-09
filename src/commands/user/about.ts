@@ -1,6 +1,6 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 
 export default class AboutCommand extends SlashCommand {
     constructor(client: Bot) {

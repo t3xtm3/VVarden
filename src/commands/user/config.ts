@@ -2,7 +2,7 @@ import { Punish } from '.prisma/client';
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild, updateGuild } from '../../utils/guild';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 
 const mainChoices = [
     {

@@ -1,6 +1,6 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 import { getUser } from '../../utils/users';
 
 export default class CheckUserCommand extends SlashCommand {

@@ -1,6 +1,6 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 import { getStaffMember } from '../../utils/staff';
 
 export default class RankCommand extends SlashCommand {

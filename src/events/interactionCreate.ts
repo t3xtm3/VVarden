@@ -1,7 +1,7 @@
 // import { ChannelType, LogType } from '@prisma/client';
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot } from '../classes/Bot';
-import sendEmbed from '../utils/messages/sendEmbed';
+import { sendEmbed } from '../utils/messages';
 import { getStaffMember } from '../utils/staff';
 
 export default async function (client: Bot, interaction: BaseCommandInteraction) {

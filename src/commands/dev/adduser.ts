@@ -2,7 +2,7 @@ import { FilterType, UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { enumToMap } from '../../utils/helpers';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 import { createUser } from '../../utils/users';
 
 const map = enumToMap(UserStatus);

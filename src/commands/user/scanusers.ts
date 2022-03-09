@@ -2,7 +2,7 @@ import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild } from '../../utils/guild';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
-import sendEmbed from '../../utils/messages/sendEmbed';
+import { sendEmbed } from '../../utils/messages';
 import { getAllBlacklisted } from '../../utils/users';
 import { punishUser } from '../../utils/users/punishUser';
 

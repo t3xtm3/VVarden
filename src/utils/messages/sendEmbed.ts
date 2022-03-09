@@ -1,6 +1,6 @@
 import { EmbedOptions } from '../../@types';
 
-export default async function ({ interaction, channel, content, embed, components }: EmbedOptions) {
+export async function sendEmbed({ interaction, channel, content, embed, components }: EmbedOptions) {
     const options: any = {
         embeds: [{ ...embed }],
         components,
