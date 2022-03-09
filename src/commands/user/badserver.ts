@@ -1,7 +1,7 @@
 import { BaseCommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import _ from 'lodash';
 import { Bot, SlashCommand } from '../../classes';
-import { addBadServer, getAllBadServers, removeBadServer } from '../../utils/badservers';
+import { getAllBadServers, removeBadServer, upsertBadServer } from '../../utils/badservers';
 import { sendEmbed, sendPagination } from '../../utils/messages';
 
 export default class BadServerCommand extends SlashCommand {
@@ -15,7 +15,7 @@ export default class BadServerCommand extends SlashCommand {
                 {
                     type: 1,
                     name: 'add',
-                    description: 'Add a server',
+                    description: 'Add or update a server',
                     options: [
                         {
                             type: 3,
@@ -73,7 +73,7 @@ export default class BadServerCommand extends SlashCommand {
 
         if (name === 'add') {
             const serverName = interaction.options.get('name')?.value as string;
-            await addBadServer({ client, id: sid, name: serverName, addedBy: interaction.user.id })
+            await upsertBadServer({ client, id: sid, name: serverName, addedBy: interaction.user.id })
                 .then(() => {
                     sendEmbed({
                         interaction,
@@ -87,7 +87,7 @@ export default class BadServerCommand extends SlashCommand {
                     sendEmbed({
                         interaction,
                         embed: {
-                            description: `The server \`${sid}\` is a bad server already`,
+                            description: 'An unknown error has occured',
                             color: 0x800000,
                         },
                     });

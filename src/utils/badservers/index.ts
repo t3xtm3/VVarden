@@ -1,4 +1,4 @@
 export { getBadServersByIDs } from './getBadServersByIDs';
-export { addBadServer } from './addBadServer';
+export { upsertBadServer } from './upsertBadServer';
 export { removeBadServer } from './removeBadServer';
 export { getAllBadServers } from './getAllBadServers';

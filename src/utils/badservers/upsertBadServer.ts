@@ -10,7 +10,7 @@ import { Bot } from '../../classes';
  * @param {string} name This is the servers name
  * @param {Snowflake} addedBy
  */
-export async function addBadServer({
+export async function upsertBadServer({
     client,
     id,
     name,
@@ -21,8 +21,15 @@ export async function addBadServer({
     name: string;
     addedBy: Snowflake;
 }) {
-    return await client.db.badServers.create({
-        data: {
+    return await client.db.badServers.upsert({
+        where: {
+            id,
+        },
+        update: {
+            name,
+            addedBy,
+        },
+        create: {
             id,
             name,
             addedBy,
