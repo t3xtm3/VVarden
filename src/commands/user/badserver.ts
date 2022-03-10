@@ -142,7 +142,7 @@ export default class BadServerCommand extends SlashCommand {
 
             const chunks = _.chunk(desc, 15);
             const pages: MessageEmbed[] = [];
-            chunks.forEach(async chunk => {
+            chunks.forEach(chunk => {
                 pages.push(
                     new MessageEmbed({
                         author: {
