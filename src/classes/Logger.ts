@@ -56,7 +56,7 @@ export class Logger {
         this.error = this.logger.error.bind(this.logger);
     }
 
-    prisma(message: any) {
+    prisma(message: string) {
         this.logger.log('prisma', message);
     }
 
