@@ -134,9 +134,9 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                 total.blacklisted += blacklisted;
                 total.permblacklisted += permblacklisted;
 
-                // fs.unlink(`./imports/${type}/${filename}`, err => {
-                //     if (err) throw err;
-                // });
+                fs.unlink(`./imports/${type}/${filename}`, err => {
+                    if (err) throw err;
+                });
                 return total;
             }
         }
