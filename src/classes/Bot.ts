@@ -1,8 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { Client, ClientOptions, Collection, Snowflake, TextChannel } from 'discord.js';
-import { SlashCommand } from './SlashCommand';
-import { Logger } from '../utils/logger';
+import { SlashCommand, Logger } from './';
 import { PrismaClient } from '@prisma/client';
 import glob from 'glob';
 import { promisify } from 'util';
@@ -46,6 +45,9 @@ class Bot extends Client {
         this.db = db;
     }
 
+    /**
+     * Loads all commands.
+     */
     async loadCommands(dir: string): Promise<void> {
         const commandFiles = await globPromise(`${dir}/*/*{.ts,.js}`);
         for (const filePath of commandFiles) {
@@ -60,6 +62,9 @@ class Bot extends Client {
         this.logger.info('Registering commands');
     }
 
+    /**
+     * Loads all events.
+     */
     async loadEvents(dir: string): Promise<void> {
         const items = await fs.readdir(dir);
 

@@ -39,7 +39,7 @@ export default class AnonymizeCommand extends SlashCommand {
                 interaction,
                 embed: {
                     description: 'You must provided either a user or user id',
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
             return false;

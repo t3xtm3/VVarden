@@ -4,8 +4,7 @@ dotenv.config();
 import * as prisma from '@prisma/client';
 
 import { Intents } from 'discord.js';
-import { Bot } from './classes/Bot';
-import { Logger } from './utils/logger';
+import { Logger, Bot } from './classes';
 
 const logger = new Logger();
 export const db = new prisma.PrismaClient({

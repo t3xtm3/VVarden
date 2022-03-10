@@ -3,20 +3,6 @@ import { LeveledLogMethod } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import { grey, gray, white } from 'chalk';
 
-const consoleFormat = winston.format.printf(({ level, message, timestamp }) => {
-    const opening = gray('[');
-    const closing = gray(']');
-    const seperator = grey('-');
-
-    return `${opening}${grey(timestamp)}${closing} ${opening}${level}${closing} ${seperator} ${white(
-        `${message}`
-    )}`;
-});
-
-const fileFormat = winston.format.printf(({ level, message, timestamp }) => {
-    return `[${timestamp}] [${level}] - ${message}`;
-});
-
 const customLevels = {
     levels: {
         prisma: 0,
@@ -28,7 +14,7 @@ const customLevels = {
         prisma: 'blue',
     },
 };
-winston.addColors(customLevels.colors);
+
 export class Logger {
     logger: winston.Logger;
 
@@ -37,6 +23,7 @@ export class Logger {
     error: LeveledLogMethod;
 
     constructor() {
+        winston.addColors(customLevels.colors);
         this.logger = winston.createLogger({
             level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
             levels: customLevels.levels,
@@ -48,7 +35,7 @@ export class Logger {
                         }),
                         winston.format.colorize(),
                         winston.format.splat(),
-                        consoleFormat
+                        this.consoleFormat
                     ),
                 }),
                 new DailyRotateFile({
@@ -58,7 +45,7 @@ export class Logger {
                             format: 'YYYY-MM-DD HH:mm:ss',
                         }),
                         winston.format.splat(),
-                        fileFormat
+                        this.fileFormat
                     ),
                 }),
             ],
@@ -69,7 +56,21 @@ export class Logger {
         this.error = this.logger.error.bind(this.logger);
     }
 
-    async prisma(message: any) {
+    prisma(message: any) {
         this.logger.log('prisma', message);
     }
+
+    consoleFormat = winston.format.printf(({ level, message, timestamp }) => {
+        const opening = gray('[');
+        const closing = gray(']');
+        const seperator = grey('-');
+
+        return `${opening}${grey(timestamp)}${closing} ${opening}${level}${closing} ${seperator} ${white(
+            `${message}`
+        )}`;
+    });
+
+    fileFormat = winston.format.printf(({ level, message, timestamp }) => {
+        return `[${timestamp}] [${level}] - ${message}`;
+    });
 }

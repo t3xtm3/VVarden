@@ -1,5 +1,6 @@
 // import { ChannelType, LogType } from '@prisma/client';
 import { BaseCommandInteraction } from 'discord.js';
+import { Colours } from '../@types';
 import { Bot } from '../classes/Bot';
 import { sendEmbed } from '../utils/messages';
 import { getStaffMember } from '../utils/staff';
@@ -55,7 +56,7 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
                 interaction,
                 embed: {
                     description: message,
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
         }
