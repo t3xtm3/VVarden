@@ -20,6 +20,7 @@ export abstract class SlashCommand implements CommandOptions {
     defaultPermission: boolean;
     staffRole?: string;
     permission?: PermissionString;
+    cooldown?: number;
 
     constructor(opts: CommandOptions) {
         this.client = opts.client;
@@ -30,6 +31,7 @@ export abstract class SlashCommand implements CommandOptions {
         this.defaultPermission = opts.defaultPermission;
         this.staffRole = opts.staffRole;
         this.permission = opts.permission;
+        this.cooldown = opts.cooldown;
     }
     public abstract run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean>;
 }

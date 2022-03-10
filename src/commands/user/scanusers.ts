@@ -17,6 +17,7 @@ export default class ScanUsers extends SlashCommand {
             options: [],
             defaultPermission: true,
             permission: 'ADMINISTRATOR',
+            cooldown: 60,
         });
     }
 
@@ -31,10 +32,12 @@ export default class ScanUsers extends SlashCommand {
                 client,
                 id: interaction.guildId,
             });
-            if (!settings)
-                return client.logger.error(
+            if (!settings) {
+                client.logger.error(
                     `src/commands/scanusers.ts - Bot is in unknown guild - ${interaction.guildId}`
                 );
+                return false;
+            }
             sendEmbed({
                 interaction,
                 embed: {

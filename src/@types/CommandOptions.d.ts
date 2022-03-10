@@ -20,6 +20,20 @@ export interface CommandOptions {
 
     defaultPermission: boolean;
 
+    /**
+     * Staff Role Types
+     * dev
+     * admin
+     */
     staffRole?: string;
+
+    /**
+     * This is for in built discord permissions
+     */
     permission?: PermissionString;
+
+    /**
+     * Cooldown in seconds
+     */
+    cooldown?: number;
 }
