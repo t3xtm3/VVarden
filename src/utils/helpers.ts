@@ -8,10 +8,15 @@ import { sendEmbed } from './messages';
 import { upsertUser } from './users/upsertUser';
 let processState = 0;
 
-export async function getChannelByID(client: Bot, channel: Snowflake, options?: any) {
+export async function getChannelByID(
+    client: Bot,
+    channel: Snowflake,
+    cache: boolean,
+    guildID: Snowflake
+) {
     const chan = ((await client.channels.cache.get(channel)) ||
         (await client.channels.fetch(channel))) as TextChannel;
-    if (options.cache) client.logChans.set(options.guildID, chan);
+    if (cache) client.logChans.set(guildID, chan);
     return chan;
 }
 
@@ -40,33 +45,6 @@ export function combineRoles(oldRoles: string, newRoles: string) {
     const combArr = wipOldArr.concat(wipNewArr.filter(item => wipOldArr.indexOf(item) < 0));
 
     return combArr;
-}
-
-export function CSVtoArray(text: string) {
-    const re_valid =
-        /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
-    const re_value =
-        /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
-
-    // Return NULL if input string is not well formed CSV string.
-    if (!re_valid.test(text)) return null;
-
-    const a = []; // Initialize array to receive values.
-    text.replace(
-        re_value, // "Walk" the string using replace with callback.
-        (m0: string, m1: string, m2: string, m3: string) => {
-            // Remove backslash from \' in single quoted values.
-            if (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
-            // Remove backslash from \" in double quoted values.
-            else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
-            else if (m3 !== undefined) a.push(m3);
-            return ''; // Return empty string.
-        }
-    );
-
-    // Handle special case of empty last value.
-    if (/,\s*$/.test(text)) a.push('');
-    return a;
 }
 
 export async function processCSVImport(
@@ -123,7 +101,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                 total.count++;
 
                 for await (const line of rl) {
-                    const lineArr = CSVtoArray(line);
+                    const lineArr = line.split(',');
                     if (lineArr !== null && lineArr[0] !== 'username') {
                         await upsertUser({
                             client,
@@ -139,7 +117,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                             if (Array.isArray(result)) {
                                 permblacklisted++;
                                 client.logger.debug(
-                                    `CSVImport -> Updated status for <@${result[0]}>.\nUser has been permanently blacklisted.`
+                                    `CSV Import -> Updated status for <@${result[0]}>.\nUser has been permanently blacklisted.`
                                 );
                                 sendEmbed({
                                     channel: logChan,
@@ -156,11 +134,9 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                 total.blacklisted += blacklisted;
                 total.permblacklisted += permblacklisted;
 
-                client.logger.debug('CSVImport -> Completed user imports');
-
-                fs.unlink(`./imports/${type}/${filename}`, err => {
-                    if (err) throw err;
-                });
+                // fs.unlink(`./imports/${type}/${filename}`, err => {
+                //     if (err) throw err;
+                // });
                 return total;
             }
         }
