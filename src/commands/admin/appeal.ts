@@ -1,6 +1,6 @@
 import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
-import { Colours } from '../../@types';
+import { Colours, LogTypes } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
@@ -70,10 +70,9 @@ export default class AppealCommand extends SlashCommand {
                     },
                 });
                 client.emit('logAction', {
-                    type: 'APPEAL',
+                    type: LogTypes.APPEALED,
                     author: interaction.user,
-                    userID: id,
-                    last_username: updated.last_username,
+                    message: `${interaction.user.username}#${interaction.user.discriminator} appealed ${updated.last_username} (${id})`,
                 });
             })
             .catch(() => {

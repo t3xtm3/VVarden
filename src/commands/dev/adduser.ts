@@ -1,6 +1,6 @@
 import { FilterType, UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
-import { Colours } from '../../@types';
+import { Colours, LogTypes } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { enumToMap } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
@@ -102,11 +102,15 @@ export default class AddUserCommand extends SlashCommand {
                 });
 
                 client.emit('logAction', {
-                    type: 'USER_ADD',
+                    type: LogTypes.ADD_USER,
                     author: interaction.user,
-                    userID: id,
-                    last_username: user.username,
-                    details: { guild: server, reason },
+                    message: `${interaction.user.username}#${interaction.user.discriminator} added ${
+                        user.username
+                    } (${id}) to the database with: \`\`\`${JSON.stringify(
+                        { guild: server, reason },
+                        null,
+                        2
+                    )}\`\`\``,
                 });
             })
             .catch(async () => {

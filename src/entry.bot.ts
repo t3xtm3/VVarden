@@ -39,16 +39,16 @@ const client = new Bot(logger, db, {
     await client.login(process.env.TOKEN);
 })();
 
-process.on('unhandledRejection', (err: any) => {
-    console.log(`Unhandled Promise Rejection\n\n${err.stack}`);
+process.on('unhandledRejection', err => {
+    console.log(`Unhandled Promise Rejection\n\n${err}`);
 });
 
 /**
  * Database events
  */
 
-db.$on('info', (e: any) => {
-    client.logger.prisma(e);
+db.$on('info', (e: prisma.Prisma.LogEvent) => {
+    client.logger.prisma(e.message);
 });
 
 db.$use(async (params, next) => {
@@ -61,12 +61,12 @@ db.$use(async (params, next) => {
     return result;
 });
 
-db.$on('warn', (e: any) => {
-    client.logger.prisma(e);
+db.$on('warn', (e: prisma.Prisma.LogEvent) => {
+    client.logger.prisma(e.message);
 });
 
-db.$on('error', (e: any) => {
-    client.logger.prisma(e);
+db.$on('error', (e: prisma.Prisma.LogEvent) => {
+    client.logger.prisma(e.message);
 });
 
 export { client };

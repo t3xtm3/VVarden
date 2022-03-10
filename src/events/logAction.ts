@@ -1,68 +1,40 @@
-import { TextBasedChannel } from 'discord.js';
+import { MessageEmbedOptions, TextBasedChannel } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import { sendEmbed } from '../utils/messages';
 import data from '../config.json';
+import { Colours, LogInfo, LogTypes } from '../@types';
 
-export default async function (client: Bot, info: any) {
-    if (info.type === 'USER_ADD') {
-        const channel = await getChannel(client, data.CHANNEL_ADDUSERS);
-        if (!channel) return false;
-        await sendEmbed({
-            channel,
-            embed: {
-                author: {
-                    name: `${info.author.username}#${info.author.discriminator}`,
-                    icon_url: info.author.displayAvatarURL(),
-                },
-                description: `${info.author.username}#${info.author.discriminator} added ${
-                    info.last_username
-                } (${info.userID}) to the database with: \`\`\`${JSON.stringify(
-                    info.details,
-                    null,
-                    2
-                )}\`\`\``,
-                color: 0x008000,
-            },
-        });
-        return true;
-    } else if (info.type === 'APPEAL') {
-        const channel = await getChannel(client, data.CHANNEL_LOG);
-        if (!channel) return false;
-        await sendEmbed({
-            channel,
-            embed: {
-                author: {
-                    name: `${info.author.username}#${info.author.discriminator}`,
-                    icon_url: info.author.displayAvatarURL(),
-                },
-                description: `${info.author.username}#${info.author.discriminator} appealed ${info.last_username} (${info.userID})`,
-                color: 0x008000,
-            },
-        });
-        return true;
-    } else if (info.type === 'STATUS_UPDATE') {
-        const channel = await getChannel(client, data.CHANNEL_LOG);
-        if (!channel) return false;
-        await sendEmbed({
-            channel,
-            embed: {
-                author: {
-                    name: `${info.author.username}#${info.author.discriminator}`,
-                    icon_url: info.author.displayAvatarURL(),
-                },
-                description: `${info.author.username}#${info.author.discriminator} updated status for ${info.last_username} (${info.userID})\nUser Status: ${info.details.status}\nUser Type: ${info.details.user_type}\nReason: ${info.details.reason}`,
-                color: 0x008000,
-            },
-        });
+export default async function (client: Bot, info: LogInfo) {
+    let channel: TextBasedChannel;
+
+    const embed: MessageEmbedOptions = {
+        author: {
+            name: `${info.author.username}#${info.author.discriminator}`,
+            icon_url: info.author.displayAvatarURL(),
+        },
+        description: info.message,
+        color: Colours.GREEN,
+    };
+
+    if (info.type === LogTypes.ADD_USER) {
+        channel = await getChannel(client, data.CHANNEL_ADDUSERS);
+    } else if (info.type in [LogTypes.APPEALED, LogTypes.STATUS_UPDATE]) {
+        channel = await getChannel(client, data.CHANNEL_LOG);
     }
-    return false;
+
+    if (!channel) return false;
+    await sendEmbed({
+        channel,
+        embed,
+    });
+    return true;
 }
 
-async function getChannel(client: Bot, chan: any) {
+async function getChannel(client: Bot, chan: string) {
     const channel = (await client.channels.fetch(chan)) as TextBasedChannel;
     if (!channel) {
         client.logger.error(`src/events/logAction.ts - ${chan} channel not set or found`);
-        return false;
+        return null;
     }
     return channel;
 }

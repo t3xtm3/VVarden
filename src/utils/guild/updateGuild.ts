@@ -10,7 +10,6 @@ export async function updateGuild({
     puncheat,
     punleak,
     punsupp,
-    data,
 }: {
     client: Bot;
     id: string;
@@ -20,7 +19,6 @@ export async function updateGuild({
     puncheat?: Punish;
     punleak?: Punish;
     punsupp?: Punish;
-    data?: any;
 }) {
     return await client.db.guild.update({
         where: {
