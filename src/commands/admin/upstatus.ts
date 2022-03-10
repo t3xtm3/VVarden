@@ -108,7 +108,10 @@ export default class UpstatusCommand extends SlashCommand {
                 client.emit('logAction', {
                     type: 'STATUS_UPDATE',
                     author: interaction.user,
-                    details: `${interaction.user.username}#${interaction.user.discriminator} updated status for ${u.last_username} (${id})\nUser Status: ${status}\nUser Type: ${user_type}\nReason: ${reason}`,
+                    details: `${interaction.user.username}#${interaction.user.discriminator} updated status for ${u.last_username} (${id})
+                    User Status: ${status}
+                    User Type: ${user_type}
+                    Reason: ${reason}`,
                 });
             })
             .catch(() => {

@@ -1,4 +1,5 @@
 import { Guild, TextChannel } from 'discord.js';
+import { Colours } from '../@types';
 import { Bot } from '../classes/Bot';
 import { createGuild } from '../utils/guild';
 import { sendEmbed } from '../utils/messages';
@@ -23,7 +24,7 @@ export default async function (client: Bot, guild: Guild) {
                 I also need to have the permissions to kick and ban members, with a role higher than them!
                 \nI'm already acting on new member joins.
                 \nIf you want to contribute to the project, use the Official Discord: <https://discord.gg/jeFeDRasfs>`,
-                color: 0x008000,
+                color: Colours.GREEN,
                 footer: {
                     text: 'VVarden by Vampire#8144',
                 },

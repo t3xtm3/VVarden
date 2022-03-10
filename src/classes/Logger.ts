@@ -5,8 +5,8 @@ import { grey, gray, white } from 'chalk';
 
 const customLevels = {
     levels: {
-        prisma: 0,
-        info: 1,
+        info: 0,
+        prisma: 1,
         debug: 2,
         error: 3,
     },

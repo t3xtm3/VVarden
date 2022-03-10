@@ -5,3 +5,4 @@ export { anonymiseUser } from './anonymiseUser';
 export { globalFindCheck } from './globalFindCheck';
 export { countBlacklisted } from './countBlacklisted';
 export { getAllBlacklisted } from './getAllBlacklisted';
+export { upsertUser } from './upsertUser';

@@ -75,7 +75,7 @@ export async function punishUser({
     const channel =
         cachedChannel.id === guildInfo.logchan
             ? cachedChannel
-            : await getChannelByID(client, guildInfo.logchan, { cache: true, guildID: guildInfo.id });
+            : await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
 
     if (toDo === 'WARN') {
         sendEmbed({
