@@ -1,4 +1,5 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getBadServersByIDs } from '../../utils/badservers';
 import { sendEmbed } from '../../utils/messages';
@@ -39,7 +40,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
                 interaction,
                 embed: {
                     description: 'You must provided either a user or user id',
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
             return false;
@@ -70,7 +71,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
                             icon_url: user.avatar,
                         },
                         thumbnail: { url: user.avatar },
-                        color: 0xffff00,
+                        color: Colours.RED,
                         fields: [
                             {
                                 name: 'User Information',
@@ -116,7 +117,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
                     embed: {
                         description:
                             ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                        color: 0xffff00,
+                        color: Colours.YELLOW,
                     },
                 });
             });

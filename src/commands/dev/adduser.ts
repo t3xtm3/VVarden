@@ -1,5 +1,6 @@
 import { FilterType, UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { enumToMap } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
@@ -64,7 +65,7 @@ export default class AddUserCommand extends SlashCommand {
                 interaction,
                 embed: {
                     description: 'Invalid user id provided',
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
             return false;
@@ -96,7 +97,7 @@ export default class AddUserCommand extends SlashCommand {
                     interaction,
                     embed: {
                         description: 'Successfully added user to the database',
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
 
@@ -114,7 +115,7 @@ export default class AddUserCommand extends SlashCommand {
                     embed: {
                         description:
                             ':shield: User is already in database\nChange status if nessary using /upstatus',
-                        color: 0xffff00,
+                        color: Colours.YELLOW,
                     },
                 });
             });

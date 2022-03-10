@@ -1,5 +1,6 @@
 import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { enumToMap, getProcessState, processInformationMsg } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
@@ -101,7 +102,7 @@ export default class UpstatusCommand extends SlashCommand {
                             name: `${interaction.user.username}#${interaction.user.discriminator}`,
                             icon_url: interaction.user.displayAvatarURL(),
                         },
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
                 client.emit('logAction', {
@@ -122,7 +123,7 @@ export default class UpstatusCommand extends SlashCommand {
                     embed: {
                         description:
                             ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                        color: 0xffff00,
+                        color: Colours.YELLOW,
                     },
                 });
             });

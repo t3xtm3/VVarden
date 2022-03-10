@@ -1,4 +1,5 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
 import { globalFindCheck } from '../../utils/users';
@@ -38,7 +39,7 @@ export default class ForceCheckCommand extends SlashCommand {
                 interaction,
                 embed: {
                     description: 'You must provided either a user or user id',
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
             return false;
@@ -49,7 +50,7 @@ export default class ForceCheckCommand extends SlashCommand {
             interaction,
             embed: {
                 description: ':white_check_mark: Force checking user..',
-                color: 0x008000,
+                color: Colours.YELLOW,
             },
         });
 

@@ -1,4 +1,5 @@
 import { BaseCommandInteraction } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild } from '../../utils/guild';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
@@ -39,7 +40,7 @@ export default class ScanUsers extends SlashCommand {
                 embed: {
                     description:
                         "Now scanning users. This may take awhile so be patient.\nBe aware this is resource intensive, and shouldn't be used often.\nAbuse of this command will result in punishment.",
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
 
@@ -65,7 +66,7 @@ export default class ScanUsers extends SlashCommand {
                     channel: interaction.channel,
                     embed: {
                         description: 'Scanning completed',
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
             });

@@ -1,5 +1,6 @@
 import { Punish } from '.prisma/client';
 import { BaseCommandInteraction } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild, updateGuild } from '../../utils/guild';
 import { sendEmbed } from '../../utils/messages';
@@ -130,7 +131,7 @@ export default class ConfigCommand extends SlashCommand {
                         title: 'Server Configuration',
                         description:
                             'To change a setting use the config command with one of the options\nFor example: `/config punleak ban`',
-                        color: 0x008000,
+                        color: Colours.GREEN,
                         fields: [
                             {
                                 name: 'logchan - Log Channel',
@@ -179,7 +180,7 @@ export default class ConfigCommand extends SlashCommand {
                         name: `${interaction.user.username}#${interaction.user.discriminator}`,
                         icon_url: interaction.user.displayAvatarURL(),
                     },
-                    color: 0x008000,
+                    color: Colours.GREEN,
                 },
             });
         } else if (name.includes('pun')) {
@@ -217,7 +218,7 @@ export default class ConfigCommand extends SlashCommand {
                         name: `${interaction.user.username}#${interaction.user.discriminator}`,
                         icon_url: interaction.user.displayAvatarURL(),
                     },
-                    color: 0x008000,
+                    color: Colours.GREEN,
                 },
             });
         }

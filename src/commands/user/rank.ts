@@ -1,4 +1,5 @@
 import { BaseCommandInteraction } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
 import { getStaffMember } from '../../utils/staff';
@@ -23,7 +24,7 @@ export default class RankCommand extends SlashCommand {
 
         const embed = {
             description: '',
-            color: 0x008000,
+            color: Colours.GREEN,
         };
         if (staff.dev) {
             embed.description = 'Your wish is my command **Bot Owner**!';

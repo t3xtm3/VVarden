@@ -1,4 +1,5 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
 import { getUser } from '../../utils/users';
@@ -50,7 +51,7 @@ export default class CheckUserCommand extends SlashCommand {
                             thumbnail: {
                                 url: user.avatar,
                             },
-                            color: 0x800000,
+                            color: Colours.RED,
                             fields: [
                                 {
                                     name: 'User Information',
@@ -76,7 +77,7 @@ export default class CheckUserCommand extends SlashCommand {
                         embed: {
                             description:
                                 ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                            color: 0xffff00,
+                            color: Colours.YELLOW,
                         },
                     });
                 }
@@ -87,7 +88,7 @@ export default class CheckUserCommand extends SlashCommand {
                     embed: {
                         description:
                             ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                        color: 0xffff00,
+                        color: Colours.YELLOW,
                     },
                 });
             });

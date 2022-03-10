@@ -2,6 +2,7 @@ import { FilterType, UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake, TextBasedChannel, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as readline from 'readline';
+import { Colours } from '../@types';
 import { Bot } from '../classes';
 import { sendEmbed } from './messages';
 import { upsertUser } from './users/upsertUser';
@@ -92,7 +93,7 @@ export async function processCSVImport(
                             name: `${interaction.user.username}#${interaction.user.discriminator}`,
                             icon_url: interaction.user.displayAvatarURL(),
                         },
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
                 processState = 0;
@@ -138,13 +139,13 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                             if (Array.isArray(result)) {
                                 permblacklisted++;
                                 client.logger.debug(
-                                    `:shield: Updated status for <@${result[0]}>.\nUser has been permanently blacklisted.`
+                                    `CSVImport -> Updated status for <@${result[0]}>.\nUser has been permanently blacklisted.`
                                 );
                                 sendEmbed({
                                     channel: logChan,
                                     embed: {
                                         description: `:shield: Updated status for <@${result[0]}>.\nUser has been permanently blacklisted.`,
-                                        color: 0x800000,
+                                        color: Colours.RED,
                                     },
                                 });
                             } else blacklisted++;
@@ -155,7 +156,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                 total.blacklisted += blacklisted;
                 total.permblacklisted += permblacklisted;
 
-                client.logger.debug('Completed user imports');
+                client.logger.debug('CSVImport -> Completed user imports');
 
                 fs.unlink(`./imports/${type}/${filename}`, err => {
                     if (err) throw err;

@@ -3,6 +3,7 @@ import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processCSVImport, processInformationMsg } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
 import data from '../../config.json';
+import { Colours } from '../../@types';
 
 export default class ProcfileCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -31,7 +32,7 @@ export default class ProcfileCommand extends SlashCommand {
             channel: chan as TextBasedChannel,
             embed: {
                 description: `${interaction.user.username}#${interaction.user.discriminator} has started processing imports..`,
-                color: 0x800000,
+                color: Colours.RED,
             },
         });
 

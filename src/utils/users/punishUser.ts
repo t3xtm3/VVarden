@@ -1,5 +1,6 @@
 import { Guild, Users } from '.prisma/client';
 import { GuildMember, TextChannel } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot } from '../../classes';
 import { getChannelByID } from '../helpers';
 import { sendEmbed } from '../messages';
@@ -50,7 +51,7 @@ export async function punishUser({
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.user.defaultAvatarURL,
                         },
-                        color: 0xffff00,
+                        color: Colours.RED,
                     },
                 });
             });
@@ -85,7 +86,7 @@ export async function punishUser({
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.user.displayAvatarURL(),
                 },
-                color: 0x008000,
+                color: Colours.GREEN,
             },
         }).catch();
     } else {
@@ -103,7 +104,7 @@ export async function punishUser({
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
                         },
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
             })
@@ -116,7 +117,7 @@ export async function punishUser({
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
                         },
-                        color: 0x008000,
+                        color: Colours.RED,
                     },
                 });
             });

@@ -1,4 +1,5 @@
 import { BaseCommandInteraction } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
 import { assignAdmin, removeAdmin } from '../../utils/staff';
@@ -53,7 +54,7 @@ export default class AdminCommand extends SlashCommand {
                     interaction,
                     embed: {
                         description: `Successfully added <@${id}>`,
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
                 return true;
@@ -65,7 +66,7 @@ export default class AdminCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: `Successfully removed <@${id}>`,
-                            color: 0x008000,
+                            color: Colours.GREEN,
                         },
                     });
                     return true;
@@ -75,7 +76,7 @@ export default class AdminCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: '❌ That user is not an admin',
-                            color: 0x800000,
+                            color: Colours.YELLOW,
                         },
                     });
                     return false;

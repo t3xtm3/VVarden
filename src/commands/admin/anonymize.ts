@@ -1,4 +1,5 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
 import { anonymiseUser } from '../../utils/users';
@@ -54,7 +55,7 @@ export default class AnonymizeCommand extends SlashCommand {
                             name: `${interaction.user.username}#${interaction.user.discriminator}`,
                             icon_url: interaction.user.displayAvatarURL(),
                         },
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
             })
@@ -64,7 +65,7 @@ export default class AnonymizeCommand extends SlashCommand {
                     embed: {
                         description:
                             ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                        color: 0xffff00,
+                        color: Colours.YELLOW,
                     },
                 });
             });

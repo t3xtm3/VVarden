@@ -1,4 +1,5 @@
 import { BaseCommandInteraction } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
 import { countBlacklisted } from '../../utils/users';
@@ -23,7 +24,7 @@ export default class StatusCommand extends SlashCommand {
             interaction,
             embed: {
                 title: ':desktop: Bot Status',
-                color: 0x008000,
+                color: Colours.GREEN,
                 fields: [
                     {
                         name: 'Shard Count',

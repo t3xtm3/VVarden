@@ -1,6 +1,7 @@
 import { ServerType } from '@prisma/client';
 import { BaseCommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import _ from 'lodash';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getAllBadServers, removeBadServer, upsertBadServer } from '../../utils/badservers';
 import { enumToMap } from '../../utils/helpers';
@@ -101,7 +102,7 @@ export default class BadServerCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: `Successfully added \`${sid}\` as a bad server`,
-                            color: 0x008000,
+                            color: Colours.GREEN,
                         },
                     });
                 })
@@ -110,7 +111,7 @@ export default class BadServerCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: 'An unknown error has occured',
-                            color: 0x800000,
+                            color: Colours.RED,
                         },
                     });
                 });
@@ -121,7 +122,7 @@ export default class BadServerCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: `Successfully removed \`${sid}\` as a bad server`,
-                            color: 0x008000,
+                            color: Colours.GREEN,
                         },
                     });
                 })
@@ -130,7 +131,7 @@ export default class BadServerCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: `The server \`${sid}\` is not listed`,
-                            color: 0x800000,
+                            color: Colours.YELLOW,
                         },
                     });
                 });
@@ -149,7 +150,7 @@ export default class BadServerCommand extends SlashCommand {
                             icon_url: interaction.guild.iconURL(),
                         },
                         description: `\`\`\`ID                 | Name\n${chunk.join('\n')}\`\`\``,
-                        color: 0xffff00,
+                        color: Colours.RED,
                     })
                 );
             });

@@ -1,5 +1,6 @@
 import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
@@ -45,7 +46,7 @@ export default class AppealCommand extends SlashCommand {
                 interaction,
                 embed: {
                     description: 'You must provided either a user or user id',
-                    color: 0xffff00,
+                    color: Colours.YELLOW,
                 },
             });
             return false;
@@ -65,7 +66,7 @@ export default class AppealCommand extends SlashCommand {
                     interaction,
                     embed: {
                         description: `Updated ${updated.last_username} (${info.id}) to status \`${info.status}\`, type \`${updated.user_type}\` with reason: \`${info.reason}\``,
-                        color: 0x008000,
+                        color: Colours.GREEN,
                     },
                 });
                 client.emit('logAction', {
@@ -81,7 +82,7 @@ export default class AppealCommand extends SlashCommand {
                     embed: {
                         description:
                             ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                        color: 0xffff00,
+                        color: Colours.YELLOW,
                     },
                 });
             });
