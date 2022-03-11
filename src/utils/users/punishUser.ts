@@ -38,7 +38,10 @@ export async function punishUser({
             .createDM(true)
             .then(chan => {
                 chan.send({
-                    content: `:shield: Warden\nYou are being automodded by ${guildInfo.name} for being associated with ${count} Leaking or Cheating Discord Servers.\nYou may attempt to appeal this via the Official Warden Discord:\nhttps://discord.gg/jeFeDRasfs`,
+                    content: `:shield: Warden
+                    You are being automodded by ${guildInfo.name} for being associated with ${count} Leaking or Cheating Discord Servers.
+                    You may attempt to appeal this via the Official Warden Discord:
+                    https://discord.gg/jeFeDRasfs`,
                 });
             })
             .catch(() => {
@@ -81,7 +84,9 @@ export async function punishUser({
         sendEmbed({
             channel,
             embed: {
-                description: `:warning: User ${oldUser.last_username} (${member.id}) has been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status} / **User Type**: ${type}.\n**Details**: ${oldUser.reason}`,
+                description: `:warning: User ${oldUser.last_username} (${member.id}) has been seen in ${count} bad discord servers.
+                **User Status**: ${oldUser.status} / **User Type**: ${type}.
+                **Details**: ${oldUser.reason}`,
                 author: {
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.user.displayAvatarURL(),
@@ -99,7 +104,10 @@ export async function punishUser({
                 sendEmbed({
                     channel,
                     embed: {
-                        description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${guildInfo.punown} on scan.\nThey have been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status} / **User Type**: ${type}.\n**Details**: ${oldUser.reason}`,
+                        description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${guildInfo.punown} on scan.
+                        They have been seen in ${count} bad discord servers.
+                        **User Status**: ${oldUser.status} / **User Type**: ${type}.
+                        **Details**: ${oldUser.reason}`,
                         author: {
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
@@ -112,7 +120,8 @@ export async function punishUser({
                 sendEmbed({
                     channel,
                     embed: {
-                        description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!\nPlease verify I have this permission, and am a higher role than this user!`,
+                        description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!
+                        Please verify I have this permission, and am a higher role than this user!`,
                         author: {
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
