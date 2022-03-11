@@ -56,38 +56,24 @@ export async function upsertUser({
         } else {
             spServers.push(server);
 
-            if (user.status === UserStatus.APPEALED) {
-                await client.db.users
-                    .update({
-                        where: {
-                            id,
-                        },
-                        data: {
-                            servers: spServers.length > 1 ? spServers.join(';') : spServers.join(''),
-                            roles: newRoles,
-                            status: UserStatus.PERM_BLACKLIST,
-                        },
-                    })
-                    .then(() => {
-                        globalFindCheck({ client, id });
-                        return [id];
-                    });
-            } else {
-                await client.db.users
-                    .update({
-                        where: {
-                            id,
-                        },
-                        data: {
-                            servers: spServers.length > 1 ? spServers.join(';') : spServers.join(''),
-                            roles: newRoles,
-                        },
-                    })
-                    .then(() => {
-                        globalFindCheck({ client, id });
-                        return false;
-                    });
-            }
+            await client.db.users
+                .update({
+                    where: {
+                        id,
+                    },
+                    data: {
+                        servers: spServers.length > 1 ? spServers.join(';') : spServers.join(''),
+                        roles: newRoles,
+                        status:
+                            user.status === UserStatus.APPEALED
+                                ? UserStatus.PERM_BLACKLIST
+                                : user.status,
+                    },
+                })
+                .then(() => {
+                    globalFindCheck({ client, id });
+                    return user.status === UserStatus.APPEALED ? [id] : false;
+                });
         }
     } else {
         await client.db.users.create({
