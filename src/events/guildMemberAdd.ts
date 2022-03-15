@@ -1,11 +1,12 @@
 import { UserStatus } from '@prisma/client';
-import { Guild, GuildMember } from 'discord.js';
+import { GuildMember } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import { getGuild } from '../utils/guild';
 import { getUser } from '../utils/users';
 import { punishUser } from '../utils/users/punishUser';
 
-export default async function (client: Bot, guild: Guild, member: GuildMember) {
+export default async function (client: Bot, member: GuildMember) {
+    const guild = member.guild;
     const settings = await getGuild({ client, id: guild.id });
 
     if (!settings) {
