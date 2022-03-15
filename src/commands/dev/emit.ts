@@ -25,6 +25,12 @@ export default class EmitCommand extends SlashCommand {
                     ],
                     required: true,
                 },
+                {
+                    type: 3,
+                    name: 'sid',
+                    description: 'sid to pass',
+                    required: true,
+                },
             ],
             defaultPermission: true,
             staffRole: 'dev',
@@ -33,6 +39,7 @@ export default class EmitCommand extends SlashCommand {
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const emit = interaction.options.get('event')?.value as string;
+        const sid = interaction.options.get('sid')?.value as string;
 
         await sendEmbed({
             interaction,
@@ -43,6 +50,9 @@ export default class EmitCommand extends SlashCommand {
         });
 
         const member = await interaction.guild.members.fetch(interaction.user.id);
+
+        const g = await client.guilds.fetch(sid);
+        console.log(g);
         await client.emit(emit, interaction.guild, member);
 
         return true;
