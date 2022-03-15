@@ -93,7 +93,9 @@ export default class CheckUserAdminCommand extends SlashCommand {
                             },
                             {
                                 name: 'Database Information',
-                                value: `**User Status**: ${user.status}\n**User Type**: ${user.user_type}\n**Details**: ${user.reason}`,
+                                value: `**User Status**: ${user.status.toLowerCase()}\n**User Type**: ${user.user_type.toLowerCase()}\n**Details**: ${
+                                    user.reason
+                                }`,
                                 inline: false,
                             },
                             {
