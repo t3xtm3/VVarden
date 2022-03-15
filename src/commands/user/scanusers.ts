@@ -62,7 +62,7 @@ export default class ScanUsers extends SlashCommand {
                     guildInfo: settings,
                     oldUser: user,
                     toDM: false,
-                });
+                }).catch(e => console.log(e));
             });
             sendEmbed({
                 channel: interaction.channel,
