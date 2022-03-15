@@ -1,4 +1,4 @@
-import { Guild, Users } from '.prisma/client';
+import { Guild, Users, UserType } from '.prisma/client';
 import { GuildMember, TextChannel } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot } from '../../classes';
@@ -28,7 +28,7 @@ export async function punishUser({
     oldUser: Users;
     toDM: boolean;
 }) {
-    const type = oldUser.user_type as string;
+    const type = oldUser.user_type;
     const count = oldUser.servers.split(';').length;
     let toDo = '';
 
@@ -61,16 +61,16 @@ export async function punishUser({
     }
 
     switch (type) {
-        case 'owner':
+        case UserType.OWNER:
             toDo = guildInfo.punown;
             break;
-        case 'supporter':
+        case UserType.SUPPORTER:
             toDo = guildInfo.punsupp;
             break;
-        case 'leaker':
+        case UserType.LEAKER:
             toDo = guildInfo.punleak;
             break;
-        case 'cheater':
+        case UserType.CHEATER:
             toDo = guildInfo.puncheat;
             break;
     }

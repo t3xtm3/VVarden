@@ -15,7 +15,7 @@ model Users {
     last_username  String
     avatar         String
     status         UserStatus
-    user_type      String
+    user_type      UserType
     servers        String              @default("") @db.LongText
     roles          String              @default("") @db.LongText
     filter_type    FilterType
@@ -66,6 +66,13 @@ enum FilterType {
     MANUAL
     SEMI_AUTO
     AUTO
+}
+
+enum UserType {
+    CHEATER
+    LEAKER
+    SUPPORTER
+    OWNER
 }
 
 enum ServerType {

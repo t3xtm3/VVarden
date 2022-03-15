@@ -1,4 +1,4 @@
-import { UserStatus } from '@prisma/client';
+import { UserStatus, UserType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
@@ -8,6 +8,12 @@ import { updateStatus } from '../../utils/users';
 
 const map = enumToMap(UserStatus);
 const choices = Array.from(map.entries()).map(m => ({
+    name: m[0],
+    value: `${m[1]}`,
+}));
+
+const mapa = enumToMap(UserType);
+const choicesa = Array.from(mapa.entries()).map(m => ({
     name: m[0],
     value: `${m[1]}`,
 }));
@@ -43,6 +49,7 @@ export default class UpstatusCommand extends SlashCommand {
                     type: 3,
                     name: 'type',
                     description: 'New User Type',
+                    choices: choicesa,
                     required: false,
                 },
                 {
@@ -67,7 +74,7 @@ export default class UpstatusCommand extends SlashCommand {
             interaction.options.get('userid')?.value) as Snowflake;
 
         const status = interaction.options.get('status')?.value as UserStatus;
-        const user_type = interaction.options.get('type')?.value as string;
+        const user_type = interaction.options.get('type')?.value as UserType;
         const reason = interaction.options.get('reason')?.value as string;
 
         if (!id) {

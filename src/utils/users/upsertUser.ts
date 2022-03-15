@@ -1,4 +1,4 @@
-import { FilterType, UserStatus } from '@prisma/client';
+import { FilterType, UserStatus, UserType } from '@prisma/client';
 import { getUser, globalFindCheck, updateStatus } from '.';
 import { Bot } from '../../classes';
 import { combineRoles } from '../helpers';
@@ -33,7 +33,7 @@ export async function upsertUser({
     avatar: string;
     last_username: string;
     status: UserStatus;
-    user_type: string;
+    user_type: UserType;
     server: string;
     roles: string;
     filter_type: FilterType;

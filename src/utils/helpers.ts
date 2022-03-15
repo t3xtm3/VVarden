@@ -1,4 +1,4 @@
-import { FilterType, UserStatus } from '@prisma/client';
+import { FilterType, UserStatus, UserType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake, TextBasedChannel, TextChannel } from 'discord.js';
 import * as fs from 'fs';
 import * as readline from 'readline';
@@ -103,6 +103,16 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                 for await (const line of rl) {
                     const lineArr = line.split(',');
                     if (lineArr !== null && lineArr[0] !== 'username') {
+                        const newType =
+                            type === 'leaker'
+                                ? UserType.LEAKER
+                                : type === 'cheater'
+                                ? UserType.CHEATER
+                                : type === 'supporter'
+                                ? UserType.SUPPORTER
+                                : type === 'owner'
+                                ? UserType.OWNER
+                                : UserType.LEAKER;
                         await upsertUser({
                             client,
                             id: lineArr[7],
@@ -111,7 +121,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                             status: UserStatus.BLACKLIST,
                             server: serverid,
                             roles: lineArr[3],
-                            user_type: type,
+                            user_type: newType,
                             filter_type: FilterType.SEMI_AUTO,
                         }).then((result: any) => {
                             if (Array.isArray(result)) {

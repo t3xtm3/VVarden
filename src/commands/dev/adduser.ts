@@ -1,4 +1,4 @@
-import { FilterType, UserStatus } from '@prisma/client';
+import { FilterType, UserStatus, UserType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours, LogTypes } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
@@ -8,6 +8,12 @@ import { createUser } from '../../utils/users';
 
 const map = enumToMap(UserStatus);
 const choices = Array.from(map.entries()).map(m => ({
+    name: m[0],
+    value: `${m[1]}`,
+}));
+
+const mapa = enumToMap(UserType);
+const choicesa = Array.from(mapa.entries()).map(m => ({
     name: m[0],
     value: `${m[1]}`,
 }));
@@ -48,6 +54,7 @@ export default class AddUserCommand extends SlashCommand {
                     type: 3,
                     name: 'type',
                     description: 'User Type',
+                    choices: choicesa,
                     required: false,
                 },
             ],
@@ -75,7 +82,7 @@ export default class AddUserCommand extends SlashCommand {
             interaction.options.get('reason')?.value.toString() ||
             'Manual: Member of Blacklisted Discord Server';
 
-        const user_type = interaction.options.get('type')?.value.toString() || 'leaker';
+        const user_type = (interaction.options.get('type')?.value as UserType) || UserType.LEAKER;
         const status = (interaction.options.get('status')?.value || UserStatus.BLACKLIST) as UserStatus;
         const server = (interaction.options.get('server')?.value || interaction.guildId) as Snowflake;
 

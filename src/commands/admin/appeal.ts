@@ -57,7 +57,6 @@ export default class AppealCommand extends SlashCommand {
             id,
             reason: `Appealed ${date} - ${interaction.user.username}`,
             status: UserStatus.APPEALED,
-            user_type: '',
         };
 
         await updateStatus({ client, ...info })
@@ -65,7 +64,7 @@ export default class AppealCommand extends SlashCommand {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description: `Updated ${updated.last_username} (${info.id}) to status \`${info.status}\`, type \`${updated.user_type}\` with reason: \`${info.reason}\``,
+                        description: `Updated ${updated.last_username} (${info.id}) to status \`${info.status}\`, with reason: \`${info.reason}\``,
                         color: Colours.GREEN,
                     },
                 });
