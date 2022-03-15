@@ -64,15 +64,17 @@ export default class ScanUsers extends SlashCommand {
                         toDM: false,
                     });
                 })
-            ).then(() => {
-                sendEmbed({
-                    channel: interaction.channel,
-                    embed: {
-                        description: 'Scanning completed',
-                        color: Colours.GREEN,
-                    },
-                });
-            });
+            )
+                .then(() => {
+                    sendEmbed({
+                        channel: interaction.channel,
+                        embed: {
+                            description: 'Scanning completed',
+                            color: Colours.GREEN,
+                        },
+                    });
+                })
+                .catch(e => console.log(e));
             return true;
         });
 

@@ -93,7 +93,7 @@ export async function punishUser({
                 },
                 color: Colours.GREEN,
             },
-        }).catch();
+        }).catch(e => console.log(e));
     } else {
         const action =
             toDo === 'BAN'
@@ -128,7 +128,7 @@ export async function punishUser({
                         },
                         color: Colours.RED,
                     },
-                });
+                }).catch(e => console.log(e));
             });
     }
 }
