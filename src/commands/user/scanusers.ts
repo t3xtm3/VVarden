@@ -56,6 +56,7 @@ export default class ScanUsers extends SlashCommand {
                 await a;
                 const user = users.find(u => u.id === member.id);
                 if (!user) return;
+                client.logger.info(`scanusers -> Checking ${member.id}`);
                 await punishUser({
                     client,
                     member,

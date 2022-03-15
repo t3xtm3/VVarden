@@ -75,10 +75,12 @@ export async function punishUser({
             break;
     }
     const cachedChannel = client.logChans.get(guildInfo.id);
-    const channel =
-        cachedChannel.id === guildInfo.logchan
-            ? cachedChannel
-            : await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
+    let channel: TextChannel;
+    if (cachedChannel) {
+        channel = cachedChannel;
+    } else {
+        channel = await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
+    }
 
     if (toDo === 'WARN') {
         sendEmbed({
