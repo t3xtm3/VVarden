@@ -73,7 +73,7 @@ export default class ConfigCommand extends SlashCommand {
                 },
                 {
                     type: 1,
-                    name: 'punleaker',
+                    name: 'punleak',
                     description: 'Punish leakers',
                     options: [
                         {
