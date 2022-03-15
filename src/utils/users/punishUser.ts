@@ -28,11 +28,20 @@ export async function punishUser({
     oldUser: Users;
     toDM: boolean;
 }) {
+    if (member.user.bot) return;
+
     const type = oldUser.user_type;
     const count = oldUser.servers.split(';').length;
     let toDo = '';
 
-    if (member.user.bot) return;
+    const cachedChannel = client.logChans.get(guildInfo.id);
+    let channel: TextChannel;
+    if (cachedChannel) {
+        channel = cachedChannel;
+    } else {
+        channel = await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
+    }
+
     if (toDM) {
         await member
             .createDM()
@@ -45,7 +54,6 @@ export async function punishUser({
                 });
             })
             .catch(() => {
-                const channel = client.channels.cache.get(guildInfo.logchan) as TextChannel;
                 sendEmbed({
                     channel,
                     embed: {
@@ -73,13 +81,6 @@ export async function punishUser({
         case UserType.CHEATER:
             toDo = guildInfo.puncheat;
             break;
-    }
-    const cachedChannel = client.logChans.get(guildInfo.id);
-    let channel: TextChannel;
-    if (cachedChannel) {
-        channel = cachedChannel;
-    } else {
-        channel = await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
     }
 
     if (toDo === 'WARN') {
