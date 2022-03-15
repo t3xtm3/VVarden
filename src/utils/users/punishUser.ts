@@ -35,7 +35,7 @@ export async function punishUser({
     if (member.user.bot) return;
     if (toDM) {
         await member
-            .createDM(true)
+            .createDM()
             .then(chan => {
                 chan.send({
                     content: `:shield: Warden
@@ -99,7 +99,7 @@ export async function punishUser({
                 },
                 color: Colours.GREEN,
             },
-        }).catch(e => console.log(e));
+        }).catch(() => client.logger.debug('Unable to send warning embed, no permissions?'));
     } else {
         // const action =
         //     toDo === 'BAN'
