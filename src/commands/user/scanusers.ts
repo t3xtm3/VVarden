@@ -27,6 +27,7 @@ export default class ScanUsers extends SlashCommand {
             return false;
         }
 
+        console.time('scanusers');
         await interaction.guild.members.fetch().then(async () => {
             const settings = await getGuild({
                 client,
@@ -68,6 +69,8 @@ export default class ScanUsers extends SlashCommand {
                     color: Colours.GREEN,
                 },
             }).catch(e => console.log(e));
+
+            console.timeEnd('scanusers');
             return true;
         });
 

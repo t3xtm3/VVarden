@@ -51,7 +51,7 @@ class Bot extends Client {
     async loadCommands(dir: string): Promise<void> {
         const commandFiles = await globPromise(`${dir}/*/*{.ts,.js}`);
         for (const filePath of commandFiles) {
-            const commandFile = await require(filePath);
+            const commandFile = require(filePath);
             const command = new commandFile.default(this);
 
             if (!command.name) return;
@@ -72,6 +72,7 @@ class Bot extends Client {
             const item = items[i];
 
             const eventFile = require(path.join(dir, item));
+            this.logger.debug(`Loaded event: ${item.split('.')[0]}`);
             this.on(item.split('.')[0], eventFile.default.bind(null, this));
         }
     }
