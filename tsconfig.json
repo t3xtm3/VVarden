@@ -3,7 +3,7 @@
     "compilerOptions": {
       "outDir": "build",
       "lib": [
-        "ES2021",
+        "ES2020",
         "DOM"
       ],
       "strict": true,
