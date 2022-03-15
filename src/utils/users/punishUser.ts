@@ -109,13 +109,12 @@ export async function punishUser({
                 description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${toDo} on scan.
                         They have been seen in ${count} bad discord servers.
                         **User Status**: ${oldUser.status} / **User Type**: ${type}.
-                        **Details**: ${oldUser.reason}`,
+                        **Details**: ${oldUser.reason}
+
+                        This does not action`,
                 author: {
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.displayAvatarURL(),
-                },
-                footer: {
-                    text: 'THIS DOES NOT ACTION',
                 },
                 color: Colours.GREEN,
             },
