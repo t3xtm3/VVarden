@@ -43,7 +43,7 @@ export default class EmitCommand extends SlashCommand {
         });
 
         const member = interaction.guild.members.fetch(interaction.user.id);
-        await client.emit(emit, member);
+        await client.emit(emit, interaction.guild, member);
 
         return true;
     }
