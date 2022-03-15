@@ -17,7 +17,7 @@ export default class ScanUsers extends SlashCommand {
             options: [],
             defaultPermission: true,
             permission: 'ADMINISTRATOR',
-            cooldown: 60,
+            cooldown: 3600,
         });
     }
 
