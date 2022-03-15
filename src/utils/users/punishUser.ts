@@ -101,7 +101,7 @@ export async function punishUser({
             toDo === 'BAN'
                 ? member.ban({ reason: `Warden - User Type ${type}` })
                 : member.kick(`Warden - User Type ${type}`);
-        action
+        await action
             .then(() => {
                 sendEmbed({
                     channel,
