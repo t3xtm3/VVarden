@@ -38,11 +38,11 @@ export default class EmitCommand extends SlashCommand {
             interaction,
             embed: {
                 description: `Emitted ${emit}`,
-                color: Colours.RED,
+                color: Colours.YELLOW,
             },
         });
 
-        const member = interaction.guild.members.fetch(interaction.user.id);
+        const member = await interaction.guild.members.fetch(interaction.user.id);
         await client.emit(emit, interaction.guild, member);
 
         return true;
