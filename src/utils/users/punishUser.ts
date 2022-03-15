@@ -86,9 +86,13 @@ export async function punishUser({
         sendEmbed({
             channel,
             embed: {
-                description: `:warning: User ${oldUser.last_username} (${member.id}) has been seen in ${count} bad discord servers.
-                **User Status**: ${oldUser.status} / **User Type**: ${type}.
-                **Details**: ${oldUser.reason}`,
+                description: `:warning: User ${oldUser.last_username} (${
+                    member.id
+                }) has been seen in ${count} bad discord servers.
+                **User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.
+                **Details**: ${oldUser.reason}
+
+                This does not action`,
                 author: {
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.user.displayAvatarURL(),
@@ -106,9 +110,11 @@ export async function punishUser({
         sendEmbed({
             channel,
             embed: {
-                description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${toDo} on scan.
+                description: `:shield: User ${oldUser.last_username} (${
+                    member.id
+                }) has been punished with a ${toDo} on scan.
                         They have been seen in ${count} bad discord servers.
-                        **User Status**: ${oldUser.status} / **User Type**: ${type}.
+                        **User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.
                         **Details**: ${oldUser.reason}
 
                         This does not action`,

@@ -48,7 +48,7 @@ export default class CheckServerCommand extends SlashCommand {
                             {
                                 name: 'Server Information',
                                 value: `**ID**: ${server[0].id} / **Name**: ${server[0].name}\n
-                                **Details**: ${server[0].type}\n
+                                **Details**: ${server[0].type.toLowerCase()}\n
                                 **Date Added**:${server[0].createdAt
                                     .toISOString()
                                     .replace(/T/, ' ')

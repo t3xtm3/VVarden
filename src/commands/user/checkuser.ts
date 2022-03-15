@@ -59,7 +59,9 @@ export default class CheckUserCommand extends SlashCommand {
                                 },
                                 {
                                     name: 'Blacklist Reason',
-                                    value: `**User Type**: ${user.user_type}\n**Details**: ${user.reason}`,
+                                    value: `**User Type**: ${user.user_type.toLowerCase()}\n**Details**: ${
+                                        user.reason
+                                    }`,
                                 },
                                 {
                                     name: `Added Type: ${user.filter_type.replace('_', '-')}`,
