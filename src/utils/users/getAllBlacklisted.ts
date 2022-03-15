@@ -7,11 +7,14 @@ import { Bot } from '../../classes';
  * @export
  * @param {Bot} client
  */
-export async function getAllBlacklisted({ client }: { client: Bot }) {
+export async function getAllBlacklisted({ client, ids }: { client: Bot; ids: string[] }) {
     return await client.db.users.findMany({
         where: {
             status: {
                 in: [UserStatus.BLACKLIST, UserStatus.PERM_BLACKLIST],
+            },
+            id: {
+                in: ids,
             },
         },
     });

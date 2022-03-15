@@ -47,25 +47,32 @@ export default class ScanUsers extends SlashCommand {
                 },
             });
 
+            console.time('scanusers');
             // Reduce database calls from one per member to one
             // Bulk grab all blacklisted then check if exists
             // Rather than checking database per member
-            const users = await getAllBlacklisted({ client });
-            // Process all blacklisted in parallel
-            console.time('scanusers');
-            await Promise.all(
-                interaction.guild.members.cache.map(async member => {
-                    const user = users.find(u => u.id === member.id);
-                    if (!user) return;
-                    await punishUser({
-                        client,
-                        member,
-                        guildInfo: settings,
-                        oldUser: user,
-                        toDM: false,
-                    }).catch(e => console.log(e));
-                })
-            );
+            const ids = interaction.guild.members.cache.map(u => u.id);
+            const users = await getAllBlacklisted({ client, ids });
+            users.forEach(async user => {
+                await punishUser({
+                    client,
+                    member: interaction.guild.members.cache.get(user.id),
+                    guildInfo: settings,
+                    oldUser: user,
+                    toDM: false,
+                }).catch(e => console.log(e));
+            });
+            // interaction.guild.members.cache.forEach(async member => {
+            //     const user = users.find(u => u.id === member.id);
+            //     if (!user) return;
+            //     await punishUser({
+            //         client,
+            //         member,
+            //         guildInfo: settings,
+            //         oldUser: user,
+            //         toDM: false,
+            //     }).catch(e => console.log(e));
+            // });
             console.timeEnd('scanusers');
             sendEmbed({
                 channel: interaction.channel,

@@ -106,7 +106,7 @@ export async function punishUser({
                 sendEmbed({
                     channel,
                     embed: {
-                        description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${guildInfo.punown} on scan.
+                        description: `:shield: User ${oldUser.last_username} (${member.id}) has been punished with a ${toDo} on scan.
                         They have been seen in ${count} bad discord servers.
                         **User Status**: ${oldUser.status} / **User Type**: ${type}.
                         **Details**: ${oldUser.reason}`,
