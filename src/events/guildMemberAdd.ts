@@ -1,3 +1,4 @@
+import { UserStatus } from '@prisma/client';
 import { Guild, GuildMember } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import { getGuild } from '../utils/guild';
@@ -17,7 +18,7 @@ export default async function (client: Bot, guild: Guild, member: GuildMember) {
     if (!user) return false;
 
     // Dynamically set this in future?
-    if (user.status.includes('BLACKLIST')) {
+    if (user.status in [UserStatus.BLACKLIST, UserStatus.PERM_BLACKLIST]) {
         await punishUser({
             client,
             member,
