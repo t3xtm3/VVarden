@@ -18,7 +18,7 @@ export default async function (client: Bot, guild: Guild, member: GuildMember) {
     if (!user) return false;
 
     // Dynamically set this in future?
-    if (user.status in [UserStatus.BLACKLIST, UserStatus.PERM_BLACKLIST]) {
+    if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
         await punishUser({
             client,
             member,
