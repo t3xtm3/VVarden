@@ -3,7 +3,7 @@
     "compilerOptions": {
       "outDir": "build",
       "lib": [
-        "ES2020",
+        "ES2021",
         "DOM"
       ],
       "strict": true,
@@ -22,7 +22,7 @@
       ]
     },
     "include": [
-      "src/**/*.ts", "registerdata.ts",
+      "src/**/*.ts",
     ],
     "exclude": [
       "node_modules"

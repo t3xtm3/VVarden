@@ -102,44 +102,42 @@ export async function punishUser({
             },
         }).catch(() => client.logger.debug('Unable to send warning embed, no permissions?'));
     } else {
-        // const action =
-        //     toDo === 'BAN'
-        //         ? member.ban({ reason: `Warden - User Type ${type}` })
-        //         : member.kick(`Warden - User Type ${type}`);
-        // await action
-        //     .then(() => {
-        sendEmbed({
-            channel,
-            embed: {
-                description: `:shield: User ${oldUser.last_username} (${
-                    member.id
-                }) has been punished with a ${toDo} on scan.
+        const action =
+            toDo === 'BAN'
+                ? member.ban({ reason: `Warden - User Type ${type}` })
+                : member.kick(`Warden - User Type ${type}`);
+        await action
+            .then(() => {
+                sendEmbed({
+                    channel,
+                    embed: {
+                        description: `:shield: User ${oldUser.last_username} (${
+                            member.id
+                        }) has been punished with a ${toDo} on scan.
                         They have been seen in ${count} bad discord servers.
                         **User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.
-                        **Details**: ${oldUser.reason}
-
-                        This does not action`,
-                author: {
-                    name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
-                    icon_url: member.displayAvatarURL(),
-                },
-                color: Colours.GREEN,
-            },
-        });
-        // })
-        // .catch(() => {
-        //     sendEmbed({
-        //         channel,
-        //         embed: {
-        //             description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!
-        //             Please verify I have this permission, and am a higher role than this user!`,
-        //             author: {
-        //                 name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
-        //                 icon_url: member.displayAvatarURL(),
-        //             },
-        //             color: Colours.RED,
-        //         },
-        //     }).catch(e => console.log(e));
-        // });
+                        **Details**: ${oldUser.reason}`,
+                        author: {
+                            name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
+                            icon_url: member.displayAvatarURL(),
+                        },
+                        color: Colours.GREEN,
+                    },
+                });
+            })
+            .catch(() => {
+                sendEmbed({
+                    channel,
+                    embed: {
+                        description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!
+                    Please verify I have this permission, and am a higher role than this user!`,
+                        author: {
+                            name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
+                            icon_url: member.displayAvatarURL(),
+                        },
+                        color: Colours.RED,
+                    },
+                }).catch(e => console.log(e));
+            });
     }
 }
