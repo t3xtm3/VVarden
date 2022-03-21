@@ -26,10 +26,12 @@ export default class RankCommand extends SlashCommand {
             description: '',
             color: Colours.GREEN,
         };
-        if (staff.dev) {
-            embed.description = 'Your wish is my command **Bot Owner**!';
-        } else if (staff.admin) {
-            embed.description = 'Your wish is my command **Bot Admin**!';
+        if (staff) {
+            if (staff.dev) {
+                embed.description = 'Your wish is my command **Bot Owner**!';
+            } else if (staff.admin) {
+                embed.description = 'Your wish is my command **Bot Admin**!';
+            }
         } else if (member.permissions.has('ADMINISTRATOR')) {
             embed.description = 'Your wish is my command **Discord Admin**!';
         } else {
