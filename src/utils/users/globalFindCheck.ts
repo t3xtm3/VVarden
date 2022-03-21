@@ -27,17 +27,21 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
         ).reduce(async (a, guildID) => {
             await a;
             const guild = client.guilds.cache.get(guildID.id);
-            const member = await guild.members.fetch(id).catch(null);
-            if (member) {
-                const settings = await getGuild({ client, id: guild.id });
-                await punishUser({
-                    client,
-                    member,
-                    guildInfo: settings,
-                    oldUser: user,
-                    toDM: false,
+            await guild.members
+                .fetch(id)
+                .then(async member => {
+                    const settings = await getGuild({ client, id: guild.id });
+                    await punishUser({
+                        client,
+                        member,
+                        guildInfo: settings,
+                        oldUser: user,
+                        toDM: false,
+                    });
+                })
+                .catch(() => {
+                    return false;
                 });
-            }
         });
     }
     return true;

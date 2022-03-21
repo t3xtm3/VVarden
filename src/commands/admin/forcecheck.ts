@@ -45,7 +45,6 @@ export default class ForceCheckCommand extends SlashCommand {
             return false;
         }
 
-        await globalFindCheck({ client, id });
         sendEmbed({
             interaction,
             embed: {
@@ -53,6 +52,7 @@ export default class ForceCheckCommand extends SlashCommand {
                 color: Colours.YELLOW,
             },
         });
+        await globalFindCheck({ client, id });
 
         return true;
     }
