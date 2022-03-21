@@ -29,8 +29,8 @@ export const db = new prisma.PrismaClient({
 });
 
 const client = new Bot(logger, db, {
-    intents: new Intents(32767),
-    partials: ['CHANNEL', 'REACTION', 'USER', 'GUILD_MEMBER', 'MESSAGE'],
+    intents: new Intents(515),
+    partials: ['CHANNEL', 'USER', 'GUILD_MEMBER'],
 });
 
 (async () => {
