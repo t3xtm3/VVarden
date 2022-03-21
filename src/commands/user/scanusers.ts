@@ -27,7 +27,7 @@ export default class ScanUsers extends SlashCommand {
             return false;
         }
 
-        console.time('scanusers');
+        const begin = Date.now();
         await interaction.guild.members.fetch().then(async () => {
             const settings = await getGuild({
                 client,
@@ -70,7 +70,8 @@ export default class ScanUsers extends SlashCommand {
                 },
             }).catch(e => console.log(e));
 
-            console.timeEnd('scanusers');
+            const end = Date.now();
+            client.logger.debug(`scanUsers ${interaction.guild.name}: Ran in ${(end - begin) / 1000}s`);
             return true;
         });
 
