@@ -43,9 +43,6 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
                     return true;
                 })
                 .catch(() => {
-                    client.logger.debug(
-                        `globalFindCheck: User not found ${id} in discord: ${guild.name}`
-                    );
                     return false;
                 });
         }, Promise.resolve());
