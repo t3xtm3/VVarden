@@ -92,9 +92,7 @@ export async function punishUser({
                     member.id
                 }) has been seen in ${count} bad discord servers.
                 **User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.
-                **Details**: ${oldUser.reason}
-
-                This does not action`,
+                **Details**: ${oldUser.reason}`,
                 author: {
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.user.displayAvatarURL(),
