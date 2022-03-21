@@ -6,6 +6,6 @@ export default async function (client: Bot) {
     const arr = client.commands.map(c => c);
     client.application.commands
         .set(arr)
-        .then(() => client.logger.info('Loaded successfully'))
+        .then(() => client.logger.info('Loaded application commands successfully'))
         .catch(e => console.log(e));
 }

@@ -39,10 +39,9 @@ const client = new Bot(logger, db, {
     await client.login(process.env.TOKEN);
 })();
 
-process.on('unhandledRejection', (err: any) => {
-    console.log(`Unhandled Promise Rejection\n\n${err.stack}`);
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
 });
-
 /**
  * Database events
  */

@@ -58,8 +58,6 @@ class Bot extends Client {
             this.commands.set(command.name, command);
             this.logger.debug(`Loaded command: ${command.name}`);
         }
-
-        this.logger.info('Registering commands');
     }
 
     /**
