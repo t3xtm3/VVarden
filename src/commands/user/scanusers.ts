@@ -67,7 +67,7 @@ export default class ScanUsers extends SlashCommand {
             sendEmbed({
                 channel: interaction.channel,
                 embed: {
-                    description: `Scanning completed, ${users.length} are being actioned`,
+                    description: `Scanning completed, ${users.length} have been actioned`,
                     color: Colours.GREEN,
                 },
             }).catch(e => console.log(e));
