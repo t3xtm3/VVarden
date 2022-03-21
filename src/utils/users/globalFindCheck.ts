@@ -25,11 +25,9 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
 
     if (user.status.includes('BLACKLIST')) {
         // User is blacklisted
-        await (
-            await client.guilds.fetch()
-        ).reduce(async (a, guildID) => {
+        await client.guilds.fetch();
+        await client.guilds.cache.reduce(async (a, guild) => {
             await a;
-            const guild = client.guilds.cache.get(guildID.id);
             await guild.members
                 .fetch(id)
                 .then(async member => {
@@ -42,11 +40,15 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
                         oldUser: user,
                         toDM: false,
                     });
+                    return true;
                 })
                 .catch(() => {
+                    client.logger.debug(
+                        `globalFindCheck: User not found ${id} in discord: ${guild.name}`
+                    );
                     return false;
                 });
-        });
+        }, Promise.resolve());
     }
     return true;
 }

@@ -3,6 +3,7 @@ import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import * as simpleGit from 'simple-git';
 import path from 'path';
+import * as fs from 'fs/promises';
 
 import glob from 'glob';
 import { promisify } from 'util';
@@ -39,13 +40,20 @@ export default class ProcfileCommand extends SlashCommand {
         await git.pull();
 
         client.commands.sweep(() => true);
-        const commandFiles = await globPromise(`${path.join(__dirname, '../../commands')}/*/*{.ts,.js}`);
+        const commandFiles = await globPromise(`${path.join(baseDir, '../../commands')}/*/*{.ts,.js}`);
         for (const filePath of commandFiles) {
             const commandFile = require(filePath);
             const command = new commandFile.default(this);
 
             if (!command.name) return false;
             client.commands.set(command.name, command);
+        }
+
+        const eventFiles = await globPromise(`${path.join(baseDir, '../../events')}/*/*{.ts,.js}`);
+
+        for (const filePath of eventFiles) {
+            const eventFile = require(filePath);
+            client.on(filePath.split('.')[0], eventFile.default.bind(null, this));
         }
         return true;
     }
