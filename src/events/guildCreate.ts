@@ -9,7 +9,7 @@ export default async function (client: Bot, guild: Guild) {
     client.logger.info(`Joined new guild ${guild.name} with ${guild.memberCount} members.`);
 
     const channel = (await guild.channels.fetch(guild.systemChannelId)) as TextChannel;
-    await createGuild({ client, guild, logchan: guild.systemChannelId });
+    createGuild({ client, guild, logchan: guild.systemChannelId });
 
     if (channel) {
         sendEmbed({

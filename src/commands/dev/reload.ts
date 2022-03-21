@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, TextBasedChannel } from 'discord.js';
+import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
 import { getProcessState, processInformationMsg } from '../../utils/helpers';
 

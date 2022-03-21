@@ -14,10 +14,7 @@ export async function createGuild({
         where: {
             id: guild.id,
         },
-        update: {
-            name: guild.name,
-            logchan,
-        },
+        update: {},
         create: {
             id: guild.id,
             name: guild.name,
