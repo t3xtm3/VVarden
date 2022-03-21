@@ -72,7 +72,9 @@ enum UserType {
     CHEATER
     LEAKER
     SUPPORTER
+    OTHER
     OWNER
+    BOT
 }
 
 enum ServerType {
