@@ -65,7 +65,7 @@ export default class AdminCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: 'Already an admin..',
-                            color: Colours.GREEN,
+                            color: Colours.YELLOW,
                         },
                     });
                 });
