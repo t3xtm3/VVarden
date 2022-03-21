@@ -25,6 +25,8 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
 
     if (user.status.includes('BLACKLIST')) {
         // User is blacklisted
+
+        const begin = Date.now();
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
             await a;
@@ -46,6 +48,9 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
                     return false;
                 });
         }, Promise.resolve());
+
+        const end = Date.now();
+        client.logger.debug(`globalFindCheck: ${id} Ran in ${(end - begin) / 1000}s`);
     }
     return true;
 }
