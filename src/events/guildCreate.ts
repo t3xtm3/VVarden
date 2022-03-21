@@ -29,6 +29,6 @@ export default async function (client: Bot, guild: Guild) {
                     text: 'VVarden by Vampire#8144',
                 },
             },
-        });
+        }).catch();
     }
 }
