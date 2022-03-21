@@ -18,7 +18,10 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
         },
     });
 
-    if (!user) return false;
+    if (!user) {
+        client.logger.debug(`globalFindCheck: ${id} not in database`);
+        return false;
+    }
 
     if (user.status.includes('BLACKLIST')) {
         // User is blacklisted

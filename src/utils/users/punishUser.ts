@@ -125,6 +125,10 @@ export async function punishUser({
                         color: Colours.GREEN,
                     },
                 });
+
+                client.logger.info(
+                    `punishUser: ${oldUser.last_username} (${oldUser.id}) - ${toDo} - ${guildInfo.name}`
+                );
             })
             .catch(() => {
                 sendEmbed({
