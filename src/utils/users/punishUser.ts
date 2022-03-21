@@ -28,7 +28,7 @@ export async function punishUser({
     oldUser: Users;
     toDM: boolean;
 }) {
-    if (member.user.bot) return;
+    if (member.user.bot) return false;
 
     const type = oldUser.user_type;
     const count = oldUser.servers.split(';').length;
@@ -102,6 +102,7 @@ export async function punishUser({
                 color: Colours.GREEN,
             },
         }).catch(() => client.logger.debug('Unable to send warning embed, no permissions?'));
+        return false;
     } else {
         const action =
             toDo === 'BAN'
@@ -126,7 +127,7 @@ export async function punishUser({
                     },
                 });
 
-                client.logger.info(
+                client.logger.debug(
                     `punishUser: ${oldUser.last_username} (${oldUser.id}) - ${toDo} - ${guildInfo.name}`
                 );
             })
@@ -142,7 +143,12 @@ export async function punishUser({
                         },
                         color: Colours.RED,
                     },
-                }).catch(e => console.log(e));
+                }).catch(() =>
+                    client.logger.debug(
+                        `punishUser: Unable to create message in ${channel.id} in ${guildInfo.name} (${guildInfo.id})`
+                    )
+                );
             });
+        return false;
     }
 }

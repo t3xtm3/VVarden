@@ -33,6 +33,7 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
             await guild.members
                 .fetch(id)
                 .then(async member => {
+                    client.logger.debug(`globalFindCheck: Found ${member.id} in discord: ${guild.name}`);
                     const settings = await getGuild({ client, id: guild.id });
                     await punishUser({
                         client,
