@@ -2,7 +2,7 @@ import { Punish } from '.prisma/client';
 import { BaseCommandInteraction } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
-import { getGuild, updateGuild } from '../../utils/guild';
+import { createGuild, getGuild, updateGuild } from '../../utils/guild';
 import { sendEmbed } from '../../utils/messages';
 
 const mainChoices = [
@@ -123,6 +123,12 @@ export default class ConfigCommand extends SlashCommand {
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const name = interaction.options.data[0]?.name;
+        // Temp fix if bot is in undefined guild
+        await createGuild({
+            client,
+            guild: interaction.guild,
+            logchan: interaction.guild.systemChannelId,
+        }).catch();
         if (name === 'view') {
             await getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
                 sendEmbed({

@@ -67,7 +67,7 @@ export async function punishUser({
                         },
                         color: Colours.RED,
                     },
-                });
+                }).catch();
             });
     }
 
@@ -125,6 +125,10 @@ export async function punishUser({
                         },
                         color: Colours.GREEN,
                     },
+                }).catch(() => {
+                    client.logger.debug(
+                        `punishUser: Unable to create message in ${channel.id} in ${guildInfo.name} (${guildInfo.id})`
+                    );
                 });
 
                 client.logger.debug(

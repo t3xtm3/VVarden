@@ -35,7 +35,7 @@ export function processInformationMsg(interaction: BaseCommandInteraction) {
             },
             color: 0xffff00,
         },
-    });
+    }).catch();
 }
 
 export function combineRoles(oldRoles: string, newRoles: string) {

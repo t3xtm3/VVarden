@@ -10,12 +10,8 @@ export async function createGuild({
     guild: Guild;
     logchan: string;
 }) {
-    return await client.db.guild.upsert({
-        where: {
-            id: guild.id,
-        },
-        update: {},
-        create: {
+    return await client.db.guild.create({
+        data: {
             id: guild.id,
             name: guild.name,
             logchan,
