@@ -124,11 +124,11 @@ export default class ConfigCommand extends SlashCommand {
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const name = interaction.options.data[0]?.name;
         // Temp fix if bot is in undefined guild
-        await createGuild({
+        createGuild({
             client,
             guild: interaction.guild,
             logchan: interaction.guild.systemChannelId,
-        }).catch();
+        });
         if (name === 'view') {
             await getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
                 sendEmbed({

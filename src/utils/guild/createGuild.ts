@@ -10,11 +10,18 @@ export async function createGuild({
     guild: Guild;
     logchan: string;
 }) {
-    return await client.db.guild.create({
-        data: {
-            id: guild.id,
-            name: guild.name,
-            logchan,
-        },
-    });
+    const exists = await client.db.guild.findUnique({ where: { id: guild.id } });
+    if (!exists) {
+        return await client.db.guild
+            .create({
+                data: {
+                    id: guild.id,
+                    name: guild.name,
+                    logchan,
+                },
+            })
+            .catch();
+    } else {
+        return false;
+    }
 }
