@@ -16,6 +16,7 @@ export async function createGuild({
         },
         update: {
             name: guild.name,
+            logchan,
         },
         create: {
             id: guild.id,

@@ -43,7 +43,7 @@ export async function punishUser({
     }
 
     if (toDM) {
-        await member
+        member
             .createDM()
             .then(chan => {
                 chan.send({
@@ -51,6 +51,8 @@ export async function punishUser({
                     You are being automodded by ${guildInfo.name} for being associated with ${count} Leaking or Cheating Discord Servers.
                     You may attempt to appeal this via the Official Warden Discord:
                     https://discord.gg/jeFeDRasfs`,
+                }).catch(e => {
+                    client.logger.error(`Unable to send DM to ${member.id} - ${e}`);
                 });
             })
             .catch(e => {
