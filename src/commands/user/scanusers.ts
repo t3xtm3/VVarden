@@ -27,6 +27,8 @@ export default class ScanUsers extends SlashCommand {
             return false;
         }
 
+        client.logger.debug(`scanUsers: Started by ${interaction.user.id} in ${interaction.guild.name}`);
+
         const begin = Date.now();
         await interaction.guild.members.fetch().then(async () => {
             const settings = await getGuild({
