@@ -53,7 +53,8 @@ export async function punishUser({
                     https://discord.gg/jeFeDRasfs`,
                 });
             })
-            .catch(() => {
+            .catch(e => {
+                client.logger.error(`Unable to create DM with ${member.id} - ${e}`);
                 sendEmbed({
                     channel,
                     embed: {
