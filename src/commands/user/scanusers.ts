@@ -71,7 +71,11 @@ export default class ScanUsers extends SlashCommand {
             }).catch(e => console.log(e));
 
             const end = Date.now();
-            client.logger.debug(`scanUsers ${interaction.guild.name}: Ran in ${(end - begin) / 1000}s`);
+            client.logger.debug(
+                `scanUsers ${interaction.guild.name}: Ran in ${(end - begin) / 1000}s, punished ${
+                    users.length
+                } users`
+            );
             return true;
         });
 
