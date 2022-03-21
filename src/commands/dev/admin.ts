@@ -49,16 +49,26 @@ export default class AdminCommand extends SlashCommand {
         const id = interaction.options.getUser('user').id;
 
         if (name === 'add') {
-            await assignAdmin({ client, id }).then(() => {
-                sendEmbed({
-                    interaction,
-                    embed: {
-                        description: `Successfully added <@${id}>`,
-                        color: Colours.GREEN,
-                    },
+            await assignAdmin({ client, id })
+                .then(() => {
+                    sendEmbed({
+                        interaction,
+                        embed: {
+                            description: `Successfully added <@${id}>`,
+                            color: Colours.GREEN,
+                        },
+                    });
+                    return true;
+                })
+                .catch(() => {
+                    sendEmbed({
+                        interaction,
+                        embed: {
+                            description: 'Already an admin..',
+                            color: Colours.GREEN,
+                        },
+                    });
                 });
-                return true;
-            });
         } else if (name === 'remove') {
             await removeAdmin({ client, id })
                 .then(() => {
