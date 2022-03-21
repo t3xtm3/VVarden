@@ -53,19 +53,21 @@ export default class ScanUsers extends SlashCommand {
             // Rather than checking database per member
             const ids = interaction.guild.members.cache.map(u => u.id);
             const users = await getAllBlacklisted({ client, ids });
-            users.forEach(async user => {
-                await punishUser({
-                    client,
-                    member: interaction.guild.members.cache.get(user.id),
-                    guildInfo: settings,
-                    oldUser: user,
-                    toDM: false,
-                }).catch(e => console.log(e));
-            });
+            await Promise.all(
+                users.map(async user => {
+                    await punishUser({
+                        client,
+                        member: interaction.guild.members.cache.get(user.id),
+                        guildInfo: settings,
+                        oldUser: user,
+                        toDM: false,
+                    }).catch(e => console.log(e));
+                })
+            );
             sendEmbed({
                 channel: interaction.channel,
                 embed: {
-                    description: 'Scanning completed',
+                    description: `Scanning completed, ${users.length} are being actioned`,
                     color: Colours.GREEN,
                 },
             }).catch(e => console.log(e));
