@@ -4,6 +4,7 @@ import { Bot } from '../classes/Bot';
 import { getGuild } from '../utils/guild';
 import { getUser } from '../utils/users';
 import { punishUser } from '../utils/users/punishUser';
+import data from '../config.json';
 
 export default async function (client: Bot, member: GuildMember) {
     const guild = member.guild;
@@ -18,6 +19,8 @@ export default async function (client: Bot, member: GuildMember) {
     if (!user) {
         return false;
     }
+
+    if (guild.id === data.MAIN_GUILD) return;
 
     // Dynamically set this in future?
     if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
