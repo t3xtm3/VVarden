@@ -15,14 +15,17 @@ export default class ProcfileCommand extends SlashCommand {
         });
     }
 
+    /**
+     * WIP
+     */
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         if (getProcessState() === 1) {
             processInformationMsg(interaction);
             return false;
         }
 
-        client.commands.sweep(() => true);
-        await client.loadCommands(__dirname + '/commands');
+        // client.commands.sweep(() => true);
+        // await client.loadCommands(__dirname + '/commands');
         return true;
     }
 }
