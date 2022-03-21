@@ -16,14 +16,16 @@ export default async function (client: Bot, member: GuildMember) {
 
     const user = await getUser({ client, id: member.id });
     if (!user) {
-        client.logger.debug(`guildMemberAdd: ${member.id} is not in the database, skipping`);
+        client.logger.debug(
+            `guildMemberAdd ${guild.name}: ${member.id} is not in the database, skipping`
+        );
         return false;
     }
 
-    client.logger.debug(`guildMemberAdd: ${member.id} is in database, checking status`);
+    client.logger.debug(`guildMemberAdd ${guild.name}: ${member.id} is in database, checking status`);
     // Dynamically set this in future?
     if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
-        client.logger.debug(`guildMemberAdd: ${member.id} is ${user.status}, punishing`);
+        client.logger.debug(`guildMemberAdd ${guild.name}: ${member.id} is ${user.status}, punishing`);
         await punishUser({
             client,
             member,
