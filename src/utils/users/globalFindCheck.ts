@@ -22,24 +22,23 @@ export async function globalFindCheck({ client, id }: { client: Bot; id: Snowfla
 
     if (user.status.includes('BLACKLIST')) {
         // User is blacklisted
-        await Promise.all(
-            (
-                await client.guilds.fetch()
-            ).map(async (_, guildID) => {
-                const guild = client.guilds.cache.get(guildID);
-                const member = (await guild.members.cache.get(id)) || (await guild.members.fetch(id));
-                if (member) {
-                    const settings = await getGuild({ client, id: guild.id });
-                    await punishUser({
-                        client,
-                        member,
-                        guildInfo: settings,
-                        oldUser: user,
-                        toDM: false,
-                    });
-                }
-            })
-        );
+        await (
+            await client.guilds.fetch()
+        ).reduce(async (a, guildID) => {
+            await a;
+            const guild = client.guilds.cache.get(guildID.id);
+            const member = await guild.members.fetch(id).catch(null);
+            if (member) {
+                const settings = await getGuild({ client, id: guild.id });
+                await punishUser({
+                    client,
+                    member,
+                    guildInfo: settings,
+                    oldUser: user,
+                    toDM: false,
+                });
+            }
+        });
     }
     return true;
 }
