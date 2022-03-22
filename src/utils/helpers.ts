@@ -55,26 +55,28 @@ export async function processCSVImport(
     try {
         processState = 1;
 
-        processFiles(client, 'leaker', chan).then(ret => {
-            processFiles(client, 'cheater', chan).then(retb => {
-                sendEmbed({
-                    channel: chan,
-                    embed: {
-                        description: `:shield: Sucessfully completed imports for ${
-                            ret?.count + retb?.count
-                        } servers.\n+ ${
-                            ret?.blacklisted + retb?.blacklisted
-                        } users have been added.\n+ ${
-                            ret?.permblacklisted + retb?.permblacklisted
-                        } users were permanently blacklisted.`,
-                        author: {
-                            name: `${interaction.user.username}#${interaction.user.discriminator}`,
-                            icon_url: interaction.user.displayAvatarURL(),
+        processFiles(client, 'reseller', chan).then(reta => {
+            processFiles(client, 'leaker', chan).then(ret => {
+                processFiles(client, 'cheater', chan).then(retb => {
+                    sendEmbed({
+                        channel: chan,
+                        embed: {
+                            description: `:shield: Sucessfully completed imports for ${
+                                ret?.count + retb?.count
+                            } servers.\n+ ${
+                                ret?.blacklisted + retb?.blacklisted + reta?.blacklisted
+                            } users have been added.\n+ ${
+                                ret?.permblacklisted + retb?.permblacklisted + reta?.permblacklisted
+                            } users were permanently blacklisted.`,
+                            author: {
+                                name: `${interaction.user.username}#${interaction.user.discriminator}`,
+                                icon_url: interaction.user.displayAvatarURL(),
+                            },
+                            color: Colours.GREEN,
                         },
-                        color: Colours.GREEN,
-                    },
+                    });
+                    processState = 0;
                 });
-                processState = 0;
             });
         });
     } catch (e) {
