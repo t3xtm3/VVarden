@@ -115,7 +115,7 @@ async function processFiles(client: Bot, type: string, logChan: TextBasedChannel
                                 : type === 'owner'
                                 ? UserType.OWNER
                                 : UserType.LEAKER;
-                        upsertUser({
+                        await upsertUser({
                             client,
                             id: lineArr[7],
                             avatar: lineArr[2],
