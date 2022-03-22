@@ -20,6 +20,7 @@ export default class StatusCommand extends SlashCommand {
         const uptime = process.uptime();
 
         const blacklistedUsers = await countBlacklisted({ client });
+        const guildCache = await client.shard.fetchClientValues('guilds.cache.size');
         sendEmbed({
             interaction,
             embed: {
@@ -33,7 +34,10 @@ export default class StatusCommand extends SlashCommand {
                     },
                     {
                         name: 'Protected Guilds',
-                        value: `I am watching ${client.guilds.cache.size} Guilds`,
+                        value: `I am watching ${guildCache.reduce(
+                            (acc: any, guildCount: any) => acc + guildCount,
+                            0
+                        )} Guilds`,
                         inline: false,
                     },
                     {
