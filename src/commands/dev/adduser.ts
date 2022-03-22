@@ -65,19 +65,6 @@ export default class AddUserCommand extends SlashCommand {
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const id = interaction.options.get('id')?.value as Snowflake;
-        const user = await client.users.fetch(id);
-
-        if (!user) {
-            await sendEmbed({
-                interaction,
-                embed: {
-                    description: 'Invalid user id provided',
-                    color: Colours.YELLOW,
-                },
-            });
-            return false;
-        }
-
         const reason =
             interaction.options.get('reason')?.value.toString() ||
             'Manual: Member of Blacklisted Discord Server';
@@ -86,46 +73,61 @@ export default class AddUserCommand extends SlashCommand {
         const status = (interaction.options.get('status')?.value || UserStatus.BLACKLIST) as UserStatus;
         const server = (interaction.options.get('server')?.value || interaction.guildId) as Snowflake;
 
-        await createUser({
-            client,
-            id,
-            info: {
-                avatar: user.displayAvatarURL(),
-                last_username: `${user.username}#${user.discriminator}`,
-                status,
-                user_type,
-                servers: server,
-                reason,
-                filter_type: FilterType.MANUAL,
-            },
-        })
-            .then(async () => {
-                await sendEmbed({
-                    interaction,
-                    embed: {
-                        description: 'Successfully added user to the database',
-                        color: Colours.GREEN,
+        await client.users
+            .fetch(id)
+            .then(user => {
+                createUser({
+                    client,
+                    id,
+                    info: {
+                        avatar: user.displayAvatarURL(),
+                        last_username: `${user.username}#${user.discriminator}`,
+                        status,
+                        user_type,
+                        servers: server,
+                        reason,
+                        filter_type: FilterType.MANUAL,
                     },
-                });
+                })
+                    .then(async () => {
+                        sendEmbed({
+                            interaction,
+                            embed: {
+                                description: 'Successfully added user to the database',
+                                color: Colours.GREEN,
+                            },
+                        });
 
-                client.emit('logAction', {
-                    type: LogTypes.ADD_USER,
-                    author: interaction.user,
-                    message: `${interaction.user.username}#${interaction.user.discriminator} added ${
-                        user.username
-                    } (${id}) to the database with: \`\`\`${JSON.stringify(
-                        { guild: server, reason },
-                        null,
-                        2
-                    )}\`\`\``,
-                });
+                        client.emit('logAction', {
+                            type: LogTypes.ADD_USER,
+                            author: interaction.user,
+                            message: `${interaction.user.username}#${
+                                interaction.user.discriminator
+                            } added ${
+                                user.username
+                            } (${id}) to the database with: \`\`\`${JSON.stringify(
+                                { guild: server, reason },
+                                null,
+                                2
+                            )}\`\`\``,
+                        });
+                    })
+                    .catch(async () => {
+                        sendEmbed({
+                            interaction,
+                            embed: {
+                                description:
+                                    ':shield: User is already in database\nChange status if nessary using /upstatus',
+                                color: Colours.YELLOW,
+                            },
+                        });
+                    });
             })
-            .catch(async () => {
+            .catch(() => {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description:
-                            ':shield: User is already in database\nChange status if nessary using /upstatus',
+                        description: 'Invalid user id provided',
                         color: Colours.YELLOW,
                     },
                 });
