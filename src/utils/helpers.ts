@@ -62,7 +62,7 @@ export async function processCSVImport(
                         channel: chan,
                         embed: {
                             description: `:shield: Sucessfully completed imports for ${
-                                ret?.count + retb?.count
+                                ret?.count + retb?.count + reta?.count
                             } servers.\n+ ${
                                 ret?.blacklisted + retb?.blacklisted + reta?.blacklisted
                             } users have been added.\n+ ${
