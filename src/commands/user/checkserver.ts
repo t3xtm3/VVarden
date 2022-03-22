@@ -27,7 +27,7 @@ export default class CheckServerCommand extends SlashCommand {
         const sid = interaction.options.get('id')?.value as Snowflake;
 
         if (sid.length !== 18) {
-            await sendEmbed({
+            sendEmbed({
                 interaction,
                 embed: {
                     description: 'Invalid server id provided',
@@ -37,7 +37,7 @@ export default class CheckServerCommand extends SlashCommand {
             return false;
         }
 
-        await getBadServersByIDs({ client, ids: [sid] })
+        getBadServersByIDs({ client, ids: [sid] })
             .then(server => {
                 sendEmbed({
                     interaction,

@@ -34,7 +34,7 @@ export default class CheckUserCommand extends SlashCommand {
             ((interaction.options.getUser('user')?.id ||
                 interaction.options.get('userid')?.value) as Snowflake) ?? interaction.member.user.id;
 
-        await getUser({ client, id })
+        getUser({ client, id })
             .then(async user => {
                 if (user.status.includes('BLACKLIST')) {
                     sendEmbed({

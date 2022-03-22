@@ -59,7 +59,7 @@ export default class AppealCommand extends SlashCommand {
             status: UserStatus.APPEALED,
         };
 
-        await updateStatus({ client, ...info })
+        updateStatus({ client, ...info })
             .then(async updated => {
                 sendEmbed({
                     interaction,

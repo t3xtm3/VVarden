@@ -30,7 +30,7 @@ export default class ScanUsers extends SlashCommand {
         client.logger.debug(`scanUsers: Started by ${interaction.user.id} in ${interaction.guild.name}`);
 
         const begin = Date.now();
-        await interaction.guild.members.fetch().then(async () => {
+        interaction.guild.members.fetch().then(async () => {
             const settings = await getGuild({
                 client,
                 id: interaction.guildId,
@@ -57,7 +57,7 @@ export default class ScanUsers extends SlashCommand {
             const users = await getAllBlacklisted({ client, ids });
             await Promise.all(
                 users.map(async user => {
-                    await punishUser({
+                    punishUser({
                         client,
                         member: interaction.guild.members.cache.get(user.id),
                         guildInfo: settings,

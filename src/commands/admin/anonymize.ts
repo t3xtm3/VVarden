@@ -45,7 +45,7 @@ export default class AnonymizeCommand extends SlashCommand {
             return false;
         }
 
-        await anonymiseUser({ client, id })
+        anonymiseUser({ client, id })
             .then(async () => {
                 sendEmbed({
                     interaction,

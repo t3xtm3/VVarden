@@ -46,7 +46,7 @@ export default class CheckUserAdminCommand extends SlashCommand {
             return false;
         }
 
-        await getUser({ client, id })
+        getUser({ client, id })
             .then(async user => {
                 const roles = user.roles !== '' ? user.roles.split(';').join(',\n') : 'None';
 

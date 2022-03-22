@@ -28,7 +28,7 @@ export default class ProcfileCommand extends SlashCommand {
             (await client.channels.cache.get(data.CHANNEL_LOG)) ??
             (await client.channels.fetch(data.CHANNEL_LOG));
 
-        await sendEmbed({
+        sendEmbed({
             channel: chan as TextBasedChannel,
             embed: {
                 description: `${interaction.user.username}#${interaction.user.discriminator} has started processing imports..`,

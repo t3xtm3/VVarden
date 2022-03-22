@@ -77,7 +77,7 @@ export default class BadServerCommand extends SlashCommand {
         const sid = interaction.options.get('sid')?.value as Snowflake;
 
         if (name in ['add', 'remove'] && sid.length !== 18) {
-            await sendEmbed({
+            sendEmbed({
                 interaction,
                 embed: {
                     description: 'Invalid server id provided',
@@ -90,7 +90,7 @@ export default class BadServerCommand extends SlashCommand {
         if (name === 'add') {
             const type = interaction.options.get('type')?.value as ServerType;
             const serverName = interaction.options.get('name')?.value as string;
-            await upsertBadServer({
+            upsertBadServer({
                 client,
                 id: sid,
                 name: serverName,
@@ -116,7 +116,7 @@ export default class BadServerCommand extends SlashCommand {
                     });
                 });
         } else if (name === 'remove') {
-            await removeBadServer({ client, id: sid })
+            removeBadServer({ client, id: sid })
                 .then(() => {
                     sendEmbed({
                         interaction,

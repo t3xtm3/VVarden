@@ -130,7 +130,7 @@ export default class ConfigCommand extends SlashCommand {
             logchan: interaction.guild.systemChannelId,
         });
         if (name === 'view') {
-            await getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
+            getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
                 sendEmbed({
                     interaction,
                     embed: {
@@ -173,7 +173,7 @@ export default class ConfigCommand extends SlashCommand {
             });
         } else if (name === 'logchan') {
             const choice = interaction.options.get('channel').channel.id;
-            await updateGuild({
+            updateGuild({
                 client,
                 id: interaction.guildId,
                 logchan: choice,
@@ -192,25 +192,25 @@ export default class ConfigCommand extends SlashCommand {
         } else if (name.includes('pun')) {
             const choice = interaction.options.get('type').value as Punish;
             if (name === 'punown') {
-                await updateGuild({
+                updateGuild({
                     client,
                     id: interaction.guildId,
                     punown: choice,
                 });
             } else if (name === 'punsupp') {
-                await updateGuild({
+                updateGuild({
                     client,
                     id: interaction.guildId,
                     punsupp: choice,
                 });
             } else if (name === 'punleak') {
-                await updateGuild({
+                updateGuild({
                     client,
                     id: interaction.guildId,
                     punleak: choice,
                 });
             } else if (name === 'puncheat') {
-                await updateGuild({
+                updateGuild({
                     client,
                     id: interaction.guildId,
                     puncheat: choice,

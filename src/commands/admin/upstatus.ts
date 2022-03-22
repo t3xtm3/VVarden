@@ -99,7 +99,7 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        await updateStatus({ client, id, status, user_type, reason })
+        updateStatus({ client, id, status, user_type, reason })
             .then(u => {
                 sendEmbed({
                     interaction,

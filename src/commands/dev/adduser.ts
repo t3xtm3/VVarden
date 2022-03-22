@@ -73,7 +73,7 @@ export default class AddUserCommand extends SlashCommand {
         const status = (interaction.options.get('status')?.value || UserStatus.BLACKLIST) as UserStatus;
         const server = (interaction.options.get('server')?.value || interaction.guildId) as Snowflake;
 
-        await client.users
+        client.users
             .fetch(id)
             .then(user => {
                 createUser({
