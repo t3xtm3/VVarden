@@ -56,7 +56,7 @@ export async function upsertUser({
         } else {
             spServers.push(server);
 
-            client.db.users
+            await client.db.users
                 .update({
                     where: {
                         id,
@@ -76,7 +76,7 @@ export async function upsertUser({
                 });
         }
     } else {
-        client.db.users.create({
+        await client.db.users.create({
             data: {
                 id,
                 avatar,
