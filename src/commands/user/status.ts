@@ -29,7 +29,7 @@ export default class StatusCommand extends SlashCommand {
                 fields: [
                     {
                         name: 'Shard Count',
-                        value: `I am using ${client.shard?.count ?? 1} shard(s)`,
+                        value: 'I am using 1 shard(s)',
                         inline: false,
                     },
                     {
