@@ -6,6 +6,7 @@ import { Bot, SlashCommand } from '../../classes';
 import { getAllBadServers, removeBadServer, upsertBadServer } from '../../utils/badservers';
 import { enumToMap } from '../../utils/helpers';
 import { sendEmbed, sendPagination } from '../../utils/messages';
+import { getStaffMember } from '../../utils/staff';
 
 const map = enumToMap(ServerType);
 const choices = Array.from(map.entries()).map(m => ({
@@ -68,7 +69,6 @@ export default class BadServerCommand extends SlashCommand {
                 },
             ],
             defaultPermission: true,
-            staffRole: 'dev',
         });
     }
 
@@ -76,7 +76,23 @@ export default class BadServerCommand extends SlashCommand {
         const name = interaction.options.data[0]?.name;
         const sid = interaction.options.get('sid')?.value as Snowflake;
 
-        if (name in ['add', 'remove'] && sid.length !== 18) {
+        if (['add', 'remove'].includes(name)) {
+            const staff = await getStaffMember({ client, id: interaction.user.id });
+            console.log(staff);
+            if (!(staff && staff['dev' as keyof typeof staff])) {
+                const message = '⚠️ You must be a `Bot DEV` to use this command';
+                sendEmbed({
+                    interaction,
+                    embed: {
+                        description: message,
+                        color: Colours.YELLOW,
+                    },
+                });
+                return false;
+            }
+        }
+
+        if (['add', 'remove'].includes(name) && sid.length !== 18) {
             sendEmbed({
                 interaction,
                 embed: {
