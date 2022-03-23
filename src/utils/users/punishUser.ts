@@ -34,6 +34,10 @@ export async function punishUser({
     const count = oldUser.servers.split(';').length;
     let toDo = '';
 
+    if (!guildInfo)
+        return client.logger.debug(
+            `CRITICAL: GUILD HAS NO SETTINGS ${member.guild.name} ${member.guild.id}`
+        );
     const cachedChannel = client.logChans.get(guildInfo.id);
     let channel: TextChannel;
     if (cachedChannel) {
