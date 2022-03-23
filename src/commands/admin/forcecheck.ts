@@ -1,8 +1,10 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
+import { getGuild } from '../../utils/guild';
 import { sendEmbed } from '../../utils/messages';
-import { globalFindCheck } from '../../utils/users';
+import { getUser } from '../../utils/users';
+import { punishUser } from '../../utils/users/punishUser';
 
 export default class ForceCheckCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -52,7 +54,30 @@ export default class ForceCheckCommand extends SlashCommand {
                 color: Colours.YELLOW,
             },
         });
-        globalFindCheck({ client, id });
+
+        const oldUser = await getUser({ client, id });
+        await client.guilds.fetch();
+        await client.guilds.cache.reduce(async (a, guild) => {
+            await a;
+            await guild.members.fetch();
+            const member = guild.members.cache.find(m => m.id === id);
+            if (member) {
+                const settings = await getGuild({ client, id: guild.id });
+                await punishUser({
+                    client,
+                    member,
+                    oldUser,
+                    guildInfo: settings,
+                    toDM: false,
+                });
+                client.logger.debug(`forceCheck ${id}: Finished actioning ${guild.name}`);
+            } else {
+                client.logger.debug(`forceCheck ${id}: Skipping ${guild.name} not in guild`);
+            }
+        }, Promise.resolve());
+        client.logger.debug(
+            `forceCheck ${id}: Finished actioning on ${client.guilds.cache.size} guilds`
+        );
 
         return true;
     }

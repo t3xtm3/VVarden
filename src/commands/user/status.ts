@@ -54,7 +54,7 @@ export default class StatusCommand extends SlashCommand {
                         } MB.`,
                         inline: false,
                     },
-
+                ],
                 footer: {
                     text: 'VVarden by Vampire#8144',
                 },

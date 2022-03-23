@@ -25,7 +25,7 @@ export default class ProcfileCommand extends SlashCommand {
      * WIP
      */
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        if (getProcessState() === 1) {
+        if (getProcessState()) {
             processInformationMsg(interaction);
             return false;
         }

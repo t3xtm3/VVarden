@@ -4,10 +4,11 @@ dotenv.config();
 import * as prisma from '@prisma/client';
 
 import { Intents } from 'discord.js';
-import { Logger, Bot } from './classes';
+import { Logger, Bot, Processing } from './classes';
 
 const logger = new Logger();
-export const db = new prisma.PrismaClient({
+const processing = new Processing();
+const db = new prisma.PrismaClient({
     log: [
         {
             emit: 'event',
@@ -28,7 +29,7 @@ export const db = new prisma.PrismaClient({
     ],
 });
 
-const client = new Bot(logger, db, {
+const client = new Bot(logger, processing, db, {
     intents: new Intents(515),
     partials: ['CHANNEL', 'USER', 'GUILD_MEMBER'],
 });
@@ -54,6 +55,7 @@ db.$use(async (params, next) => {
     const before = Date.now();
     const result = await next(params);
     if (params.action === 'findUnique') return result;
+    if (client.processing.isProcessing()) return result;
     const after = Date.now();
     client.logger.prisma(`Query - ${params.model}.${params.action} took ${after - before}ms`);
 

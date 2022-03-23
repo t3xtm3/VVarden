@@ -65,7 +65,7 @@ export default class UpstatusCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        if (getProcessState() === 1) {
+        if (getProcessState()) {
             processInformationMsg(interaction);
             return false;
         }
