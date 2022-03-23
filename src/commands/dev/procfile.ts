@@ -78,7 +78,7 @@ export default class ProcfileCommand extends SlashCommand {
             if (found) {
                 const currServers = found.servers.split(';');
                 let status;
-                if (found.status === UserStatus.APPEALED && currServers.includes(user.servers)) {
+                if (found.status === UserStatus.APPEALED) {
                     permblacklisted++;
                     status = UserStatus.PERM_BLACKLIST;
                 } else if (found.status === UserStatus.PERM_BLACKLIST) {
