@@ -43,7 +43,11 @@ export async function punishUser({
     if (cachedChannel) {
         channel = cachedChannel;
     } else {
-        channel = await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
+        try {
+            channel = await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
+        } catch (e) {
+            channel = undefined;
+        }
     }
 
     if (toDM) {
@@ -131,7 +135,7 @@ export async function punishUser({
                     },
                 }).catch(() => {
                     client.logger.debug(
-                        `punishUser: Unable to create message in ${channel.id} in ${guildInfo.name} (${guildInfo.id})`
+                        `punishUser: Unable to create message in ${channel?.id} in ${guildInfo.name} (${guildInfo.id})`
                     );
                 });
 
@@ -153,7 +157,7 @@ export async function punishUser({
                     },
                 }).catch(() =>
                     client.logger.debug(
-                        `punishUser: Unable to create message in ${channel.id} in ${guildInfo.name} (${guildInfo.id})`
+                        `punishUser: Unable to create message in ${channel?.id} in ${guildInfo.name} (${guildInfo.id})`
                     )
                 );
             });
