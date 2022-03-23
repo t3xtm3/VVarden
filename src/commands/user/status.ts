@@ -20,7 +20,7 @@ export default class StatusCommand extends SlashCommand {
         const uptime = process.uptime();
 
         const blacklistedUsers = await countBlacklisted({ client });
-        const guildCache = await client.shard.fetchClientValues('guilds.cache.size');
+        const guildCache = client.guilds.cache.size;
         sendEmbed({
             interaction,
             embed: {
@@ -29,15 +29,12 @@ export default class StatusCommand extends SlashCommand {
                 fields: [
                     {
                         name: 'Shard Count',
-                        value: `I am using ${client.shard?.count} Shards`,
+                        value: `I am using ${client.shard?.count ?? 1} shard(s)`,
                         inline: false,
                     },
                     {
                         name: 'Protected Guilds',
-                        value: `I am watching ${guildCache.reduce(
-                            (acc: any, guildCount: any) => acc + guildCount,
-                            0
-                        )} Guilds`,
+                        value: `I am watching ${guildCache} guilds`,
                         inline: false,
                     },
                     {
@@ -57,7 +54,7 @@ export default class StatusCommand extends SlashCommand {
                         } MB.`,
                         inline: false,
                     },
-                ],
+
                 footer: {
                     text: 'VVarden by Vampire#8144',
                 },

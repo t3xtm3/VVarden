@@ -46,7 +46,7 @@ export class Sharding {
             });
         });
 
-        manager.spawn({ amount: 'auto' });
+        manager.spawn();
     }
 }
 Sharding.start();
