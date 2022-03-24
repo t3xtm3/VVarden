@@ -50,7 +50,7 @@ export default class ForceCheckCommand extends SlashCommand {
         sendEmbed({
             interaction,
             embed: {
-                description: '`✅` Force checking user..',
+                description: '`🟢` Force checking user..',
                 color: Colours.YELLOW,
             },
         });
@@ -90,7 +90,7 @@ export default class ForceCheckCommand extends SlashCommand {
         sendEmbed({
             channel: interaction.channel as TextChannel,
             embed: {
-                description: `\`✅\` User has been force checked in ${client.guilds.cache.size} guilds`,
+                description: `\`🟢\` User has been force checked in ${client.guilds.cache.size} guilds`,
                 color: Colours.YELLOW,
             },
         }).catch();
