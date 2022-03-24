@@ -84,6 +84,21 @@ export class Processing {
         });
     }
 
+    disabledMessage(interaction: BaseCommandInteraction) {
+        sendEmbed({
+            interaction,
+            embed: {
+                description:
+                    'This command is currently disabled while VVarden processes new information.',
+                author: {
+                    name: `${interaction.user.username}#${interaction.user.discriminator}`,
+                    icon_url: interaction.user.displayAvatarURL(),
+                },
+                color: 0xffff00,
+            },
+        }).catch();
+    }
+
     async processData(type: string): Promise<ServerDataOptions[]> {
         const dir = await this.getFiles(type);
         if (!dir) {

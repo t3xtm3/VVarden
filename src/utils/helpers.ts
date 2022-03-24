@@ -1,38 +1,3 @@
-import { BaseCommandInteraction, Snowflake, TextChannel } from 'discord.js';
-import { Bot } from '../classes';
-import { client } from '../entry.bot';
-import { sendEmbed } from './messages';
-
-export async function getChannelByID(
-    client: Bot,
-    channel: Snowflake,
-    cache: boolean,
-    guildID: Snowflake
-) {
-    const chan = ((await client.channels.cache.get(channel)) ||
-        (await client.channels.fetch(channel))) as TextChannel;
-    if (cache) client.logChans.set(guildID, chan);
-    return chan;
-}
-
-export function getProcessState() {
-    return client.processing.isProcessing();
-}
-
-export function processInformationMsg(interaction: BaseCommandInteraction) {
-    sendEmbed({
-        interaction,
-        embed: {
-            description: 'This command is currently disabled while VVarden processes new information.',
-            author: {
-                name: `${interaction.user.username}#${interaction.user.discriminator}`,
-                icon_url: interaction.user.displayAvatarURL(),
-            },
-            color: 0xffff00,
-        },
-    }).catch();
-}
-
 export function combineRoles(oldRoles: string, newRoles: string) {
     // Takes a delimited role string and combines it, removing dupes
     const wipOldArr = oldRoles.split(';');

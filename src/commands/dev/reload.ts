@@ -1,9 +1,7 @@
 import { BaseCommandInteraction } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import * as simpleGit from 'simple-git';
 import path from 'path';
-import * as fs from 'fs/promises';
 
 import glob from 'glob';
 import { promisify } from 'util';
@@ -25,8 +23,8 @@ export default class ProcfileCommand extends SlashCommand {
      * WIP
      */
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        if (getProcessState()) {
-            processInformationMsg(interaction);
+        if (client.processing.isProcessing()) {
+            client.processing.disabledMessage(interaction);
             return false;
         }
 

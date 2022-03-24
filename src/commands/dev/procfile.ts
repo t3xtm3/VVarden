@@ -1,6 +1,6 @@
 import { BaseCommandInteraction, TextBasedChannel, TextChannel } from 'discord.js';
 import { Bot, SlashCommand } from '../../classes';
-import { combineRoles, getProcessState, processInformationMsg } from '../../utils/helpers';
+import { combineRoles } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
 import data from '../../config.json';
 import { Colours, UserOptions } from '../../@types';
@@ -23,8 +23,8 @@ export default class ProcfileCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        if (getProcessState()) {
-            processInformationMsg(interaction);
+        if (client.processing.isProcessing()) {
+            client.processing.disabledMessage(interaction);
             return false;
         }
 

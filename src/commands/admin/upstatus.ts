@@ -2,7 +2,7 @@ import { UserStatus, UserType } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
-import { enumToMap, getProcessState, processInformationMsg } from '../../utils/helpers';
+import { enumToMap } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
 import { updateStatus } from '../../utils/users';
 
@@ -65,8 +65,8 @@ export default class UpstatusCommand extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        if (getProcessState()) {
-            processInformationMsg(interaction);
+        if (client.processing.isProcessing()) {
+            client.processing.disabledMessage(interaction);
             return false;
         }
 

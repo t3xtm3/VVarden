@@ -2,7 +2,6 @@ import { BaseCommandInteraction } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild } from '../../utils/guild';
-import { getProcessState, processInformationMsg } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
 import { getAllBlacklisted } from '../../utils/users';
 import { punishUser } from '../../utils/users/punishUser';
@@ -22,8 +21,8 @@ export default class ScanUsers extends SlashCommand {
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
-        if (getProcessState()) {
-            processInformationMsg(interaction);
+        if (client.processing.isProcessing()) {
+            client.processing.disabledMessage(interaction);
             return false;
         }
 

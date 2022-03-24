@@ -2,7 +2,6 @@ import { Guild, Users, UserType } from '.prisma/client';
 import { GuildMember, TextChannel } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot } from '../../classes';
-import { getChannelByID } from '../helpers';
 import { sendEmbed } from '../messages';
 
 /**
@@ -44,7 +43,7 @@ export async function punishUser({
         channel = cachedChannel;
     } else {
         try {
-            channel = await getChannelByID(client, guildInfo.logchan, true, guildInfo.id);
+            channel = await client.getChannelByID(guildInfo.logchan, true, guildInfo.id);
         } catch (e) {
             channel = undefined;
         }

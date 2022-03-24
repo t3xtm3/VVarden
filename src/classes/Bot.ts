@@ -86,6 +86,16 @@ class Bot extends Client {
             this.cooldowns.set(commandName, new Collection<string, number>());
         return this.cooldowns.get(commandName) as Collection<string, number>;
     }
+
+    /**
+     * Retrieves channel by id from cache, if set otherwise set
+     */
+    async getChannelByID(channel: Snowflake, cache: boolean, guildID: Snowflake) {
+        const chan = ((await this.channels.cache.get(channel)) ||
+            (await this.channels.fetch(channel))) as TextChannel;
+        if (cache) this.logChans.set(guildID, chan);
+        return chan;
+    }
 }
 
 export { Bot };
