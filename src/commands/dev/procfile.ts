@@ -40,6 +40,7 @@ export default class ProcfileCommand extends SlashCommand {
         });
 
         const process = client.processing;
+        client.logger.warn(`procfile: Initiated by ${interaction.user.id}`);
 
         client.processing.setProcessing(1);
 

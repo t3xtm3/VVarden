@@ -58,7 +58,7 @@ export default class ForceCheckCommand extends SlashCommand {
         const oldUser = await getUser({ client, id });
 
         const begin = Date.now();
-        client.logger.info(`forceCheck ${id}: Starting..`);
+        client.logger.info(`forceCheck ${id}: Initiated by ${interaction.user.id}`);
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
             await a;
