@@ -51,7 +51,7 @@ export async function punishUser({
     }
 
     if (toDM) {
-        member
+        await member
             .createDM()
             .then(chan => {
                 chan.send({
@@ -153,7 +153,7 @@ export async function punishUser({
                     `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
                 );
             })
-            .catch(() => {
+            .catch(e => {
                 sendEmbed({
                     channel,
                     embed: {
@@ -169,6 +169,8 @@ export async function punishUser({
                         `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
                     )
                 );
+
+                client.logger.warn(`punishUser ${guildInfo.name}: ${oldUser.id} - ${e}`);
             });
         return false;
     }
