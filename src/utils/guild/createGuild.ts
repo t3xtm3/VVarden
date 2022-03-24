@@ -17,7 +17,7 @@ export async function createGuild({
                 data: {
                     id: guild.id,
                     name: guild.name,
-                    logchan: logchan || guild.systemChannelId,
+                    logchan: logchan,
                 },
             })
             .catch();

@@ -10,8 +10,10 @@ export default async function (client: Bot, guild: Guild) {
         `Joined new guild ${guild.name} with ${guild.memberCount} members. Owner is ${guild.ownerId}`
     );
 
-    const channel = (await guild.channels.fetch(guild.systemChannelId)) as TextChannel;
-    createGuild({ client, guild, logchan: guild.systemChannelId }).catch();
+    const channel = (await (await guild.channels.fetch())
+        .filter(chan => chan.isText())
+        .first()) as TextChannel;
+    createGuild({ client, guild, logchan: channel.id }).catch();
 
     if (channel) {
         sendEmbed({
