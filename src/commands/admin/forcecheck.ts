@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Snowflake } from 'discord.js';
+import { BaseCommandInteraction, Snowflake, TextChannel } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild } from '../../utils/guild';
@@ -85,6 +85,14 @@ export default class ForceCheckCommand extends SlashCommand {
                 (end - begin) / 1000
             }s`
         );
+
+        sendEmbed({
+            channel: interaction.channel as TextChannel,
+            embed: {
+                description: `\`✅\` User has been force checked in ${client.guilds.cache.size} guilds`,
+                color: Colours.YELLOW,
+            },
+        }).catch();
 
         return true;
     }
