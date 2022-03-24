@@ -118,6 +118,9 @@ export async function punishUser({
                 `punishUser ${guildInfo.name}: Unable to send warning embed, no permissions?`
             )
         );
+        client.logger.info(
+            `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
+        );
         return false;
     } else {
         const action =
