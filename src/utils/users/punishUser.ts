@@ -100,9 +100,9 @@ export async function punishUser({
             embed: {
                 description: `:warning: User ${oldUser.last_username} (${
                     member.id
-                }) has been seen in ${count} bad discord servers.
-                **User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.
-                **Details**: ${oldUser.reason}`,
+                }) has been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.\n**Details**: ${
+                    oldUser.reason
+                }`,
                 author: {
                     name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                     icon_url: member.user.displayAvatarURL(),
@@ -123,10 +123,9 @@ export async function punishUser({
                     embed: {
                         description: `:shield: User ${oldUser.last_username} (${
                             member.id
-                        }) has been punished with a ${toDo}.
-                        They have been seen in ${count} bad discord servers.
-                        **User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.
-                        **Details**: ${oldUser.reason}`,
+                        }) has been punished with a ${toDo}.\nThey have been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.\n**Details**: ${
+                            oldUser.reason
+                        }`,
                         author: {
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
@@ -147,8 +146,7 @@ export async function punishUser({
                 sendEmbed({
                     channel,
                     embed: {
-                        description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!
-                    Please verify I have this permission, and am a higher role than this user!`,
+                        description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!\nPlease verify I have this permission, and am a higher role than this user!`,
                         author: {
                             name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
                             icon_url: member.displayAvatarURL(),
