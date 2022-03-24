@@ -106,7 +106,7 @@ export default class AddUserCommand extends SlashCommand {
                             } added ${
                                 user.username
                             } (${id}) to the database with: \`\`\`${JSON.stringify(
-                                { guild: server, reason },
+                                { user_type, status, guild: server, reason },
                                 null,
                                 2
                             )}\`\`\``,
