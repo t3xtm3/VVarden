@@ -127,7 +127,7 @@ export default class ConfigCommand extends SlashCommand {
         createGuild({
             client,
             guild: interaction.guild,
-            logchan: interaction.guild.systemChannelId,
+            logchan: interaction.channelId,
         });
         if (name === 'view') {
             getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
