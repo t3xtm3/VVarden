@@ -50,7 +50,7 @@ export default class ForceCheckCommand extends SlashCommand {
         sendEmbed({
             interaction,
             embed: {
-                description: ':white_check_mark: Force checking user..',
+                description: '`✅` Force checking user..',
                 color: Colours.YELLOW,
             },
         });
@@ -62,11 +62,13 @@ export default class ForceCheckCommand extends SlashCommand {
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
             await a;
-            await guild.members.fetch();
+            await guild.members.fetch().catch(() => {
+                return true;
+            });
             const member = guild.members.cache.find(m => m.id === id);
             if (member) {
                 const settings = await getGuild({ client, id: guild.id });
-                await punishUser({
+                punishUser({
                     client,
                     member,
                     oldUser,
