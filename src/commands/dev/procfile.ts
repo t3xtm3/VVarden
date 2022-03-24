@@ -109,7 +109,7 @@ export default class ProcfileCommand extends SlashCommand {
         process.setBlacklisted(users.length - permblacklisted);
         process.setPermBlacklisted(permblacklisted);
         process.sendCompletionMsg(interaction, chan);
-        client.logger.debug('procfile: Processed all data, now globalFindCheck time :D');
+        client.logger.info('procfile: Processed all data, now globalFindCheck time :D');
 
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
@@ -138,7 +138,7 @@ export default class ProcfileCommand extends SlashCommand {
                 client.logger.debug(`globalFindCheck ${guild.name}: Skipping no one to action`);
             }
         }, Promise.resolve());
-        client.logger.debug(
+        client.logger.info(
             `globalFindCheck: Finished actioning on all ${client.guilds.cache.size} guilds`
         );
 

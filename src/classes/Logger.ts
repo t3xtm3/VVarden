@@ -6,9 +6,10 @@ import { grey, gray, white } from 'chalk';
 const customLevels = {
     levels: {
         info: 0,
-        prisma: 1,
-        debug: 2,
-        error: 3,
+        warn: 1,
+        error: 2,
+        debug: 3,
+        prisma: 4,
     },
     colors: {
         prisma: 'blue',
@@ -21,6 +22,7 @@ export class Logger {
     info: LeveledLogMethod;
     debug: LeveledLogMethod;
     error: LeveledLogMethod;
+    warn: LeveledLogMethod;
 
     constructor() {
         winston.addColors(customLevels.colors);
@@ -54,6 +56,7 @@ export class Logger {
         this.debug = this.logger.debug.bind(this.logger);
         this.info = this.logger.info.bind(this.logger);
         this.error = this.logger.error.bind(this.logger);
+        this.warn = this.logger.warn.bind(this.logger);
     }
 
     prisma(message: string) {

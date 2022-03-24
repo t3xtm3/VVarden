@@ -11,7 +11,7 @@ export default async function (client: Bot, member: GuildMember) {
     const settings = await getGuild({ client, id: guild.id });
 
     if (!settings) {
-        client.logger.error(`src/events/guildMemberAdd.ts - Bot is in unknown guild - ${guild.id}`);
+        client.logger.error(`guildMemberAdd ${guild.name}: Unknown guild - Owner is: ${guild.ownerId}`);
         return false;
     }
 
@@ -24,7 +24,7 @@ export default async function (client: Bot, member: GuildMember) {
 
     // Dynamically set this in future?
     if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
-        client.logger.debug(`guildMemberAdd ${guild.name}: ${member.id} is ${user.status}, punishing`);
+        client.logger.debug(`guildMemberAdd ${guild.name}: ${member.id} - ${user.status}`);
         await punishUser({
             client,
             member,

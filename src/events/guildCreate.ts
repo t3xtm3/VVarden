@@ -6,7 +6,9 @@ import { sendEmbed } from '../utils/messages';
 
 export default async function (client: Bot, guild: Guild) {
     // Joined new guild
-    client.logger.info(`Joined new guild ${guild.name} with ${guild.memberCount} members.`);
+    client.logger.info(
+        `Joined new guild ${guild.name} with ${guild.memberCount} members. Owner is ${guild.ownerId}`
+    );
 
     const channel = (await guild.channels.fetch(guild.systemChannelId)) as TextChannel;
     createGuild({ client, guild, logchan: guild.systemChannelId }).catch();

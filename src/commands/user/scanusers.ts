@@ -27,7 +27,7 @@ export default class ScanUsers extends SlashCommand {
             return false;
         }
 
-        client.logger.debug(`scanUsers: Started by ${interaction.user.id} in ${interaction.guild.name}`);
+        client.logger.debug(`scanUsers ${interaction.guild.name}: Started by ${interaction.user.id}`);
 
         const begin = Date.now();
         interaction.guild.members.fetch().then(async () => {
@@ -37,7 +37,7 @@ export default class ScanUsers extends SlashCommand {
             });
             if (!settings) {
                 client.logger.error(
-                    `src/commands/scanusers.ts - Bot is in unknown guild - ${interaction.guildId}`
+                    `guildMemberAdd ${interaction.guild.name}: Unknown guild - Owner is: ${interaction.guild.ownerId}`
                 );
                 return false;
             }
@@ -75,10 +75,10 @@ export default class ScanUsers extends SlashCommand {
             }).catch(e => console.log(e));
 
             const end = Date.now();
-            client.logger.debug(
-                `scanUsers: ${interaction.guild.name} ran in ${(end - begin) / 1000}s, punished ${
-                    users.length
-                } users`
+            client.logger.info(
+                `scanUsers ${interaction.guild.name}: actioned ${users.length} users, took ${
+                    (end - begin) / 1000
+                }s`
             );
             return true;
         });

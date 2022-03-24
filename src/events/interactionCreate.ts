@@ -13,7 +13,9 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
                 content: 'An error has occurred',
                 ephemeral: true,
             });
-            console.log(slashCommand);
+            client.logger.error(
+                `interactionCreate ${interaction.commandName}: Not a registered command`
+            );
             return false;
         }
         let has;

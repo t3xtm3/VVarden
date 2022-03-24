@@ -56,6 +56,9 @@ export default class ForceCheckCommand extends SlashCommand {
         });
 
         const oldUser = await getUser({ client, id });
+
+        const begin = Date.now();
+        client.logger.info(`forceCheck ${id}: Starting..`);
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
             await a;
@@ -75,8 +78,12 @@ export default class ForceCheckCommand extends SlashCommand {
                 client.logger.debug(`forceCheck ${id}: Skipping ${guild.name} not in guild`);
             }
         }, Promise.resolve());
-        client.logger.debug(
-            `forceCheck ${id}: Finished actioning on ${client.guilds.cache.size} guilds`
+
+        const end = Date.now();
+        client.logger.info(
+            `forceCheck ${id}: Finished actioning on ${client.guilds.cache.size} guilds, took ${
+                (end - begin) / 1000
+            }s`
         );
 
         return true;

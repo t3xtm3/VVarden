@@ -35,8 +35,8 @@ export async function punishUser({
     let toDo = '';
 
     if (!guildInfo)
-        return client.logger.debug(
-            `CRITICAL: GUILD HAS NO SETTINGS ${member.guild.name} ${member.guild.id}`
+        return client.logger.error(
+            `CRITICAL: GUILD HAS NO SETTINGS ${member.guild.name} ${member.guild.id} - OWNER: ${member.guild.ownerId}`
         );
     const cachedChannel = client.logChans.get(guildInfo.id);
     let channel: TextChannel;
@@ -56,15 +56,19 @@ export async function punishUser({
             .then(chan => {
                 chan.send({
                     content: `:shield: Warden
-                    You are being automodded by ${guildInfo.name} for being associated with ${count} Leaking or Cheating Discord Servers.
+                    You are being automodded by ${guildInfo.name} for being associated with ${count} leaking or cheating discord servers.
                     You may attempt to appeal this via the Official Warden Discord:
                     https://discord.gg/jeFeDRasfs`,
                 }).catch(e => {
-                    client.logger.error(`Unable to send DM to ${member.id} - ${e}`);
+                    client.logger.warn(
+                        `punishUser ${guildInfo.name}: Unable to send DM to ${member.id} - ${e}`
+                    );
                 });
             })
             .catch(e => {
-                client.logger.error(`Unable to create DM with ${member.id} - ${e}`);
+                client.logger.error(
+                    `punishUser ${guildInfo.name}: Unable to create DM with ${member.id} - ${e}`
+                );
                 sendEmbed({
                     channel,
                     embed: {
@@ -109,7 +113,11 @@ export async function punishUser({
                 },
                 color: Colours.GREEN,
             },
-        }).catch(() => client.logger.debug('Unable to send warning embed, no permissions?'));
+        }).catch(() =>
+            client.logger.warn(
+                `punishUser ${guildInfo.name}: Unable to send warning embed, no permissions?`
+            )
+        );
         return false;
     } else {
         const action =
@@ -133,13 +141,13 @@ export async function punishUser({
                         color: Colours.GREEN,
                     },
                 }).catch(() => {
-                    client.logger.debug(
-                        `punishUser: Unable to create message in ${channel?.id} in ${guildInfo.name} (${guildInfo.id})`
+                    client.logger.warn(
+                        `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
                     );
                 });
 
-                client.logger.debug(
-                    `punishUser: ${oldUser.last_username} (${oldUser.id}) - ${toDo} - ${guildInfo.name}`
+                client.logger.info(
+                    `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
                 );
             })
             .catch(() => {
@@ -154,8 +162,8 @@ export async function punishUser({
                         color: Colours.RED,
                     },
                 }).catch(() =>
-                    client.logger.debug(
-                        `punishUser: Unable to create message in ${channel?.id} in ${guildInfo.name} (${guildInfo.id})`
+                    client.logger.warn(
+                        `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
                     )
                 );
             });

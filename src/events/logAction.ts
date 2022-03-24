@@ -33,7 +33,7 @@ export default async function (client: Bot, info: LogInfo) {
 async function getChannel(client: Bot, chan: string) {
     const channel = (await client.channels.fetch(chan)) as TextBasedChannel;
     if (!channel) {
-        client.logger.error(`src/events/logAction.ts - ${chan} channel not set or found`);
+        client.logger.error(`logAction: ${chan} channel not set or found`);
         return null;
     }
     return channel;
