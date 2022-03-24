@@ -62,23 +62,22 @@ export default class ForceCheckCommand extends SlashCommand {
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
             await a;
-            await guild.members.fetch().catch(() => {
-                return true;
-            });
-            const member = guild.members.cache.find(m => m.id === id);
-            if (member) {
-                const settings = await getGuild({ client, id: guild.id });
-                punishUser({
-                    client,
-                    member,
-                    oldUser,
-                    guildInfo: settings,
-                    toDM: false,
-                });
-                client.logger.debug(`forceCheck ${id}: Finished actioning ${guild.name}`);
-            } else {
-                client.logger.debug(`forceCheck ${id}: Skipping ${guild.name} not in guild`);
-            }
+            await guild.members
+                .fetch(id)
+                .then(async member => {
+                    const settings = await getGuild({ client, id: guild.id });
+                    punishUser({
+                        client,
+                        member,
+                        oldUser,
+                        guildInfo: settings,
+                        toDM: false,
+                    });
+                    client.logger.debug(`forceCheck ${id}: Finished actioning ${guild.name}`);
+                })
+                .catch(() =>
+                    client.logger.debug(`forceCheck ${id}: Skipping ${guild.name} not in guild`)
+                );
         }, Promise.resolve());
 
         const end = Date.now();
