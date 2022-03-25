@@ -2,6 +2,7 @@ import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours, LogTypes } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
+import { getABGuilds } from '../../utils/guild';
 import { sendEmbed } from '../../utils/messages';
 import { updateStatus } from '../../utils/users';
 
@@ -83,6 +84,23 @@ export default class AppealCommand extends SlashCommand {
                     },
                 });
             });
+
+        const abGuilds = await getABGuilds({ client });
+        await abGuilds.reduce(async (a, guild) => {
+            const g = client.guilds.cache.get(guild.id);
+            g.bans
+                .fetch(id)
+                .then(b => {
+                    if (b.reason.includes('Warden')) {
+                        g.bans
+                            .remove(id)
+                            .catch(e =>
+                                client.logger.warn(`appeal ${guild.name}: Unable to unban ${id} - ${e}`)
+                            );
+                    }
+                })
+                .catch();
+        }, Promise.resolve());
 
         return true;
     }

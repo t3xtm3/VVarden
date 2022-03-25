@@ -115,6 +115,29 @@ export default class ConfigCommand extends SlashCommand {
                         },
                     ],
                 },
+                {
+                    type: 1,
+                    name: 'appealunban',
+                    description: 'Toggle unbanning appealed users',
+                    options: [
+                        {
+                            type: 3,
+                            name: 'value',
+                            description: 'Enabled or disabled',
+                            choices: [
+                                {
+                                    name: 'ENABLED',
+                                    value: 'ENABLED',
+                                },
+                                {
+                                    name: 'DISABLED',
+                                    value: 'DISABLED',
+                                },
+                            ],
+                            required: true,
+                        },
+                    ],
+                },
             ],
             defaultPermission: true,
             permission: 'ADMINISTRATOR',
@@ -129,6 +152,7 @@ export default class ConfigCommand extends SlashCommand {
             guild: interaction.guild,
             logchan: interaction.channelId,
         });
+        let choice;
         if (name === 'view') {
             getGuild({ client, id: interaction.guildId }).then(async guildInfo => {
                 sendEmbed({
@@ -164,6 +188,11 @@ export default class ConfigCommand extends SlashCommand {
                                 value: `I am set to **${guildInfo.puncheat}** Members of Cheating Discords.\nThese are users with only a Member Role in these servers.`,
                                 inline: false,
                             },
+                            {
+                                name: 'appealunban - Unban When Appealed [true/false]',
+                                value: `I am set to **${guildInfo.appealunban.valueOf()}**\nThis will automatically unban those who have been appealed`,
+                                inline: false,
+                            },
                         ],
                         footer: {
                             text: 'VVarden by Vampire#8144',
@@ -171,26 +200,28 @@ export default class ConfigCommand extends SlashCommand {
                     },
                 });
             });
+            return true;
         } else if (name === 'logchan') {
-            const choice = interaction.options.get('channel').channel.id;
+            choice = interaction.options.get('channel').channel.id;
             updateGuild({
                 client,
                 id: interaction.guildId,
                 logchan: choice,
             });
-            sendEmbed({
-                interaction,
-                embed: {
-                    description: `Changed setting \`${name}\` to \`${choice}\``,
-                    author: {
-                        name: `${interaction.user.username}#${interaction.user.discriminator}`,
-                        icon_url: interaction.user.displayAvatarURL(),
-                    },
-                    color: Colours.GREEN,
-                },
+        } else if (name === 'appealunban') {
+            choice =
+                interaction.options.get('value').value === 'ENABLED'
+                    ? true
+                    : interaction.options.get('value').value === 'DISABLED'
+                    ? false
+                    : false;
+            updateGuild({
+                client,
+                id: interaction.guildId,
+                appealunban: choice,
             });
         } else if (name.includes('pun')) {
-            const choice = interaction.options.get('type').value as Punish;
+            choice = interaction.options.get('type').value as Punish;
             if (name === 'punown') {
                 updateGuild({
                     client,
@@ -216,18 +247,19 @@ export default class ConfigCommand extends SlashCommand {
                     puncheat: choice,
                 });
             }
-            sendEmbed({
-                interaction,
-                embed: {
-                    description: `Changed setting \`${name}\` to \`${choice}\``,
-                    author: {
-                        name: `${interaction.user.username}#${interaction.user.discriminator}`,
-                        icon_url: interaction.user.displayAvatarURL(),
-                    },
-                    color: Colours.GREEN,
-                },
-            });
         }
+
+        sendEmbed({
+            interaction,
+            embed: {
+                description: `Changed setting \`${name}\` to \`${choice}\``,
+                author: {
+                    name: `${interaction.user.username}#${interaction.user.discriminator}`,
+                    icon_url: interaction.user.displayAvatarURL(),
+                },
+                color: Colours.GREEN,
+            },
+        });
         return true;
     }
 }
