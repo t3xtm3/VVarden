@@ -5,6 +5,11 @@ logs/
 imports/
 
 src/config.json
+nodemon.json
 .env
 .commitlintrc.json
 .versionrc.json
+.eslintignore
+.eslintrc.json
+.prettierrc.js
+.editorconfig
