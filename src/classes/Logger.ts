@@ -1,6 +1,7 @@
 import * as winston from 'winston';
 import { LeveledLogMethod } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
+// eslint-disable-next-line node/no-extraneous-import
 import { grey, gray, white } from 'chalk';
 
 const customLevels = {

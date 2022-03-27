@@ -1,6 +1,9 @@
+.husky/
 node_modules/
 build/
-.env
 logs/
 imports/
+
 src/config.json
+.env
+.commitlintrc.json

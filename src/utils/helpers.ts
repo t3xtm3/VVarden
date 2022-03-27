@@ -7,6 +7,7 @@ export function combineRoles(oldRoles: string, newRoles: string) {
     return combArr;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function enumToMap(enumeration: any): Map<string, string | number> {
     const map = new Map<string, string | number>();
     for (const key in enumeration) {

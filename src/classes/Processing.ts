@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
 import * as fastCsv from 'fast-csv';
 import { UserType } from '@prisma/client';

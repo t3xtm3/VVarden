@@ -1,6 +1,7 @@
 import { EmbedOptions } from '../../@types';
 
 export async function sendEmbed({ interaction, channel, content, embed, components }: EmbedOptions) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any = {
         embeds: [{ ...embed }],
         components,
