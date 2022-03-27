@@ -163,7 +163,8 @@ export default class BadServerCommand extends SlashCommand {
                     new MessageEmbed({
                         author: {
                             name: 'Bad Server Listing',
-                            icon_url: interaction.guild.iconURL(),
+                            icon_url:
+                                interaction.guild?.iconURL() ?? 'http://cdn.mk3ext.dev/vh5NME2rgr.png',
                         },
                         description: `\`\`\`ID                 | Name\n${chunk.join('\n')}\`\`\``,
                         color: Colours.RED,
