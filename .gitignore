@@ -7,3 +7,4 @@ imports/
 src/config.json
 .env
 .commitlintrc.json
+.versionrc.json
