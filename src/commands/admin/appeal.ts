@@ -73,6 +73,36 @@ export default class AppealCommand extends SlashCommand {
                     author: interaction.user,
                     message: `${interaction.user.username}#${interaction.user.discriminator} appealed ${updated.last_username} (${id})`,
                 });
+
+                await client.db.users.update({
+                    where: {
+                        id,
+                    },
+                    data: {
+                        appeals: {
+                            increment: 1,
+                        },
+                    },
+                });
+
+                const abGuilds = await getABGuilds({ client });
+                await abGuilds.reduce(async (a, guild) => {
+                    const g = client.guilds.cache.get(guild.id);
+                    g.bans
+                        .fetch(id)
+                        .then(b => {
+                            if (b.reason.includes('Warden')) {
+                                g.bans
+                                    .remove(id)
+                                    .catch(e =>
+                                        client.logger.warn(
+                                            `appeal ${guild.name}: Unable to unban ${id} - ${e}`
+                                        )
+                                    );
+                            }
+                        })
+                        .catch();
+                }, Promise.resolve());
             })
             .catch(() => {
                 sendEmbed({
@@ -84,23 +114,6 @@ export default class AppealCommand extends SlashCommand {
                     },
                 });
             });
-
-        const abGuilds = await getABGuilds({ client });
-        await abGuilds.reduce(async (a, guild) => {
-            const g = client.guilds.cache.get(guild.id);
-            g.bans
-                .fetch(id)
-                .then(b => {
-                    if (b.reason.includes('Warden')) {
-                        g.bans
-                            .remove(id)
-                            .catch(e =>
-                                client.logger.warn(`appeal ${guild.name}: Unable to unban ${id} - ${e}`)
-                            );
-                    }
-                })
-                .catch();
-        }, Promise.resolve());
 
         return true;
     }

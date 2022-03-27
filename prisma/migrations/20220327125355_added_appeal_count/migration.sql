@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `users` ADD COLUMN `appeals` INTEGER NOT NULL DEFAULT 0;
