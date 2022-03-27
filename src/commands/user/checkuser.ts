@@ -34,6 +34,18 @@ export default class CheckUserCommand extends SlashCommand {
             ((interaction.options.getUser('user')?.id ||
                 interaction.options.get('userid')?.value) as Snowflake) ?? interaction.member.user.id;
 
+        const isNumber = /^\d+$/.test(id);
+        if (id.length !== 18 && !isNumber) {
+            sendEmbed({
+                interaction,
+                embed: {
+                    description: 'Invalid user id provided',
+                    color: Colours.YELLOW,
+                },
+            });
+            return false;
+        }
+
         getUser({ client, id })
             .then(async user => {
                 if (user.status.includes('BLACKLIST')) {
