@@ -3,8 +3,8 @@ import { Bot, SlashCommand } from '../../classes';
 import { combineRoles } from '../../utils/helpers';
 import { sendEmbed } from '../../utils/messages';
 import data from '../../config.json';
-import { Colours, UserOptions } from '../../@types';
-import { FilterType, UserStatus } from '@prisma/client';
+import { Colours } from '../../@types';
+import { UserStatus } from '@prisma/client';
 import { getAllUsersByIDs } from '../../utils/users';
 import { getGuild } from '../../utils/guild';
 import { punishUser } from '../../utils/users/punishUser';
@@ -44,35 +44,13 @@ export default class ProcfileCommand extends SlashCommand {
 
         client.processing.setProcessing(1);
 
-        const leakerData = await process.processData('leaker');
-        const cheaterData = await process.processData('cheater');
-        const resellerData = await process.processData('reseller');
-        const allData = [...leakerData, ...cheaterData, ...resellerData];
+        const userData = await process.processData();
 
-        const users: UserOptions[] = [];
-
-        await allData.reduce(async (a, server) => {
-            await a;
-            for await (const user of Object.create(server.data)) {
-                users.push({
-                    id: user['id'],
-                    last_username: `${user['username']}#${user['discriminator']}`,
-                    avatar: user['avatar_url'],
-                    status: UserStatus.BLACKLIST,
-                    user_type: server.type,
-                    servers: server.id,
-                    roles: user['roles'],
-                    filter_type: FilterType.AUTO,
-                    reason: 'AUTO: Member of Blacklisted Discord',
-                });
-            }
-        }, Promise.resolve());
-
-        const userIDs = users.map(u => u.id);
+        const userIDs = userData.map(u => u.id);
         const currentUsers = await getAllUsersByIDs({ client, ids: userIDs });
         let permblacklisted = 0;
 
-        await users.reduce(async (a, user) => {
+        await userData.reduce(async (a, user) => {
             await a;
             // Check if is already blacklisted
             const found = currentUsers?.find(b => b.id === user.id);
@@ -107,7 +85,7 @@ export default class ProcfileCommand extends SlashCommand {
             }
         }, Promise.resolve());
 
-        process.setBlacklisted(users.length - permblacklisted);
+        process.setBlacklisted(userData.length - permblacklisted);
         process.setPermBlacklisted(permblacklisted);
         process.sendCompletionMsg(interaction, chan);
         client.logger.info('procfile: Processed all data, now globalFindCheck time :D');

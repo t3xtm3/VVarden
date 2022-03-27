@@ -4,6 +4,7 @@ import { FilterType, UserStatus, UserType } from '@prisma/client';
  * Interface for user data stored
  */
 export interface UserData {
+    id: string;
     avatar: string;
     last_username: string;
     status: UserStatus;

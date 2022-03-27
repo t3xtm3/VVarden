@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
 import * as fastCsv from 'fast-csv';
-import { UserType } from '@prisma/client';
-import { Colours, ServerDataOptions } from '../@types';
+import { FilterType, UserStatus, UserType } from '@prisma/client';
+import { Colours, UserData } from '../@types';
 import { sendEmbed } from '../utils/messages';
 import { BaseCommandInteraction, TextChannel } from 'discord.js';
 
@@ -44,9 +44,9 @@ export class Processing {
         return this.serverCount;
     }
 
-    getFiles(type: string) {
+    getFiles() {
         try {
-            const dir = fs.readdirSync(`./imports/${type}`);
+            const dir = fs.readdirSync('./imports');
             return dir;
         } catch (e) {
             console.log(e);
@@ -100,34 +100,47 @@ export class Processing {
         }).catch();
     }
 
-    async processData(type: string): Promise<ServerDataOptions[]> {
-        const dir = await this.getFiles(type);
+    async processData(): Promise<UserData[]> {
+        const dir = await this.getFiles();
         if (!dir) {
             return [];
         }
-        const serverData: ServerDataOptions[] = [];
-        const newType =
-            type === 'leaker'
-                ? UserType.LEAKER
-                : type === 'cheater'
-                ? UserType.CHEATER
-                : type === 'supporter'
-                ? UserType.SUPPORTER
-                : type === 'owner'
-                ? UserType.OWNER
-                : UserType.LEAKER;
+        const userData: UserData[] = [];
+        const guilds: string[] = [];
 
         for await (const filename of dir) {
-            const rawServerID = filename.split('-');
-            const serverid = rawServerID[3].slice(0, rawServerID[3].length - 4);
+            const fileData = fs.readFileSync(`./imports/${filename}`);
+            const json = JSON.parse(fileData.toString());
 
-            const filePath = `./imports/${type}/${filename}`;
-            const readStream = await this.csvToObject(filePath);
-            this.serverCount += 1;
+            for (const u in json) {
+                const user = json[u];
+                if (!guilds.includes(user['guild'])) guilds.push(user['guild']);
+                let user_type;
+                if (
+                    user['permissions'].includes('ADMINISTRATOR') ||
+                    user['permissions'].includes('KICK_MEMBERS') ||
+                    user['permissions'].includes('BAN_MEMBERS') ||
+                    user['permissions'].includes('MANAGE_GUILD')
+                )
+                    user_type = UserType.OWNER;
+                else if (user['is_boosting']) user_type = UserType.SUPPORTER;
+                else if (user['type'] === 'LEAKING') user_type = UserType.LEAKER;
+                else if (user['type'] === 'CHEATING') user_type = UserType.CHEATER;
+                else user_type = UserType.OTHER;
 
-            serverData.push({ id: serverid, type: newType, data: readStream });
+                userData.push({
+                    id: user['id'],
+                    avatar: user['avatar'],
+                    last_username: user['last_username'],
+                    user_type,
+                    status: UserStatus.BLACKLIST,
+                    servers: user['guild'],
+                    reason: 'Auto: Member of Blacklisted Discord',
+                    filter_type: FilterType.AUTO,
+                });
+            }
         }
 
-        return serverData;
+        return userData;
     }
 }
