@@ -78,8 +78,8 @@ export default class AddUserCommand extends SlashCommand {
             .then(user => {
                 createUser({
                     client,
-                    id,
                     info: {
+                        id,
                         avatar: user.displayAvatarURL(),
                         last_username: `${user.username}#${user.discriminator}`,
                         status,

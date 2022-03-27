@@ -134,6 +134,7 @@ export class Processing {
                     last_username: user['last_username'],
                     user_type,
                     status: UserStatus.BLACKLIST,
+                    roles: user['roles'].join(';'),
                     servers: user['guild'],
                     reason: 'Auto: Member of Blacklisted Discord',
                     filter_type: FilterType.AUTO,
