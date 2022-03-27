@@ -142,6 +142,8 @@ export class Processing {
             }
         }
 
+        this.serverCount = guilds.length;
+
         return userData;
     }
 }
