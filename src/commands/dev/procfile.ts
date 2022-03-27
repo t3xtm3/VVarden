@@ -63,6 +63,7 @@ export default class ProcfileCommand extends SlashCommand {
                 } else if (found.status === UserStatus.PERM_BLACKLIST) {
                     status = UserStatus.PERM_BLACKLIST;
                 } else if (found.status === UserStatus.WHITELIST) {
+                    userIDs.filter(id => id !== found.id);
                     return;
                 } else {
                     status = UserStatus.BLACKLIST;
