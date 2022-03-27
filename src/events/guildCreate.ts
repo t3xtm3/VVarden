@@ -33,6 +33,6 @@ export default async function (client: Bot, guild: Guild) {
                     text: 'VVarden by Vampire#8144',
                 },
             },
-        }).catch();
+        }).catch(e => client.logger.error(`guildCreate ${guild.name}: ${e}`));
     }
 }

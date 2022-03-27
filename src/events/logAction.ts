@@ -23,10 +23,10 @@ export default async function (client: Bot, info: LogInfo) {
     }
 
     if (!channel) return false;
-    await sendEmbed({
+    sendEmbed({
         channel,
         embed,
-    });
+    }).catch(() => `logAction: Unable to send message in ${channel.id}`);
     return true;
 }
 
