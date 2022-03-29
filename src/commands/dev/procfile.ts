@@ -5,7 +5,6 @@ import { sendEmbed } from '../../utils/messages';
 import data from '../../config.json';
 import { Colours } from '../../@types';
 import { UserStatus } from '@prisma/client';
-import { getGuild } from '../../utils/guild';
 import { punishUser } from '../../utils/users/punishUser';
 
 export default class ProcfileCommand extends SlashCommand {
@@ -98,20 +97,23 @@ export default class ProcfileCommand extends SlashCommand {
         process.sendCompletionMsg(interaction, chan);
         client.logger.info('procfile: Processed all data, now globalFindCheck time :D');
 
+        // Reduce database calls
+        const guilds = await client.db.guild.findMany({});
+
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
             await a;
             await guild.members.fetch();
             const toAction = guild.members.cache.filter(u => userIDs.includes(u.id));
             if (toAction.size >= 1) {
-                const settings = await getGuild({ client, id: guild.id });
+                const settings = guilds.find(g => g.id === guild.id);
                 await toAction.reduce(async (a, member) => {
                     await a;
                     if (member.user.bot) return;
                     client.logger.debug(
                         `globalFindCheck ${guild.name}: Actioning ${member.user.username}#${member.user.discriminator} (${member.id})`
                     );
-                    await punishUser({
+                    punishUser({
                         client,
                         member,
                         oldUser: currentUsers.find(u => u.id === member.id),
