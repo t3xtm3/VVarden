@@ -68,22 +68,21 @@ export default class ProcfileCommand extends SlashCommand {
                     status = UserStatus.PERM_BLACKLIST;
                 } else if (found.status === UserStatus.PERM_BLACKLIST) {
                     status = UserStatus.PERM_BLACKLIST;
-                } else if (found.status === UserStatus.WHITELIST) {
-                    userIDs.filter(id => id !== found.id);
-                    return;
                 } else {
                     status = UserStatus.BLACKLIST;
                 }
-                await client.db.users.update({
-                    where: { id: user.id },
-                    data: {
-                        roles: combineRoles(found.roles, user.roles).join(';'),
-                        status,
-                        servers: currServers.includes(user.servers)
-                            ? currServers.join(';')
-                            : currServers.concat([user.servers]).join(';'),
-                    },
-                });
+                if (found.status !== UserStatus.WHITELIST) {
+                    await client.db.users.update({
+                        where: { id: user.id },
+                        data: {
+                            roles: combineRoles(found.roles, user.roles).join(';'),
+                            status,
+                            servers: currServers.includes(user.servers)
+                                ? currServers.join(';')
+                                : currServers.concat([user.servers]).join(';'),
+                        },
+                    });
+                }
             } else {
                 await client.db.users
                     .create({
