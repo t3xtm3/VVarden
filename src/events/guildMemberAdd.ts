@@ -1,4 +1,4 @@
-import { UserStatus } from '@prisma/client';
+import { UserStatus, UserType } from '@prisma/client';
 import { GuildMember } from 'discord.js';
 import { Bot } from '../classes/Bot';
 import { getGuild } from '../utils/guild';
@@ -20,7 +20,12 @@ export default async function (client: Bot, member: GuildMember) {
         return false;
     }
 
-    if (guild.id === data.MAIN_GUILD && user.status !== UserStatus.PERM_BLACKLIST) return false;
+    if (
+        guild.id === data.MAIN_GUILD &&
+        user.user_type !== UserType.SUPPORTER &&
+        user.user_type !== UserType.OWNER
+    )
+        return false;
 
     // Dynamically set this in future?
     if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
