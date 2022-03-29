@@ -39,6 +39,7 @@ export default class CheckServerCommand extends SlashCommand {
         client.db.badServers
             .findFirst({ where: { id: sid } })
             .then(server => {
+                const addedBy = /^\d+$/.test(server.addedBy) ? `<@${server.addedBy}>` : server.addedBy;
                 sendEmbed({
                     interaction,
                     embed: {
@@ -53,7 +54,7 @@ export default class CheckServerCommand extends SlashCommand {
                                     .toISOString()
                                     .replace(/T/, ' ')
                                     .replace(/\..+/, '')}\n
-                                **Added By**: ${server.addedBy}`,
+                                **Added By**: ${addedBy}`,
                             },
                         ],
                     },
