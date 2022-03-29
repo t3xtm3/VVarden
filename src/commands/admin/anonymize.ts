@@ -2,7 +2,6 @@ import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { sendEmbed } from '../../utils/messages';
-import { anonymiseUser } from '../../utils/users';
 
 export default class AnonymizeCommand extends SlashCommand {
     constructor(client: Bot) {
@@ -45,7 +44,18 @@ export default class AnonymizeCommand extends SlashCommand {
             return false;
         }
 
-        anonymiseUser({ client, id })
+        await client.db.users
+            .update({
+                where: {
+                    id,
+                },
+                data: {
+                    avatar: 'http://cdn.mk3ext.dev/AqFvdbUWmp.png',
+                    last_username: 'unknown#0000',
+                    servers: '860760302227161118',
+                    roles: '',
+                },
+            })
             .then(async () => {
                 sendEmbed({
                     interaction,
