@@ -5,7 +5,6 @@ import { sendEmbed } from '../../utils/messages';
 import data from '../../config.json';
 import { Colours } from '../../@types';
 import { UserStatus } from '@prisma/client';
-import { getAllUsersByIDs } from '../../utils/users';
 import { getGuild } from '../../utils/guild';
 import { punishUser } from '../../utils/users/punishUser';
 
@@ -47,7 +46,14 @@ export default class ProcfileCommand extends SlashCommand {
         const userData = await process.processData();
 
         const userIDs = userData.map(u => u.id);
-        const currentUsers = await getAllUsersByIDs({ client, ids: userIDs });
+        const currentUsers = await client.db.users.findMany({
+            where: {
+                id: {
+                    in: userIDs,
+                },
+            },
+        });
+
         let permblacklisted = 0;
 
         await userData.reduce(async (a, user) => {
