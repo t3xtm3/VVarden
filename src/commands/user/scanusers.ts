@@ -1,9 +1,9 @@
+import { UserStatus } from '@prisma/client';
 import { BaseCommandInteraction } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
 import { getGuild } from '../../utils/guild';
 import { sendEmbed } from '../../utils/messages';
-import { getAllBlacklisted } from '../../utils/users';
 import { punishUser } from '../../utils/users/punishUser';
 
 export default class ScanUsers extends SlashCommand {
@@ -53,7 +53,16 @@ export default class ScanUsers extends SlashCommand {
             // Bulk grab all blacklisted then check if exists
             // Rather than checking database per member
             const ids = interaction.guild.members.cache.map(u => u.id);
-            const users = await getAllBlacklisted({ client, ids });
+            const users = await client.db.users.findMany({
+                where: {
+                    status: {
+                        in: [UserStatus.BLACKLIST, UserStatus.PERM_BLACKLIST],
+                    },
+                    id: {
+                        in: ids,
+                    },
+                },
+            });
             await Promise.all(
                 users.map(async user => {
                     punishUser({
