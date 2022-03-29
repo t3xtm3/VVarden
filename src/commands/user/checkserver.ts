@@ -1,7 +1,6 @@
 import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
-import { getBadServersByIDs } from '../../utils/badservers';
 import { sendEmbed } from '../../utils/messages';
 
 export default class CheckServerCommand extends SlashCommand {
@@ -37,7 +36,8 @@ export default class CheckServerCommand extends SlashCommand {
             return false;
         }
 
-        getBadServersByIDs({ client, ids: [sid] })
+        client.db.badServers
+            .findFirst({ where: { id: sid } })
             .then(server => {
                 sendEmbed({
                     interaction,
@@ -47,13 +47,13 @@ export default class CheckServerCommand extends SlashCommand {
                         fields: [
                             {
                                 name: 'Server Information',
-                                value: `**ID**: ${server[0].id} / **Name**: ${server[0].name}\n
-                                **Details**: ${server[0].type.toLowerCase()}\n
-                                **Date Added**: ${server[0].createdAt
+                                value: `**ID**: ${server.id} / **Name**: ${server.name}\n
+                                **Details**: ${server.type.toLowerCase()}\n
+                                **Date Added**: ${server.createdAt
                                     .toISOString()
                                     .replace(/T/, ' ')
                                     .replace(/\..+/, '')}\n
-                                **Added By**: ${server[0].addedBy}`,
+                                **Added By**: ${server.addedBy}`,
                             },
                         ],
                     },
