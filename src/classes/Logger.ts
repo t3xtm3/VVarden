@@ -52,6 +52,8 @@ export class Logger {
                     ),
                 }),
             ],
+            exceptionHandlers: [new winston.transports.File({ filename: 'logs/exceptions.log' })],
+            rejectionHandlers: [new winston.transports.File({ filename: 'logs/rejections.log' })],
         });
 
         this.debug = this.logger.debug.bind(this.logger);

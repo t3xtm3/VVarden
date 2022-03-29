@@ -107,7 +107,9 @@ export default class AppealCommand extends SlashCommand {
                                     );
                             }
                         })
-                        .catch();
+                        .catch(() =>
+                            client.logger.warn(`appeal ${guild.name}: No permissions or unknown ban`)
+                        );
                 }, Promise.resolve());
             })
             .catch(() => {
