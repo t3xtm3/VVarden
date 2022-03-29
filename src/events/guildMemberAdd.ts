@@ -20,7 +20,7 @@ export default async function (client: Bot, member: GuildMember) {
         return false;
     }
 
-    if (guild.id === data.MAIN_GUILD) return false;
+    if (guild.id === data.MAIN_GUILD && user.status !== UserStatus.PERM_BLACKLIST) return false;
 
     // Dynamically set this in future?
     if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
