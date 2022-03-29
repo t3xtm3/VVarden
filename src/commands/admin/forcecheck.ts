@@ -1,7 +1,6 @@
 import { BaseCommandInteraction, Snowflake, TextChannel } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
-import { getGuild } from '../../utils/guild';
 import { sendEmbed } from '../../utils/messages';
 import { getUser } from '../../utils/users';
 import { punishUser } from '../../utils/users/punishUser';
@@ -58,6 +57,10 @@ export default class ForceCheckCommand extends SlashCommand {
         const oldUser = await getUser({ client, id });
 
         const begin = Date.now();
+
+        // Reduce database queries by grabbing all guilds
+        const guilds = await client.db.guild.findMany({});
+
         client.logger.info(`forceCheck ${id}: Initiated by ${interaction.user.id}`);
         await client.guilds.fetch();
         await client.guilds.cache.reduce(async (a, guild) => {
@@ -65,7 +68,7 @@ export default class ForceCheckCommand extends SlashCommand {
             await guild.members
                 .fetch(id)
                 .then(async member => {
-                    const settings = await getGuild({ client, id: guild.id });
+                    const settings = guilds.find(g => g.id === guild.id);
                     punishUser({
                         client,
                         member,
