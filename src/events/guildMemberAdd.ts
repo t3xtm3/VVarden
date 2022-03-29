@@ -11,7 +11,9 @@ export default async function (client: Bot, member: GuildMember) {
     const settings = await getGuild({ client, id: guild.id });
 
     if (!settings) {
-        client.logger.error(`guildMemberAdd ${guild.name}: Unknown guild - Owner is: ${guild.ownerId}`);
+        client.logger.error(
+            `CRITICAL: GUILD HAS NO SETTINGS ${guild.name} ${guild.id} - OWNER: ${member.guild.ownerId}`
+        );
         return false;
     }
 
