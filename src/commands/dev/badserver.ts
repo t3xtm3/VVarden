@@ -78,7 +78,6 @@ export default class BadServerCommand extends SlashCommand {
 
         if (['add', 'remove'].includes(name)) {
             const staff = await getStaffMember({ client, id: interaction.user.id });
-            console.log(staff);
             if (!(staff && staff['dev' as keyof typeof staff])) {
                 const message = '⚠️ You must be a `Bot DEV` to use this command';
                 sendEmbed({
