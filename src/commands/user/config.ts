@@ -147,7 +147,7 @@ export default class ConfigCommand extends SlashCommand {
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const name = interaction.options.data[0]?.name;
         // Temp fix if bot is in undefined guild
-        createGuild({
+        await createGuild({
             client,
             guild: interaction.guild,
             logchan: interaction.channelId,

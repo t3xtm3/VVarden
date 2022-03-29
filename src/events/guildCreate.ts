@@ -13,6 +13,7 @@ export default async function (client: Bot, guild: Guild) {
     const channel = (await (await guild.channels.fetch())
         .filter(chan => chan.isText())
         .first()) as TextChannel;
+
     createGuild({ client, guild, logchan: channel.id }).catch();
 
     if (channel) {

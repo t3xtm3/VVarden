@@ -44,7 +44,7 @@ export default class AnonymizeCommand extends SlashCommand {
             return false;
         }
 
-        await client.db.users
+        client.db.users
             .update({
                 where: {
                     id,

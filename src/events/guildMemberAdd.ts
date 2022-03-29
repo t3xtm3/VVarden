@@ -25,7 +25,7 @@ export default async function (client: Bot, member: GuildMember) {
     // Dynamically set this in future?
     if (user.status === UserStatus.BLACKLIST || user.status === UserStatus.PERM_BLACKLIST) {
         client.logger.debug(`guildMemberAdd ${guild.name}: ${member.id} - ${user.status}`);
-        await punishUser({
+        punishUser({
             client,
             member,
             guildInfo: settings,
