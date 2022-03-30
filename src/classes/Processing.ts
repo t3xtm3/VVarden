@@ -123,7 +123,8 @@ export class Processing {
                     user['permissions'].includes('MANAGE_GUILD')
                 )
                     user_type = UserType.OWNER;
-                else if (user['is_boosting']) user_type = UserType.SUPPORTER;
+                else if (user['is_boosting'] && user['type'] !== 'RESELLING')
+                    user_type = UserType.SUPPORTER;
                 else if (user['type'] === 'LEAKING') user_type = UserType.LEAKER;
                 else if (user['type'] === 'CHEATING') user_type = UserType.CHEATER;
                 else user_type = UserType.OTHER;

@@ -3,6 +3,7 @@ node_modules/
 build/
 logs/
 imports/
+old_imports/
 
 src/config.json
 nodemon.json
