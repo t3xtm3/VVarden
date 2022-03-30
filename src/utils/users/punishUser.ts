@@ -39,7 +39,7 @@ export async function punishUser({
         );
     const cachedChannel = client.logChans.get(guildInfo.id);
     let channel: TextChannel;
-    if (cachedChannel) {
+    if (cachedChannel && cachedChannel.id === guildInfo.logchan) {
         channel = cachedChannel;
     } else {
         try {
