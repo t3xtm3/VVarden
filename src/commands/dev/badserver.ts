@@ -63,6 +63,25 @@ export default class BadServerCommand extends SlashCommand {
                 },
                 {
                     type: 1,
+                    name: 'edit',
+                    description: 'Edit a server',
+                    options: [
+                        {
+                            type: 3,
+                            name: 'sid',
+                            description: 'Server ID',
+                            required: true,
+                        },
+                        {
+                            type: 3,
+                            name: 'name',
+                            description: 'New Name',
+                            required: true,
+                        },
+                    ],
+                },
+                {
+                    type: 1,
                     name: 'view',
                     description: 'View all bad servers',
                     options: [],
@@ -76,7 +95,7 @@ export default class BadServerCommand extends SlashCommand {
         const name = interaction.options.data[0]?.name;
         const sid = interaction.options.get('sid')?.value as Snowflake;
 
-        if (['add', 'remove'].includes(name)) {
+        if (['add', 'remove', 'edit'].includes(name)) {
             const staff = await getStaffMember({ client, id: interaction.user.id });
             if (!(staff && staff['dev' as keyof typeof staff])) {
                 const message = '⚠️ You must be a `Bot DEV` to use this command';
@@ -91,7 +110,7 @@ export default class BadServerCommand extends SlashCommand {
             }
         }
 
-        if (['add', 'remove'].includes(name) && sid.length !== 18) {
+        if (['add', 'remove', 'edit'].includes(name) && sid.length !== 18) {
             sendEmbed({
                 interaction,
                 embed: {
@@ -137,6 +156,36 @@ export default class BadServerCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description: `Successfully removed \`${sid}\` as a bad server`,
+                            color: Colours.GREEN,
+                        },
+                    });
+                })
+                .catch(() => {
+                    sendEmbed({
+                        interaction,
+                        embed: {
+                            description: `The server \`${sid}\` is not listed`,
+                            color: Colours.YELLOW,
+                        },
+                    });
+                });
+        } else if (name === 'edit') {
+            const newName = interaction.options.get('name')?.value as string;
+
+            client.db.badServers
+                .update({
+                    where: {
+                        id: sid,
+                    },
+                    data: {
+                        name: newName,
+                    },
+                })
+                .then(() => {
+                    sendEmbed({
+                        interaction,
+                        embed: {
+                            description: `Successfully updated \`${sid}\``,
                             color: Colours.GREEN,
                         },
                     });
