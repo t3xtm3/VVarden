@@ -3,7 +3,7 @@ import { BaseCommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
 import _ from 'lodash';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
-import { getAllBadServers, removeBadServer, upsertBadServer } from '../../utils/badservers';
+import { getAllBadServers } from '../../utils/badservers';
 import { enumToMap } from '../../utils/helpers';
 import { sendEmbed, sendPagination } from '../../utils/messages';
 import { getStaffMember } from '../../utils/staff';
@@ -25,7 +25,7 @@ export default class BadServerCommand extends SlashCommand {
                 {
                     type: 1,
                     name: 'add',
-                    description: 'Add or update a server',
+                    description: 'Add a bad server (Dev)',
                     options: [
                         {
                             type: 3,
@@ -51,7 +51,7 @@ export default class BadServerCommand extends SlashCommand {
                 {
                     type: 1,
                     name: 'remove',
-                    description: 'Remove a server',
+                    description: 'Remove a server (Dev)',
                     options: [
                         {
                             type: 3,
@@ -64,7 +64,7 @@ export default class BadServerCommand extends SlashCommand {
                 {
                     type: 1,
                     name: 'edit',
-                    description: 'Edit a server',
+                    description: 'Edit a server (Dev)',
                     options: [
                         {
                             type: 3,
@@ -124,13 +124,15 @@ export default class BadServerCommand extends SlashCommand {
         if (name === 'add') {
             const type = interaction.options.get('type')?.value as ServerType;
             const serverName = interaction.options.get('name')?.value as string;
-            upsertBadServer({
-                client,
-                id: sid,
-                name: serverName,
-                type,
-                addedBy: interaction.user.id,
-            })
+            client.db.badServers
+                .create({
+                    data: {
+                        id: sid,
+                        name: serverName,
+                        type,
+                        addedBy: interaction.user.id,
+                    },
+                })
                 .then(() => {
                     sendEmbed({
                         interaction,
@@ -144,13 +146,18 @@ export default class BadServerCommand extends SlashCommand {
                     sendEmbed({
                         interaction,
                         embed: {
-                            description: 'An unknown error has occured',
-                            color: Colours.RED,
+                            description: 'This server already exists',
+                            color: Colours.YELLOW,
                         },
                     });
                 });
         } else if (name === 'remove') {
-            removeBadServer({ client, id: sid })
+            client.db.badServers
+                .delete({
+                    where: {
+                        id: sid,
+                    },
+                })
                 .then(() => {
                     sendEmbed({
                         interaction,
