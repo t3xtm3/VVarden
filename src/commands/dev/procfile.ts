@@ -45,7 +45,7 @@ export default class ProcfileCommand extends SlashCommand {
         const userData = await process.processData();
 
         const userIDs = userData.map(u => u.id);
-        const currentUsers = await client.db.users.findMany({
+        let currentUsers = await client.db.users.findMany({
             where: {
                 id: {
                     in: userIDs,
@@ -71,16 +71,21 @@ export default class ProcfileCommand extends SlashCommand {
                     status = UserStatus.BLACKLIST;
                 }
                 if (found.status !== UserStatus.WHITELIST) {
-                    await client.db.users.update({
-                        where: { id: user.id },
-                        data: {
-                            roles: combineRoles(found.roles, user.roles).join(';'),
-                            status,
-                            servers: currServers.includes(user.servers)
-                                ? currServers.join(';')
-                                : currServers.concat([user.servers]).join(';'),
-                        },
-                    });
+                    await client.db.users
+                        .update({
+                            where: { id: user.id },
+                            data: {
+                                roles: combineRoles(found.roles, user.roles).join(';'),
+                                status,
+                                servers: currServers.includes(user.servers)
+                                    ? currServers.join(';')
+                                    : currServers.concat([user.servers]).join(';'),
+                            },
+                        })
+                        .then(updated => {
+                            currentUsers = currentUsers.filter(u => u.id !== user.id);
+                            currentUsers.push(updated);
+                        });
                 }
             } else {
                 await client.db.users
