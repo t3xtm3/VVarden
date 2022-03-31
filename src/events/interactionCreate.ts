@@ -56,7 +56,7 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
             }
         }
 
-        await interaction.deferReply();
+        await interaction.deferReply().catch(e => client.logger.error(`${e}`));
         if (has) await slashCommand.run(client, interaction);
         else {
             sendEmbed({
