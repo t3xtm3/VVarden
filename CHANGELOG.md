@@ -1,6 +1,54 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.2.0](https://github.com/t3xtm3/VVarden/compare/v1.1.0...v1.2.0) (2022-03-31)
+
+
+### Features
+
+* **badserver:** ability to update bad server name from id ([78a0ae0](https://github.com/t3xtm3/VVarden/commit/78a0ae0dde200c9c1f7120ddad1499cc4c6692c4))
+* **badserver:** ability to update bad server name from id ([f75a7c0](https://github.com/t3xtm3/VVarden/commit/f75a7c012537ad994f6c214df34e5a2e9d0ac89e))
+* **checkserver:** implement search by name ([f878692](https://github.com/t3xtm3/VVarden/commit/f878692a612240567cce5f7d0bef6b9ced735589))
+* **checkuseradmin:** show amount of appeals ([10da2d7](https://github.com/t3xtm3/VVarden/commit/10da2d7f13fba9a7a2613305ea451e41877ee9b8))
+* **fixguild:** allow bot devs to fix unknown guilds ([3085816](https://github.com/t3xtm3/VVarden/commit/308581632fe2ffcb44b01cc2d8a7a48babaf67d2))
+
+
+### Bug Fixes
+
+* **appeal:** fixed accumlator ([f932824](https://github.com/t3xtm3/VVarden/commit/f932824cfa8d134dc7edf3b202282228f15cbaec))
+* **checkserver:** mention user who added ([15788ff](https://github.com/t3xtm3/VVarden/commit/15788ff5a19018f800ac3cff484b6ba222ee18a4))
+* **checkuser:** added userid validation ([56d5e94](https://github.com/t3xtm3/VVarden/commit/56d5e949d85fc12e57b5bef859da98af3614b1b8))
+* **guildMemberAdd:** act like any other guild for main ([1329768](https://github.com/t3xtm3/VVarden/commit/1329768785f5bce81722bf0f58cdddba0ada5525))
+* **guildMemberAdd:** action on perm blacklisted in main guild ([cc49e92](https://github.com/t3xtm3/VVarden/commit/cc49e9219459caeb54dce221edfb93523422680f))
+* **guildMemberAdd:** fix for main server ([f0b9731](https://github.com/t3xtm3/VVarden/commit/f0b9731519c5d4af3515b84649f054922968b0fd))
+* **Logger:** implement exception and rejection logs ([369400e](https://github.com/t3xtm3/VVarden/commit/369400e5f6b0c38924dc542b8df4c33b3e551fdf))
+* **Processing:** remove supporter for resellers ([257af46](https://github.com/t3xtm3/VVarden/commit/257af46dc84955c1bd65e14f4de7a6d205c04d6a))
+* **Processing:** server count display ([ea7f214](https://github.com/t3xtm3/VVarden/commit/ea7f21420c6410a33277757d27a685f761373917))
+* **Processing:** updated to newest importing style ([620bb6e](https://github.com/t3xtm3/VVarden/commit/620bb6eb76a7815b3bfffe1673db8fe9194376b9))
+* **Processing:** updated to newest importing style ([63a3118](https://github.com/t3xtm3/VVarden/commit/63a3118c1dc9164e78332eeb6f82586979dc7be8))
+* **procfile:** add whitelist functionality ([a6f4c12](https://github.com/t3xtm3/VVarden/commit/a6f4c1237341fdf2d99ff4c01ed9756be2f24b16))
+* **procfile:** fix whitelist functionality ([fa59822](https://github.com/t3xtm3/VVarden/commit/fa59822ab196251d26d05db84e93589c80bd867d))
+* **procfile:** fix whitelisting ([67bcf49](https://github.com/t3xtm3/VVarden/commit/67bcf497bfc8f94140b74729aa01a27baf4eac1a))
+* **procfile:** optimisation ([d57ef5f](https://github.com/t3xtm3/VVarden/commit/d57ef5fdcff254bed71fe15108598ec980a73c36))
+* **procfile:** update user status on update ([95bfe17](https://github.com/t3xtm3/VVarden/commit/95bfe17f83732fa670d9c161a7e3338d5d53701e))
+* **punishUser:** fix cache channel not updating to real ([d9cae4b](https://github.com/t3xtm3/VVarden/commit/d9cae4bc524a1d2bd7b4764efb6ef9e26dcf4f85))
+
+
+### Chores
+
+* **anonymise:** cleanup ([6027fb4](https://github.com/t3xtm3/VVarden/commit/6027fb4ac6c0259c3220d8d608863e6d0d30fefb))
+* **badserver:** remove log ([8bbc30a](https://github.com/t3xtm3/VVarden/commit/8bbc30aeef9774bd3f51135b0e992d979d709ee8))
+* **badservers:** changed badserver to badservers ([f780f71](https://github.com/t3xtm3/VVarden/commit/f780f713e3142dcf95edb58401baa679b98830df))
+* **badservers:** changed dev commands to use bsm ([4df6abe](https://github.com/t3xtm3/VVarden/commit/4df6abeb8f2a35f8512e4a92e6da1da708787643))
+* **CHANGELOG:** update ([153efbb](https://github.com/t3xtm3/VVarden/commit/153efbbe0b262201f8089a4cb4d9007eb3af9a4d))
+* **checkserver:** cleanup ([5e6d82f](https://github.com/t3xtm3/VVarden/commit/5e6d82fddc5f727bd4591923cf1509c62fa3ff48))
+* cleanup ([022154f](https://github.com/t3xtm3/VVarden/commit/022154f9c28331a5899784f52147b8b276c3e31f))
+* **commands/dev:** changed descriptions ([fb97318](https://github.com/t3xtm3/VVarden/commit/fb9731825ca10b18bb5c5f75b9e3aaddda879b82))
+* **forcecheck:** optimise by ~1.7x ([84dc9c6](https://github.com/t3xtm3/VVarden/commit/84dc9c6a8d53d5a7448bb42c7007b0ebabfb69dd))
+* **guildMemberAdd:** update logging ([dfb08ba](https://github.com/t3xtm3/VVarden/commit/dfb08ba25b46539d3622674b0ea4313238b41345))
+* **procfile:** cleanup ([cbdb709](https://github.com/t3xtm3/VVarden/commit/cbdb70914150c275eee54b5e3adb47b93c997667))
+* **scanusers:** cleanup ([fd7ac50](https://github.com/t3xtm3/VVarden/commit/fd7ac50de17c489e0adc0055134f451b7c35a1de))
 
 ## 1.1.0 (2022-03-27)
 
