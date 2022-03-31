@@ -14,7 +14,7 @@ export default class FixGuildCommand extends SlashCommand {
             type: 'CHAT_INPUT',
             options: [
                 {
-                    type: 4,
+                    type: 3,
                     name: 'sid',
                     description: 'Server id to fix',
                     required: true,
