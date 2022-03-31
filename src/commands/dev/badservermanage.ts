@@ -1,12 +1,9 @@
 import { ServerType } from '@prisma/client';
-import { BaseCommandInteraction, MessageEmbed, Snowflake } from 'discord.js';
-import _ from 'lodash';
+import { BaseCommandInteraction, Snowflake } from 'discord.js';
 import { Colours } from '../../@types';
 import { Bot, SlashCommand } from '../../classes';
-import { getAllBadServers } from '../../utils/badservers';
 import { enumToMap } from '../../utils/helpers';
-import { sendEmbed, sendPagination } from '../../utils/messages';
-import { getStaffMember } from '../../utils/staff';
+import { sendEmbed } from '../../utils/messages';
 
 const map = enumToMap(ServerType);
 const choices = Array.from(map.entries()).map(m => ({
@@ -14,12 +11,12 @@ const choices = Array.from(map.entries()).map(m => ({
     value: `${m[1]}`,
 }));
 
-export default class BadServerCommand extends SlashCommand {
+export default class BadServerManagementCommand extends SlashCommand {
     constructor(client: Bot) {
         super({
             client,
-            name: 'badserver',
-            description: 'View and Manage Bad Servers',
+            name: 'bsm',
+            description: 'Bad Servers Management',
             type: 'CHAT_INPUT',
             options: [
                 {
@@ -80,35 +77,15 @@ export default class BadServerCommand extends SlashCommand {
                         },
                     ],
                 },
-                {
-                    type: 1,
-                    name: 'view',
-                    description: 'View all bad servers',
-                    options: [],
-                },
             ],
             defaultPermission: true,
+            staffRole: 'dev',
         });
     }
 
     public async run(client: Bot, interaction: BaseCommandInteraction): Promise<boolean> {
         const name = interaction.options.data[0]?.name;
         const sid = interaction.options.get('sid')?.value as Snowflake;
-
-        if (['add', 'remove', 'edit'].includes(name)) {
-            const staff = await getStaffMember({ client, id: interaction.user.id });
-            if (!(staff && staff['dev' as keyof typeof staff])) {
-                const message = '⚠️ You must be a `Bot DEV` to use this command';
-                sendEmbed({
-                    interaction,
-                    embed: {
-                        description: message,
-                        color: Colours.YELLOW,
-                    },
-                });
-                return false;
-            }
-        }
 
         if (['add', 'remove', 'edit'].includes(name) && sid.length !== 18) {
             sendEmbed({
@@ -206,27 +183,6 @@ export default class BadServerCommand extends SlashCommand {
                         },
                     });
                 });
-        } else if (name === 'view') {
-            const badServers = await getAllBadServers({ client });
-            const desc: string[] = [];
-            badServers.forEach(server => desc.push(`${server.id} | ${server.name}`));
-
-            const chunks = _.chunk(desc, 15);
-            const pages: MessageEmbed[] = [];
-            chunks.forEach(chunk => {
-                pages.push(
-                    new MessageEmbed({
-                        author: {
-                            name: 'Bad Server Listing',
-                            icon_url:
-                                interaction.guild?.iconURL() ?? 'http://cdn.mk3ext.dev/vh5NME2rgr.png',
-                        },
-                        description: `\`\`\`ID                 | Name\n${chunk.join('\n')}\`\`\``,
-                        color: Colours.RED,
-                    })
-                );
-            });
-            sendPagination(interaction, pages, 60000);
         }
         return true;
     }
