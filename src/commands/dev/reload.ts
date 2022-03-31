@@ -11,7 +11,7 @@ export default class ProcfileCommand extends SlashCommand {
         super({
             client,
             name: 'reload',
-            description: 'Reload the bot',
+            description: 'Reload the bot (Dev)',
             type: 'CHAT_INPUT',
             options: [],
             defaultPermission: true,

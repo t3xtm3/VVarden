@@ -9,7 +9,7 @@ export default class AdminCommand extends SlashCommand {
         super({
             client,
             name: 'admin',
-            description: 'Manage Bot Admins',
+            description: 'Manage Bot Admins (Dev)',
             type: 'CHAT_INPUT',
             options: [
                 {

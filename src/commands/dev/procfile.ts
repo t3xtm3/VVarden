@@ -12,7 +12,7 @@ export default class ProcfileCommand extends SlashCommand {
         super({
             client,
             name: 'procfile',
-            description: 'Process and Import User files',
+            description: 'Process and Import User files (Dev)',
             type: 'CHAT_INPUT',
             options: [],
             defaultPermission: true,

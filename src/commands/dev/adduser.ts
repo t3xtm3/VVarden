@@ -22,7 +22,7 @@ export default class AddUserCommand extends SlashCommand {
         super({
             client,
             name: 'adduser',
-            description: 'adduser',
+            description: 'Add a user to the database (Dev)',
             type: 'CHAT_INPUT',
             options: [
                 {

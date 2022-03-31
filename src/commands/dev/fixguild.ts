@@ -10,7 +10,7 @@ export default class FixGuildCommand extends SlashCommand {
         super({
             client,
             name: 'fixguild',
-            description: 'Fix an unknown guild',
+            description: 'Fix an unknown guild (Dev)',
             type: 'CHAT_INPUT',
             options: [
                 {
