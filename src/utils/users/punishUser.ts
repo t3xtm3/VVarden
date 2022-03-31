@@ -95,6 +95,8 @@ export async function punishUser({
         case UserType.CHEATER:
             toDo = guildInfo.puncheat;
             break;
+        default:
+            toDo = guildInfo.punleak;
     }
 
     if (toDo === 'WARN') {
