@@ -57,6 +57,7 @@ class Bot extends Client {
             const command = new commandFile.default(this);
 
             if (!command.name) return;
+            if (command.staffRole) command.defaultPermission = false;
             this.commands.set(command.name, command);
             this.logger.debug(`Loaded command: ${command.name}`);
         }
