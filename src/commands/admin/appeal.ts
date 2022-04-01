@@ -112,15 +112,8 @@ export default class AppealCommand extends SlashCommand {
                         );
                 }, Promise.resolve());
             })
-            .catch(() => {
-                sendEmbed({
-                    interaction,
-                    embed: {
-                        description:
-                            ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
-                        color: Colours.YELLOW,
-                    },
-                });
+            .catch(e => {
+                client.logger.warn(`appeal ${id}: ${e}`);
             });
 
         return true;
