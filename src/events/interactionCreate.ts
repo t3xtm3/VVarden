@@ -39,8 +39,8 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
             const now = Date.now();
             const timestamps = client.getCooldownTimestamps(slashCommand.name);
             const cooldownAmount = slashCommand.cooldown ? slashCommand.cooldown * 1000 : 0;
-            if (timestamps.has(interaction.user.id)) {
-                const currentTime = timestamps.get(interaction.user.id);
+            if (timestamps.has(interaction.guildId)) {
+                const currentTime = timestamps.get(interaction.guildId);
                 if (currentTime) {
                     const expiration = currentTime + cooldownAmount;
 
@@ -51,8 +51,8 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
                     }
                 }
             } else {
-                timestamps.set(interaction.user.id, now);
-                setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+                timestamps.set(interaction.guildId, now);
+                setTimeout(() => timestamps.delete(interaction.guildId), cooldownAmount);
             }
         }
 
