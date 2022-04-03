@@ -56,9 +56,9 @@ export async function punishUser({
             .then(chan => {
                 chan.send({
                     content: `:shield: Warden
-                    You are being automodded by ${guildInfo.name} for being associated with ${count} leaking or cheating discord servers.
-                    You may attempt to appeal this via the Official Warden Discord:
-                    https://discord.gg/jeFeDRasfs`,
+You are being automodded by ${guildInfo.name} for being associated with ${count} leaking or cheating discord servers.
+You may attempt to appeal this via the Official Warden Discord:
+https://discord.gg/jeFeDRasfs`,
                 }).catch(e => {
                     client.logger.warn(
                         `punishUser ${guildInfo.name}: Unable to send DM to ${member.id} - ${e}`
