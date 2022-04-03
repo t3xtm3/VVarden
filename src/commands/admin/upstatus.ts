@@ -145,8 +145,7 @@ export default class UpstatusCommand extends SlashCommand {
                 sendEmbed({
                     interaction,
                     embed: {
-                        description:
-                            ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
+                        description: '`🟡` That user was not found in the database.',
                         color: Colours.YELLOW,
                     },
                 });

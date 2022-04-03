@@ -90,7 +90,7 @@ export default class CheckUserCommand extends SlashCommand {
                         interaction,
                         embed: {
                             description:
-                                ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
+                                '`✅` ID not found in the database.\n  They are either fine or not yet listed.',
                             color: Colours.YELLOW,
                         },
                     });
@@ -101,7 +101,7 @@ export default class CheckUserCommand extends SlashCommand {
                     interaction,
                     embed: {
                         description:
-                            ':white_check_mark: UserID not found in Database.\nThey are either fine or not yet listed.',
+                            '`✅` ID not found in the database.\n  They are either fine or not yet listed.',
                         color: Colours.YELLOW,
                     },
                 });
