@@ -37,6 +37,7 @@ const client = new Bot(logger, processing, db, {
 (async () => {
     await client.loadEvents(__dirname + '/events');
     await client.loadCommands(__dirname + '/commands');
+    client.startTimers();
     await client.login(process.env.TOKEN);
 })();
 

@@ -1,37 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
 import { FilterType, UserStatus, UserType } from '@prisma/client';
-import { Colours, noServerPerms, UserData } from '../@types';
+import { Colours, UserData } from '../@types';
 import { sendEmbed } from '../utils/messages';
-import { BaseCommandInteraction, Collection, TextChannel } from 'discord.js';
+import { BaseCommandInteraction, TextChannel } from 'discord.js';
 
 export class Processing {
     processState: number;
     serverCount: number;
     blacklisted: number;
     permblacklisted: number;
-    noPerms: Collection<String, noServerPerms[]>;
 
     constructor() {
         this.processState = 0;
         this.serverCount = 0;
         this.blacklisted = 0;
         this.permblacklisted = 0;
-        this.noPerms = new Collection();
-    }
-
-    hasNoPerms(guild: string, type: noServerPerms): boolean {
-        if (this.noPerms.has(guild)) {
-            return this.noPerms.get(guild).includes(type);
-        } else {
-            return false;
-        }
-    }
-
-    addNoPerms(guild: string, type: noServerPerms) {
-        const current = this.noPerms.get(guild);
-        current.push(type);
-        this.noPerms.set(guild, current);
     }
 
     isProcessing() {
@@ -53,7 +37,6 @@ export class Processing {
     reset() {
         this.serverCount = 0;
         this.processState = 0;
-        this.noPerms = new Collection();
     }
 
     getServerCount() {

@@ -3,6 +3,9 @@ import * as path from 'path';
 import { Client, ClientOptions, Collection, Snowflake, TextChannel } from 'discord.js';
 import { SlashCommand, Logger, Processing } from './';
 import { PrismaClient } from '@prisma/client';
+import { noServerPerms } from '../@types';
+import * as cron from 'node-cron';
+
 import glob from 'glob';
 import { promisify } from 'util';
 const globPromise = promisify(glob);
@@ -31,6 +34,12 @@ class Bot extends Client {
     logChans: Collection<Snowflake, TextChannel>;
 
     /**
+     * Collection for caching no permissions to avoid rate limit
+     * Cache resets every 5 minutes
+     */
+    noPerms: Collection<String, noServerPerms[]>;
+
+    /**
      * Collection for command cooldown registration.
      */
     cooldowns: Collection<string, Collection<string, number>>;
@@ -42,6 +51,7 @@ class Bot extends Client {
         this.events = new Collection();
         this.logChans = new Collection();
         this.cooldowns = new Collection();
+        this.noPerms = new Collection();
         this.logger = logger;
         this.processing = processing;
         this.db = db;
@@ -85,6 +95,33 @@ class Bot extends Client {
         if (!this.cooldowns.has(commandName))
             this.cooldowns.set(commandName, new Collection<string, number>());
         return this.cooldowns.get(commandName) as Collection<string, number>;
+    }
+
+    hasNoPerms(guild: string, type: noServerPerms): boolean {
+        if (this.noPerms.has(guild)) {
+            return this.noPerms.get(guild).includes(type);
+        } else {
+            return false;
+        }
+    }
+
+    addNoPerms(guild: string, type: noServerPerms) {
+        const current = this.noPerms.get(guild);
+        current.push(type);
+        this.noPerms.set(guild, current);
+    }
+
+    resetNoPerms() {
+        this.noPerms.clear();
+        this.logger.debug('Cleared noPerms cache');
+    }
+
+    startTimers() {
+        cron.schedule('*/5 * * * *', async () => {
+            this.resetNoPerms();
+        });
+
+        this.logger.debug('Started timer');
     }
 
     /**
