@@ -102,90 +102,86 @@ export async function punishUser({
     }
 
     if (toDo === 'WARN') {
-        if (!client.processing.hasNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE)) {
-            sendEmbed({
-                channel,
-                embed: {
-                    description: `:warning: User ${oldUser.last_username} (${
-                        member.id
-                    }) has been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.\n**Details**: ${
-                        oldUser.reason
-                    }`,
-                    author: {
-                        name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
-                        icon_url: member.user.displayAvatarURL(),
-                    },
-                    color: Colours.GREEN,
+        sendEmbed({
+            channel,
+            embed: {
+                description: `:warning: User ${oldUser.last_username} (${
+                    member.id
+                }) has been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.\n**Details**: ${
+                    oldUser.reason
+                }`,
+                author: {
+                    name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
+                    icon_url: member.user.displayAvatarURL(),
                 },
-            }).catch(() =>
-                client.logger.warn(
-                    `punishUser ${guildInfo.name}: Unable to send warning embed, no permissions?`
-                )
-            );
-        }
+                color: Colours.GREEN,
+            },
+        }).catch(() =>
+            client.logger.warn(
+                `punishUser ${guildInfo.name}: Unable to send warning embed, no permissions?`
+            )
+        );
         client.logger.info(
             `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
         );
         return false;
     } else {
         const realType = toDo === 'BAN' ? noServerPerms.BAN : noServerPerms.KICK;
-        if (!client.processing.hasNoPerms(guildInfo.id, realType)) {
-            const action =
-                toDo === 'BAN'
-                    ? member.ban({ reason: `Warden - User Type ${type}` })
-                    : member.kick(`Warden - User Type ${type}`);
-            await action
-                .then(() => {
-                    if (!client.processing.hasNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE)) {
-                        sendEmbed({
-                            channel,
-                            embed: {
-                                description: `:shield: User ${oldUser.last_username} (${
-                                    member.id
-                                }) has been punished with a ${toDo}.\nThey have been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.\n**Details**: ${
-                                    oldUser.reason
-                                }`,
-                                author: {
-                                    name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
-                                    icon_url: member.displayAvatarURL(),
-                                },
-                                color: Colours.GREEN,
+        const action =
+            toDo === 'BAN'
+                ? member.ban({ reason: `Warden - User Type ${type}` })
+                : member.kick(`Warden - User Type ${type}`);
+        await action
+            .then(() => {
+                if (!client.processing.hasNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE)) {
+                    sendEmbed({
+                        channel,
+                        embed: {
+                            description: `:shield: User ${oldUser.last_username} (${
+                                member.id
+                            }) has been punished with a ${toDo}.\nThey have been seen in ${count} bad discord servers.\n**User Status**: ${oldUser.status.toLowerCase()} / **User Type**: ${type.toLowerCase()}.\n**Details**: ${
+                                oldUser.reason
+                            }`,
+                            author: {
+                                name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
+                                icon_url: member.displayAvatarURL(),
                             },
-                        }).catch(() => {
-                            client.processing.addNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE);
-                            client.logger.warn(
-                                `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
-                            );
-                        });
-
-                        client.logger.info(
-                            `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
+                            color: Colours.GREEN,
+                        },
+                    }).catch(() => {
+                        client.processing.addNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE);
+                        client.logger.warn(
+                            `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
                         );
-                    }
-                })
-                .catch(e => {
-                    client.processing.addNoPerms(guildInfo.id, realType);
-                    if (!client.processing.hasNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE)) {
-                        sendEmbed({
-                            channel,
-                            embed: {
-                                description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!\nPlease verify I have this permission, and am a higher role than this user!`,
-                                author: {
-                                    name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
-                                    icon_url: member.displayAvatarURL(),
-                                },
-                                color: Colours.RED,
+                    });
+
+                    client.logger.info(
+                        `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
+                    );
+                }
+            })
+            .catch(e => {
+                client.processing.addNoPerms(guildInfo.id, realType);
+                if (!client.processing.hasNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE)) {
+                    sendEmbed({
+                        channel,
+                        embed: {
+                            description: `:warning: I tried to ${guildInfo.punown} ${oldUser.last_username} (${member.id}) but something errored!\nPlease verify I have this permission, and am a higher role than this user!`,
+                            author: {
+                                name: `${member.user.username}#${member.user.discriminator} / ${member.id}`,
+                                icon_url: member.displayAvatarURL(),
                             },
-                        }).catch(() =>
-                            client.logger.warn(
-                                `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
-                            )
-                        );
-                    }
+                            color: Colours.RED,
+                        },
+                    }).catch(() =>
+                        client.logger.warn(
+                            `punishUser ${guildInfo.name}: Unable to create message in ${channel?.id}`
+                        )
+                    );
+                }
 
-                    client.logger.warn(`punishUser ${guildInfo.name}: ${oldUser.id} - ${e}`);
-                });
-        }
+                client.logger.warn(`punishUser ${guildInfo.name}: ${oldUser.id} - ${e}`);
+            });
         return false;
     }
 }
