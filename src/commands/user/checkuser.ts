@@ -35,7 +35,7 @@ export default class CheckUserCommand extends SlashCommand {
                 interaction.options.get('userid')?.value) as Snowflake) ?? interaction.member.user.id;
 
         const isNumber = /^\d+$/.test(id);
-        if (id.length !== 18 && !isNumber) {
+        if (id.length !== 18 || !isNumber) {
             sendEmbed({
                 interaction,
                 embed: {
