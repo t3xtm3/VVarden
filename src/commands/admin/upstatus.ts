@@ -95,7 +95,7 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        if (!status || !reason || !user_type) {
+        if (!status || !reason || !user_type || !appeals) {
             sendEmbed({
                 interaction,
                 embed: {
@@ -106,13 +106,7 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        let promise;
-        if (!appeals) {
-            promise = updateStatus({ client, id, status, user_type, reason });
-        } else {
-            promise = updateStatus({ client, id, status, user_type, reason, appeals });
-        }
-        promise
+        updateStatus({ client, id, status, user_type, reason, appeals })
             .then(u => {
                 sendEmbed({
                     interaction,
@@ -134,7 +128,7 @@ export default class UpstatusCommand extends SlashCommand {
                     Reason: ${reason}`,
                 });
             })
-            .catch(() => {
+            .catch(e => {
                 sendEmbed({
                     interaction,
                     embed: {
@@ -143,6 +137,7 @@ export default class UpstatusCommand extends SlashCommand {
                         color: Colours.YELLOW,
                     },
                 });
+                client.logger.debug(`upstatus ${id}: ${e}`);
             });
         return true;
     }
