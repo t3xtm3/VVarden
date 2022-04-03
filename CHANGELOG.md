@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/t3xtm3/VVarden/compare/v1.2.0...v1.2.1) (2022-04-03)
+
+
+### Features
+
+* **upstatus:** update appeals manually ([90bac5a](https://github.com/t3xtm3/VVarden/commit/90bac5af2e862a3ca2f2fc2029c98bb4815591bf))
+
+
+### Bug Fixes
+
+* **appeal:** remove embed on catch ([94b3544](https://github.com/t3xtm3/VVarden/commit/94b35446982441ea8225d23d57837456b3f70c13))
+* **cooldowns:** change to a guild level cooldown ([ca0ca47](https://github.com/t3xtm3/VVarden/commit/ca0ca4748d8152a78d19f33e5ebc0f562cf08de6))
+* **fixguild:** change from integer to string ([4d6d019](https://github.com/t3xtm3/VVarden/commit/4d6d019152d45ab43afbd0d0eddfa2357b1c1060))
+* **fixguild:** change from user type to integer ([24797b1](https://github.com/t3xtm3/VVarden/commit/24797b1ea3b7e751d2d98b609fcaec9ce50f5e2f))
+* **messages/sendEmbed:** defer reply if not deferred ([a637fe7](https://github.com/t3xtm3/VVarden/commit/a637fe7c790a3a1d88c294b0714249a841a5e754))
+* **processing:** fix types ([8f1d7ec](https://github.com/t3xtm3/VVarden/commit/8f1d7ec993f0c9fa57c2eb6696e8adf184cfe953))
+* **punishUser:** add other switch ([b92b7af](https://github.com/t3xtm3/VVarden/commit/b92b7af583e83ff332cedaf9b4adbbcf2f4d8901))
+* **punishUser:** add other switch ([1ff57a5](https://github.com/t3xtm3/VVarden/commit/1ff57a5f6897a6fead55bcc5e2f0c7b38ae49835))
+
+
+### Chores
+
+* **appeal:** fix logging spam ([b54c121](https://github.com/t3xtm3/VVarden/commit/b54c1213b7427bb3b8f42e7ce8cce4a0464cc06c))
+* **interactionCreate:** add catch ([0b52e09](https://github.com/t3xtm3/VVarden/commit/0b52e09ebc7c1f7bf4fbaff85c3d519f517a64c8))
+* **package:** remove fast-csv as imports are now json ([68424fd](https://github.com/t3xtm3/VVarden/commit/68424fd1f2e9271b07bf654248dfc5e5345249f4))
+* **Processing:** optimise api calls ([5dac4cd](https://github.com/t3xtm3/VVarden/commit/5dac4cda391a27d23c45b1497206208d8294c55a))
+* **ready:** delete old command(s) ([4e2f437](https://github.com/t3xtm3/VVarden/commit/4e2f437b14fd40a953f426d44852867432ffddf4))
+
 ## [1.2.0](https://github.com/t3xtm3/VVarden/compare/v1.1.0...v1.2.0) (2022-03-31)
 
 
