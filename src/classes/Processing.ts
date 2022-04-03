@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
 import { FilterType, UserStatus, UserType } from '@prisma/client';
-import { Colours, UserData } from '../@types';
+import { Colours, noServerPerms, UserData } from '../@types';
 import { sendEmbed } from '../utils/messages';
 import { BaseCommandInteraction, Collection, TextChannel } from 'discord.js';
-import { noServerPerms } from '../@types/Processing';
 
 export class Processing {
     processState: number;
