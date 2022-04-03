@@ -100,17 +100,15 @@ export default class AppealCommand extends SlashCommand {
                             if (b.reason.includes('Warden')) {
                                 g.bans
                                     .remove(id)
-                                    .catch(e =>
-                                        client.logger.warn(
-                                            `appeal ${guild.name}: Unable to unban ${id} - ${e}`
-                                        )
+                                    .catch(() =>
+                                        client.logger.warn(`appeal ${guild.name}: Unable to unban ${id}`)
                                     );
                             }
                         })
-                        .catch(() =>
-                            client.logger.warn(`appeal ${guild.name}: No permissions or unknown ban`)
-                        );
+                        .catch();
                 }, Promise.resolve());
+
+                client.logger.debug(`appeal ${id}: Finished`);
             })
             .catch(e => {
                 client.logger.warn(`appeal ${id}: ${e}`);
