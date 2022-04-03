@@ -58,6 +58,12 @@ export default class UpstatusCommand extends SlashCommand {
                     description: 'Reason for upstatus',
                     required: false,
                 },
+                {
+                    type: 3,
+                    name: 'appeals',
+                    description: 'Appeal count',
+                    required: false,
+                },
             ],
             defaultPermission: true,
             staffRole: 'admin',
@@ -76,6 +82,7 @@ export default class UpstatusCommand extends SlashCommand {
         const status = interaction.options.get('status')?.value as UserStatus;
         const user_type = interaction.options.get('type')?.value as UserType;
         const reason = interaction.options.get('reason')?.value as string;
+        const appeals = interaction.options.get('appeals')?.value as number;
 
         if (!id) {
             sendEmbed({
@@ -99,7 +106,13 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        updateStatus({ client, id, status, user_type, reason })
+        let promise;
+        if (!appeals) {
+            promise = updateStatus({ client, id, status, user_type, reason });
+        } else {
+            promise = updateStatus({ client, id, status, user_type, reason, appeals });
+        }
+        promise
             .then(u => {
                 sendEmbed({
                     interaction,

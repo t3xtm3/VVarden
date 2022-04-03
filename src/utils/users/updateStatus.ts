@@ -16,17 +16,20 @@ export async function updateStatus({
     status,
     user_type,
     reason,
+    appeals,
 }: {
     client: Bot;
     id: Snowflake;
     status: UserStatus;
     user_type?: UserType;
     reason?: string;
+    appeals?: number;
 }) {
     let data = {
         id,
         status,
         reason,
+        appeals,
     };
     if (user_type) data = { ...data, ...{ user_type } };
 
