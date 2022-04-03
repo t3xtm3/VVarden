@@ -7,10 +7,15 @@ export async function sendEmbed({ interaction, channel, content, embed, componen
         components,
     };
 
-    if (content) options.content = content;
-    if (channel) return await channel.send(options);
-    else {
-        if (!interaction.deferred) await interaction.deferReply();
-        return await interaction.editReply(options);
+    try {
+        if (content) options.content = content;
+        if (channel) return await channel.send(options);
+        else {
+            if (!interaction.deferred) await interaction.deferReply();
+            return await interaction.editReply(options);
+        }
+    } catch (e) {
+        console.log(`sendEmbed: Unknown interaction ${interaction}`);
+        return Promise.reject();
     }
 }

@@ -65,7 +65,7 @@ export default async function (client: Bot, interaction: BaseCommandInteraction)
                     description: message,
                     color: Colours.YELLOW,
                 },
-            });
+            }).catch();
         }
     }
     return true;
