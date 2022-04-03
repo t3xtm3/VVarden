@@ -107,7 +107,9 @@ class Bot extends Client {
 
     addNoPerms(guild: string, type: noServerPerms) {
         const current = this.noPerms.get(guild);
-        current.push(type);
+        if (current) {
+            current.push(type);
+        }
         this.noPerms.set(guild, current);
     }
 
