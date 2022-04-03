@@ -1,22 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
-import * as fastCsv from 'fast-csv';
 import { FilterType, UserStatus, UserType } from '@prisma/client';
 import { Colours, UserData } from '../@types';
 import { sendEmbed } from '../utils/messages';
-import { BaseCommandInteraction, TextChannel } from 'discord.js';
+import { BaseCommandInteraction, Collection, TextChannel } from 'discord.js';
+import { noServerPerms } from '../@types/Processing';
 
 export class Processing {
     processState: number;
     serverCount: number;
     blacklisted: number;
     permblacklisted: number;
+    noPerms: Collection<String, noServerPerms[]>;
 
     constructor() {
         this.processState = 0;
         this.serverCount = 0;
         this.blacklisted = 0;
         this.permblacklisted = 0;
+        this.noPerms = new Collection();
+    }
+
+    hasNoPerms(guild: string, type: noServerPerms): boolean {
+        if (this.noPerms.has(guild)) {
+            return this.noPerms.get(guild).includes(type);
+        } else {
+            return false;
+        }
+    }
+
+    addNoPerms(guild: string, type: noServerPerms) {
+        const current = this.noPerms.get(guild);
+        current.push(type);
+        this.noPerms.set(guild, current);
     }
 
     isProcessing() {
@@ -38,6 +54,7 @@ export class Processing {
     reset() {
         this.serverCount = 0;
         this.processState = 0;
+        this.noPerms = new Collection();
     }
 
     getServerCount() {
@@ -52,21 +69,6 @@ export class Processing {
             console.log(e);
             return [];
         }
-    }
-
-    csvToObject(path: string) {
-        return new Promise(resolve => {
-            const rows: any[] = [];
-            fs.createReadStream(path)
-                .pipe(fastCsv.parse({ headers: true }))
-                .on('error', (error: any) => console.error(error))
-                .on('data', (row: any) => {
-                    rows.push(row);
-                })
-                .on('end', () => {
-                    resolve(rows);
-                });
-        });
     }
 
     sendCompletionMsg(interaction: BaseCommandInteraction, chan: TextChannel) {

@@ -1,6 +1,11 @@
 import { FilterType, UserStatus, UserType } from '@prisma/client';
 import { Snowflake } from 'discord.js';
 
+export enum noServerPerms {
+    KICK,
+    BAN,
+    SEND_MESSAGE,
+}
 export interface ServerDataOptions {
     id: Snowflake;
 
