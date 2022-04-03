@@ -117,11 +117,12 @@ export async function punishUser({
                     },
                     color: Colours.GREEN,
                 },
-            }).catch(() =>
+            }).catch(() => {
+                client.addNoPerms(guildInfo.id, noServerPerms.SEND_MESSAGE);
                 client.logger.warn(
                     `punishUser ${guildInfo.name}: Unable to send warning embed, no permissions?`
-                )
-            );
+                );
+            });
         }
         client.logger.info(
             `punishUser ${guildInfo.name}: ${oldUser.last_username} (${oldUser.id}) - ${toDo}`
