@@ -105,7 +105,7 @@ export default class AppealCommand extends SlashCommand {
                                     );
                             }
                         })
-                        .catch();
+                        .catch(() => client.logger.warn(`appeal ${guild.name}: Invalid ban`));
                 }, Promise.resolve());
 
                 client.logger.debug(`appeal ${id}: Finished`);
