@@ -9,5 +9,8 @@ export async function sendEmbed({ interaction, channel, content, embed, componen
 
     if (content) options.content = content;
     if (channel) return await channel.send(options);
-    else return await interaction.editReply(options);
+    else {
+        if (!interaction.deferred) await interaction.deferReply();
+        return await interaction.editReply(options);
+    }
 }
