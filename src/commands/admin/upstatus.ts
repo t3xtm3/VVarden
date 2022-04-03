@@ -82,7 +82,7 @@ export default class UpstatusCommand extends SlashCommand {
         const status = interaction.options.get('status')?.value as UserStatus;
         const user_type = interaction.options.get('type')?.value as UserType;
         const reason = interaction.options.get('reason')?.value as string;
-        const appeals = interaction.options.get('appeals')?.value as number;
+        const appeals = interaction.options.get('appeals')?.value as string;
 
         if (!id) {
             sendEmbed({
@@ -95,7 +95,7 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        if (!status || !reason || !user_type || !appeals) {
+        if (!status || !reason || !user_type) {
             sendEmbed({
                 interaction,
                 embed: {
@@ -106,7 +106,20 @@ export default class UpstatusCommand extends SlashCommand {
             return false;
         }
 
-        updateStatus({ client, id, status, user_type, reason, appeals })
+        let promise;
+        if (!appeals) {
+            promise = updateStatus({ client, id, status, user_type, reason });
+        } else {
+            promise = updateStatus({
+                client,
+                id,
+                status,
+                user_type,
+                reason,
+                appeals: parseInt(appeals),
+            });
+        }
+        promise
             .then(u => {
                 sendEmbed({
                     interaction,
@@ -128,7 +141,7 @@ export default class UpstatusCommand extends SlashCommand {
                     Reason: ${reason}`,
                 });
             })
-            .catch(e => {
+            .catch(() => {
                 sendEmbed({
                     interaction,
                     embed: {
@@ -137,7 +150,6 @@ export default class UpstatusCommand extends SlashCommand {
                         color: Colours.YELLOW,
                     },
                 });
-                client.logger.debug(`upstatus ${id}: ${e}`);
             });
         return true;
     }
