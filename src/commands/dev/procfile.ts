@@ -26,6 +26,13 @@ export default class ProcfileCommand extends SlashCommand {
             return false;
         }
 
+        sendEmbed({
+            interaction,
+            embed: {
+                description: '`🟢` Successfully started imports',
+            },
+        });
+
         const chan: TextChannel = ((await client.channels.cache.get(data.CHANNEL_LOG)) ??
             (await client.channels.fetch(data.CHANNEL_LOG))) as TextChannel;
 
