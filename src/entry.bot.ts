@@ -44,7 +44,13 @@ const client = new Bot(logger, processing, db, {
 process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
 });
+
+process.on('uncaughtException', err => {
+    console.error('Unhandled Exception: ', err);
+});
+
 /**
+ *
  * Database events
  */
 
