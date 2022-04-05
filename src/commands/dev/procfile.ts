@@ -113,32 +113,42 @@ export default class ProcfileCommand extends SlashCommand {
         const guilds = await client.db.guild.findMany({});
 
         await client.guilds.fetch();
-        await client.guilds.cache.reduce(async (a, guild) => {
-            await a;
-            await guild.members.fetch();
-            const toAction = guild.members.cache.filter(u => userIDs.includes(u.id));
-            if (toAction.size >= 1) {
-                const settings = guilds.find(g => g.id === guild.id);
-                await toAction.reduce(async (a, member) => {
-                    await a;
-                    if (member.user.bot) return;
-                    client.logger.debug(
-                        `globalFindCheck ${guild.name}: Actioning ${member.user.username}#${member.user.discriminator} (${member.id})`
-                    );
-                    punishUser({
-                        client,
-                        member,
-                        oldUser: currentUsers.find(u => u.id === member.id),
-                        guildInfo: settings,
-                        toDM: false,
-                    });
-                    await new Promise(resolve => setTimeout(resolve, 50));
-                }, Promise.resolve());
-                client.logger.debug(`globalFindCheck ${guild.name}: Finished actioning`);
-            } else {
-                client.logger.debug(`globalFindCheck ${guild.name}: Skipping no one to action`);
-            }
-        }, Promise.resolve());
+        const realGuilds = await client.guilds.cache.map(x => x);
+
+        for await (const guild of realGuilds) {
+            guild.members
+                .fetch()
+                .then(async members => {
+                    const toAction = members.filter(u => userIDs.includes(u.id));
+                    if (toAction.size >= 1) {
+                        const settings = guilds.find(g => g.id === guild.id);
+                        await toAction.reduce(async (a, member) => {
+                            await a;
+                            if (member.user.bot) return;
+                            client.logger.debug(
+                                `globalFindCheck ${guild.name}: Actioning ${member.user.username}#${member.user.discriminator} (${member.id})`
+                            );
+                            punishUser({
+                                client,
+                                member,
+                                oldUser: currentUsers.find(u => u.id === member.id),
+                                guildInfo: settings,
+                                toDM: false,
+                            });
+                            await new Promise(resolve => setTimeout(resolve, 50));
+                        }, Promise.resolve());
+                        client.logger.debug(`globalFindCheck ${guild.name}: Finished actioning`);
+                        return;
+                    } else {
+                        client.logger.debug(`globalFindCheck ${guild.name}: Skipping no one to action`);
+                        return;
+                    }
+                })
+                .catch(() => {
+                    client.logger.debug(`globalFindCheck ${guild.name}: Skipping no one to action`);
+                    return;
+                });
+        }
         client.logger.info(
             `globalFindCheck: Finished actioning on all ${client.guilds.cache.size} guilds`
         );
